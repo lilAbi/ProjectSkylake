@@ -20,6 +20,8 @@ set(GDEXTENSION_LIB_NAME ProjectSkylake)
 set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
 # Tip: "set" arguments are basically defining variables in CMake
 
+set(GODOTCPP_API_VERSION "4.7" CACHE STRING "Godot API version used by godot-cpp")
+
 option(
   AUTOFORMAT_SRC_ON_CONFIGURE
     "If enabled, clang-format will be used to format all sources in src/ during configuration"
