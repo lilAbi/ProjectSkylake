@@ -121,7 +121,7 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++",
-        "VCPKG_TARGET_TRIPLET": "x64-windows-static-md"
+        "VCPKG_TARGET_TRIPLET": "x64-mingw-static"
       },
       "condition": {
         "type": "equals",
@@ -227,6 +227,45 @@
       "displayName": "Clang macOS RelWithDebInfo",
       "name": "clang-macos-relwdebinfo",
       "inherits": "clang-macos",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "gcc-macos",
+      "inherits": "default",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc-16",
+        "CMAKE_CXX_COMPILER": "g++-16",
+        "VCPKG_TARGET_TRIPLET": "arm64-osx"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "displayName": "GCC macOS Debug",
+      "name": "gcc-macos-debug",
+      "inherits": "gcc-macos",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "displayName": "GCC macOS Release",
+      "name": "gcc-macos-release",
+      "inherits": "gcc-macos",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "displayName": "GCC macOS RelWithDebInfo",
+      "name": "gcc-macos-relwdebinfo",
+      "inherits": "gcc-macos",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       }

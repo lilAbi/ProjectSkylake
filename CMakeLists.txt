@@ -15,7 +15,7 @@
 cmake_minimum_required(VERSION 3.20...3.31)
 
 # Name for our library:
-set(GDEXTENSION_LIB_NAME roguelite)
+set(GDEXTENSION_LIB_NAME ProjectSkylake)
 # Directory for placing the built .dll (The project .gdextension file should likely point in here):
 set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
 # Tip: "set" arguments are basically defining variables in CMake

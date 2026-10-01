@@ -31,18 +31,18 @@ BinPackArguments: true
 BinPackParameters: true
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterCaseLabel: true
-  AfterClass: true
-  AfterControlStatement: Always
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: false
   AfterEnum: false
-  AfterFunction: true
-  AfterNamespace: true
-  AfterObjCDeclaration: true
-  AfterStruct: true
-  AfterUnion: true
-  AfterExternBlock: true
+  AfterFunction: false
+  AfterNamespace: false
+  AfterObjCDeclaration: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
   BeforeCatch: true
-  BeforeElse: true
+  BeforeElse: false
   BeforeLambdaBody: false
   BeforeWhile: true
   IndentBraces: false
@@ -149,7 +149,7 @@ RemoveBracesLLVM: true
 RequiresClausePosition: OwnLine
 SeparateDefinitionBlocks: Always # Leave
 ShortNamespaceLines: 1
-SortIncludes: true
+SortIncludes: false
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
