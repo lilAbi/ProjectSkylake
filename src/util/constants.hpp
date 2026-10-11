@@ -1,0 +1,100 @@
+#pragma once
+
+#include <string>
+
+namespace core::inline labels {
+
+    //defined signals
+    namespace signal {
+
+        //godot "Button" node signals
+        namespace BaseButton {
+            constexpr inline auto pressed{"pressed"};
+            constexpr inline auto mouse_entered{"mouse_entered"};
+            constexpr inline auto mouse_exited{"mouse_exited"};
+            constexpr inline auto button_down{"button_down"};
+            constexpr inline auto button_up{"button_up"};
+        }
+
+        //godot "Control" node signals
+        namespace Control {
+            constexpr inline auto gui_input{"gui_input"};
+            constexpr inline auto mouse_entered{"mouse_entered"};
+            constexpr inline auto mouse_exited{"mouse_exited"};
+        }
+
+        namespace Timer {
+            constexpr inline auto timeout{"timeout"};
+        }
+
+        namespace Transition {
+            constexpr inline auto load_character_creator{"load_character_creator"};
+            constexpr inline auto load_game_serialization{"load_game_serialization"};
+            constexpr inline auto load_battle_menu{"load_battle_menu"};
+            constexpr inline auto load_tactics_battle{"load_tactics_battle"};
+            constexpr inline auto load_home{"load_home"};
+            constexpr inline auto start_tactics_battle{"start_tactics_battle"};
+            constexpr inline auto open_player_roster{"open_player_roster"};
+        }
+
+        namespace Tween {
+            constexpr inline auto finished{"finished"};
+        }
+
+        namespace RichTextLabel {
+            constexpr inline auto meta_clicked{"meta_clicked"};
+        }
+
+    }
+
+    //labels of nodes in a scene
+    namespace node {
+
+    } //END OF "NODE" NAMESPACE
+
+    namespace animations {
+    }
+
+    //paths to files
+    namespace path {
+        //.tscn related files
+        namespace scene {
+
+        }
+
+        //.tres related files
+        namespace resource {
+
+        }
+
+        //asset related files
+        namespace asset { //possibly can remove
+
+        }
+
+        namespace folder { //possibly can remove
+
+        }
+
+    }
+
+    enum class LayerID : uint32_t {
+        Player = 0x00000001,
+        NPCs = 0x00000002,
+        Projectiles = 0x00000004,
+        Walls = 0x00000008,
+        DamageZones = 0x00000010,
+        DeathZones = 0x00000020,
+        PhysicsObjects = 0x00000040,
+        Layer08 = 0x00000080,
+        Layer09 = 0x00000100,
+        Layer10 = 0x00000200,
+        Layer11 = 0x00000400,
+        Layer12 = 0x00000800,
+        Layer13 = 0x00001000,
+        Layer14 = 0x00002000,
+        Layer15 = 0x00004000,
+        Layer16 = 0x00008000,
+    };
+
+}

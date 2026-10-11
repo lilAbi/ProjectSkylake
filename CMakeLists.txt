@@ -203,10 +203,6 @@ if(USE_CCACHE_FOR_GDEXT_BUILD)
     include(ccache)
 endif()
 
-if(AUTOFORMAT_SRC_ON_CONFIGURE)
-    include(clang-format)
-endif()
-
 # =======================================================================
 # Dependency linkage (linking dependencies to our .dll build)
 # =======================================================================

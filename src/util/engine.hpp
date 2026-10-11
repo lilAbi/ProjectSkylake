@@ -2,8 +2,7 @@
 
 #include <cstdint>
 
-namespace godot
-{
+namespace godot {
     class Engine;
     class MainLoop;
     class Node;
@@ -11,17 +10,15 @@ namespace godot
     class Window;
 }
 
-namespace rl::inline utils
-{
-    struct engine
-    {
-        static godot::Engine* get();
-        static godot::MainLoop* main_loop();
-        static godot::SceneTree* scene_tree();
-        static godot::Window* root_window();
-        static godot::Node* root_node();
-        static void set_fps(const uint32_t fps);
-        static int32_t max_fps();
-        static bool editor_active();
+namespace core::inline utils {
+    struct Engine {
+        static godot::Engine*    get_engine();
+        static godot::MainLoop*  get_main_loop();
+        static godot::SceneTree* get_scene_tree();
+        static godot::Window*    get_root_window();
+        static godot::Node*      get_root_node();
+        static void              set_fps(int32_t fps);
+        static int32_t           get_max_fps();
+        static bool              is_editor_active();
     };
 }

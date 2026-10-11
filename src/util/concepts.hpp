@@ -5,16 +5,14 @@
 #include <string_view>
 #include <type_traits>
 
-namespace godot
-{
+namespace godot {
     template <typename T, typename V>
     struct GetTypeInfo;
     class Variant;
     class Object;
 }
 
-namespace rl::inline utils
-{
+namespace core::inline utils {
     template <auto S>
     concept CompileTimeStr = std::same_as<decltype(S), std::string_view> ||
                              std::same_as<decltype(S), std::string> ||
