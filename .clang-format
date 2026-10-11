@@ -1,0 +1,76 @@
+# Put this file in your project's src directory.
+# Core Guidelines-inspired layout; this does not check C++ correctness.
+# Unspecified formatting options inherit the LLVM baseline.
+BasedOnStyle: LLVM
+Language: Cpp
+DisableFormat: false
+
+# Consistent indentation. Preserve manually chosen line breaks in statements
+# instead of wrapping or joining calls to meet a column limit.
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ColumnLimit: 0
+
+# Project preference: opening braces stay on the signature/statement line.
+BreakBeforeBraces: Attach
+AccessModifierOffset: -4
+IndentCaseLabels: false
+# Project preference: indent contents of all namespace blocks.
+NamespaceIndentation: All
+
+# NL.18: keep pointer/reference symbols with the type: Widget* and Widget&.
+PointerAlignment: Left
+ReferenceAlignment: Pointer
+DerivePointerAlignment: false
+
+# Conventional spacing: if (ready), bind(), and [&](auto&&... args).
+SpaceBeforeParens: ControlStatements
+Cpp11BracedListStyle: true
+
+# Preserve authored line breaks for unconstrained template declarations.
+# Requires clang-format 19+.
+BreakTemplateDeclarations: Yes
+# Put requires clauses on their own indented line. A trailing clause keeps
+# the following function opening brace attached to that clause's line.
+RequiresClausePosition: OwnLineWithBrace
+IndentRequiresClause: true
+
+# Keep control flow and lambda bodies on separate lines.
+# Empty functions may stay compact.
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortEnumsOnASingleLine: true
+
+# Permit both individually listed and grouped arguments in multiline calls.
+# With ColumnLimit: 0, write the desired call line breaks yourself.
+# BlockIndent supplies the indented argument block and separate closing
+# parenthesis in these multiline calls. Legacy enum works with clang-format 18+.
+AlignAfterOpenBracket: BlockIndent
+BinPackArguments: true
+BinPackParameters: true
+MaxEmptyLinesToKeep: 1
+
+# Preserve authored comments, string literals, and include ordering.
+ReflowComments: false
+BreakStringLiterals: false
+IncludeBlocks: Preserve
+SortIncludes: Never
+SortUsingDeclarations: Never
+FixNamespaceComments: false
+
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignFunctionDeclarations: true
+  AlignFunctionPointers: false
+
+# Keep structural rewriting off. Prefer const T when writing new code
+# (NL.26), but do not automatically relocate existing qualifiers.
+QualifierAlignment: Leave
+RemoveBracesLLVM: false
