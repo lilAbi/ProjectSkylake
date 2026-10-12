@@ -1,14 +1,21 @@
 #include "extension_interface.hpp"
 
-#include "../util/console.hpp"
 #include "main.hpp"
+#include "nodes/systems/audio_controller.h"
+#include "nodes/systems/game_application.h"
+#include "nodes/systems/input_controller.h"
+#include "nodes/systems/save_controller.h"
+#include "nodes/systems/scene_coordinator.h"
+#include "nodes/systems/transition_controller.h"
+#include "nodes/title/title_screen_controller.h"
+#include "util/console.hpp"
 
 #include <gdextension_interface.h>
 #include <godot_cpp/classes/engine.hpp>
 
 void godot::initialize_static_objects() {
-    g_console_singleton = memnew(console);
-    godot::Engine::get_singleton()->register_singleton("Console", console::get());
+    g_console_singleton = memnew(Logger);
+    godot::Engine::get_singleton()->register_singleton("Console", Logger::get());
 }
 
 void godot::teardown_static_objects() {
@@ -19,8 +26,24 @@ void godot::teardown_static_objects() {
 void godot::initialize_extension_module(const godot::ModuleInitializationLevel init_level) {
     if (init_level != godot::MODULE_INITIALIZATION_LEVEL_SCENE)
         return;
+
+    //Main
     godot::ClassDB::register_class<Main>();
-    godot::ClassDB::register_class<console>();
+
+    //Systems
+    godot::ClassDB::register_class<AudioController>();
+    godot::ClassDB::register_class<GameApplication>();
+    godot::ClassDB::register_class<InputController>();
+    godot::ClassDB::register_class<SaveController>();
+    godot::ClassDB::register_class<SceneCoordinator>();
+    godot::ClassDB::register_class<TransitionController>();
+
+    //title
+    godot::ClassDB::register_class<TitleScreenController>();
+
+    //Util
+    godot::ClassDB::register_class<Logger>();
+
     initialize_static_objects();
 }
 

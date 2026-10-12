@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bnglqogtvgkcf"]
+
+[ext_resource type="Texture2D" uid="uid://b6g1opmoancod" path="res://assets/art/background/title_background.png" id="1_lpiji"]
+
+[node name="Title" type="TitleScreenController" unique_id=831838240]
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Background" type="TextureRect" parent="." unique_id=1279601060]
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_lpiji")
+
+[node name="GameTitleLabel" type="Label" parent="." unique_id=1087608498]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 500.0
+offset_right = 660.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 50
+text = "Project Skylake"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButtons" type="VBoxContainer" parent="." unique_id=286572991]
+layout_mode = 0
+offset_left = 1440.0
+offset_top = 480.0
+offset_right = 1800.0
+offset_bottom = 960.0
+
+[node name="ContinueButton" type="Button" parent="MenuButtons" unique_id=249715142]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="MenuButtons" unique_id=787415712]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "New Game"
+
+[node name="SettingsButton" type="Button" parent="MenuButtons" unique_id=915440546]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=732106815]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Footer" type="HBoxContainer" parent="." unique_id=1514381000]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VersionLabel" type="Label" parent="Footer" unique_id=1531503095]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "v0.0.1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CopyrightLabel" type="Label" parent="Footer" unique_id=1190931804]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "Skylake Studios"
+horizontal_alignment = 1
+vertical_alignment = 2

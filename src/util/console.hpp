@@ -66,4 +66,4 @@ private:
     static inline Console<TContext>* m_static_inst{nullptr};
 };
 
-using console = Console<godot::RichTextLabel>;
+using Logger = Console<godot::RichTextLabel>;

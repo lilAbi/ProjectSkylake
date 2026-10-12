@@ -50,6 +50,13 @@ namespace core::inline labels {
     //labels of nodes in a scene
     namespace node {
 
+        namespace Title {
+            constexpr inline auto ContinueButton{"%ContinueButton"};
+            constexpr inline auto NewGameButton{"%NewGameButton"};
+            constexpr inline auto SettingsButton{"%SettingsButton"};
+            constexpr inline auto QuitButton{"%QuitButton"};
+        }
+
     } //END OF "NODE" NAMESPACE
 
     namespace animations {
@@ -59,6 +66,14 @@ namespace core::inline labels {
     namespace path {
         //.tscn related files
         namespace scene {
+
+            namespace ui {
+
+                namespace title {
+                    constexpr inline auto title{"res://scenes/ui/title/title.tscn"};
+                }
+
+            }
 
         }
 

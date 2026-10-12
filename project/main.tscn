@@ -1,3 +1,64 @@
 [gd_scene format=3 uid="uid://be6f0odpenf2d"]
 
 [node name="Main" type="Main" unique_id=1872254352]
+
+[node name="Systems" type="Node" parent="." unique_id=2114072612]
+
+[node name="GameApplication" type="GameApplication" parent="Systems" unique_id=1850672158]
+
+[node name="SceneCoordinator" type="SceneCoordinator" parent="Systems/GameApplication" unique_id=1229237207]
+
+[node name="SaveController" type="SaveController" parent="Systems/GameApplication" unique_id=1697474984]
+
+[node name="AudioController" type="AudioController" parent="Systems/GameApplication" unique_id=1614475952]
+
+[node name="InputController" type="InputController" parent="Systems/GameApplication" unique_id=525520256]
+
+[node name="World" type="Node" parent="." unique_id=860107118]
+
+[node name="ActivityRoot" type="Node" parent="World" unique_id=1176213825]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=892737726]
+
+[node name="ScreenRoot" type="Control" parent="CanvasLayer" unique_id=1581117447]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=754365065]
+
+[node name="HudRoot" type="Control" parent="HudLayer" unique_id=655269303]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1143660177]
+
+[node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=1512291023]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=336864113]
+
+[node name="TransitionRoot" type="Control" parent="TransitionLayer" unique_id=553265141]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TransitionController" type="TransitionController" parent="TransitionLayer/TransitionRoot" unique_id=268261243]
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=187277091]
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=651802573]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugController" type="Node" parent="DebugLayer/DebugRoot" unique_id=1720057509]
