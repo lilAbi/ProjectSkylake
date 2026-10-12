@@ -7,7 +7,7 @@
 #include "nodes/systems/save_controller.h"
 #include "nodes/systems/scene_coordinator.h"
 #include "nodes/systems/transition_controller.h"
-#include "nodes/title/title_screen_controller.h"
+#include "nodes/title/title_scene_controller.h"
 #include "util/console.hpp"
 
 #include <gdextension_interface.h>
@@ -39,7 +39,7 @@ void godot::initialize_extension_module(const godot::ModuleInitializationLevel i
     godot::ClassDB::register_class<TransitionController>();
 
     //title
-    godot::ClassDB::register_class<TitleScreenController>();
+    godot::ClassDB::register_class<TitleSceneController>();
 
     //Util
     godot::ClassDB::register_class<Logger>();

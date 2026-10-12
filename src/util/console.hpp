@@ -27,6 +27,8 @@ public:
     }
 
     ~Console() override {
+        this->stop_logging();
+        spdlog::shutdown();
         m_static_inst = nullptr;
     }
 

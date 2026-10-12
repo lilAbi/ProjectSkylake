@@ -7,6 +7,11 @@ namespace core::inline labels {
     //defined signals
     namespace signal {
 
+        namespace TitleSceneController {
+            constexpr inline auto new_game_requested{"new_game_requested"};
+            constexpr inline auto load_game_requested{"load_game_requested"};
+        }
+
         //godot "Button" node signals
         namespace BaseButton {
             constexpr inline auto pressed{"pressed"};
@@ -52,6 +57,7 @@ namespace core::inline labels {
 
         namespace Main {
             constexpr inline auto ScreenRoot{"%ScreenRoot"};
+            constexpr inline auto ActivityRoot{"%ActivityRoot"};
         }
 
         namespace Title {

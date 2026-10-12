@@ -6,11 +6,11 @@
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
-class TitleScreenController : public godot::Control {
-    GDCLASS(TitleScreenController, godot::Control)
+class TitleSceneController : public godot::Control {
+    GDCLASS(TitleSceneController, godot::Control)
 public:
-    TitleScreenController() = default;
-    ~TitleScreenController() override = default;
+    TitleSceneController() = default;
+    ~TitleSceneController() override = default;
 
 protected:
     static void _bind_methods();
@@ -23,7 +23,7 @@ public:
     void _ready() override;
 
 private:
-    void on_continue_game_button_pressed();
+    void on_new_game_button_pressed();
     void on_load_game_button_pressed();
     void on_settings_button_pressed();
     void on_quit_button_pressed();

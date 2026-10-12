@@ -22,6 +22,8 @@ set(GDEXTENSION_LIB_PATH "${CMAKE_CURRENT_SOURCE_DIR}/project/bin")
 
 set(GODOTCPP_API_VERSION "4.7" CACHE STRING "Godot API version used by godot-cpp")
 
+set(GODOTCPP_USE_HOT_RELOAD ON CACHE BOOL "Enable godot-cpp hot reload support" FORCE)
+
 option(
   AUTOFORMAT_SRC_ON_CONFIGURE
     "If enabled, clang-format will be used to format all sources in src/ during configuration"
@@ -170,11 +172,6 @@ target_compile_options(${PROJECT_NAME} PRIVATE
             -O3
         >
     >
-)
-
-# Enable extension hot swapping:
-target_compile_definitions(${PROJECT_NAME} PRIVATE
-    HOT_RELOAD_ENABLED
 )
 
 # Define the directories containing inclusion headers (CMake needs to know this after running add_library):

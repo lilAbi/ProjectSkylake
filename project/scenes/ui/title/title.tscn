@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b6g1opmoancod" path="res://assets/art/background/title_background.png" id="1_lpiji"]
 
-[node name="Title" type="TitleScreenController" unique_id=831838240]
+[node name="Title" type="TitleSceneController" unique_id=294621421]
 custom_minimum_size = Vector2(1920, 1080)
 custom_maximum_size = Vector2(1920, 1080)
 offset_right = 1920.0
