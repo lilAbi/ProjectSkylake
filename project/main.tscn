@@ -17,6 +17,7 @@
 [node name="World" type="Node" parent="." unique_id=860107118]
 
 [node name="ActivityRoot" type="Node" parent="World" unique_id=1176213825]
+unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=892737726]
 

@@ -50,6 +50,10 @@ namespace core::inline labels {
     //labels of nodes in a scene
     namespace node {
 
+        namespace Main {
+            constexpr inline auto ScreenRoot{"%ScreenRoot"};
+        }
+
         namespace Title {
             constexpr inline auto ContinueButton{"%ContinueButton"};
             constexpr inline auto NewGameButton{"%NewGameButton"};

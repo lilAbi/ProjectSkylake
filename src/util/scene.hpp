@@ -13,8 +13,11 @@
 #include <concepts>
 
 namespace core::inline utils {
+
     namespace scene {
+
         namespace node {
+
             template <typename TNode>
                 requires std::derived_from<TNode, godot::Node>
             static inline void set_unique_name(TNode* node, const char* name) {
@@ -35,9 +38,11 @@ namespace core::inline utils {
                     set_owner(child, owner);
                 }
             }
+
         }
 
         namespace tree {
+
             template <typename TNode>
                 requires std::derived_from<TNode, godot::Node>
             static inline godot::SceneTree* get(TNode* node) {
@@ -60,9 +65,11 @@ namespace core::inline utils {
                 godot::Node*      root_node{gdcast<godot::Node>(root_window)};
                 return root_node;
             }
+
         }
 
         namespace packer {
+
             /* PackedScene from godot::Node parameter */
             template <typename TNode>
                 requires std::derived_from<TNode, godot::Node>
@@ -72,6 +79,7 @@ namespace core::inline utils {
                 package->pack(node);
                 return package;
             }
+
         }
     }
 
