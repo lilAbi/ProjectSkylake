@@ -1,5 +1,6 @@
 #include "scene_coordinator.h"
 
+#include "nodes/title/save_scene_controller.h"
 #include "nodes/title/title_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/engine.hpp"
@@ -33,6 +34,7 @@ void SceneCoordinator::_ready() {
 void SceneCoordinator::display_title_screen() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
     this->clear_screen();
+    //load & initialize the scene
     core::utils::resource::preload::PackedScene<TitleSceneController> title_scene{core::labels::path::scene::ui::title::title};
     const auto title_scene_controller = title_scene.instantiate();
     //bind "new_game_requested" signal
@@ -56,6 +58,13 @@ void SceneCoordinator::display_new_game_screen() {
 
 void SceneCoordinator::display_load_game_screen() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    this->clear_screen();
+    //load & initialize the scene
+    core::utils::resource::preload::PackedScene<SaveSceneController> save_scene{core::labels::path::scene::ui::title::save};
+    const auto save_scene_controller = save_scene.instantiate();
+    //bind "game_title_requested" signal
+    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::game_title_requested, callable_mp(this, &SceneCoordinator::display_title_screen));
+    this->mount_screen(save_scene_controller);
 }
 
 void SceneCoordinator::mount_screen(godot::Node* screen) {

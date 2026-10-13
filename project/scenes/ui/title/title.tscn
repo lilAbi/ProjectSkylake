@@ -34,19 +34,19 @@ offset_top = 480.0
 offset_right = 1800.0
 offset_bottom = 960.0
 
-[node name="ContinueButton" type="Button" parent="MenuButtons" unique_id=249715142]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "Continue"
-
 [node name="NewGameButton" type="Button" parent="MenuButtons" unique_id=787415712]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 50
 text = "New Game"
+
+[node name="LoadButton" type="Button" parent="MenuButtons" unique_id=249715142]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "Load"
 
 [node name="SettingsButton" type="Button" parent="MenuButtons" unique_id=915440546]
 unique_name_in_owner = true

@@ -12,6 +12,10 @@ namespace core::inline labels {
             constexpr inline auto load_game_requested{"load_game_requested"};
         }
 
+        namespace SaveSceneController {
+            constexpr inline auto game_title_requested{"game_title_requested"};
+        }
+
         //godot "Button" node signals
         namespace BaseButton {
             constexpr inline auto pressed{"pressed"};
@@ -61,10 +65,14 @@ namespace core::inline labels {
         }
 
         namespace Title {
-            constexpr inline auto ContinueButton{"%ContinueButton"};
             constexpr inline auto NewGameButton{"%NewGameButton"};
+            constexpr inline auto LoadButton{"%LoadButton"};
             constexpr inline auto SettingsButton{"%SettingsButton"};
             constexpr inline auto QuitButton{"%QuitButton"};
+        }
+
+        namespace Save {
+            constexpr inline auto BackButton{"%BackButton"};
         }
 
     } //END OF "NODE" NAMESPACE
@@ -81,6 +89,7 @@ namespace core::inline labels {
 
                 namespace title {
                     constexpr inline auto title{"res://scenes/ui/title/title.tscn"};
+                    constexpr inline auto save{"res://scenes/ui/title/save.tscn"};
                 }
 
             }

@@ -30,8 +30,8 @@ private:
 
 private:
     Logger*        m_logger = Logger::get();
-    godot::Button* m_continue_game_button = nullptr;
     godot::Button* m_new_game_button = nullptr;
+    godot::Button* m_load_game_button = nullptr;
     godot::Button* m_settings_button = nullptr;
     godot::Button* m_quit_button = nullptr;
 };
