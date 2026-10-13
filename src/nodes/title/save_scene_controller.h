@@ -23,9 +23,13 @@ public:
     void _ready() override;
 
 private:
+    void on_slot_button_pressed();
     void on_back_button_pressed();
 
 private:
     Logger*        m_logger = Logger::get();
+    godot::Button* m_slot_1_button = nullptr;
+    godot::Button* m_slot_2_button = nullptr;
+    godot::Button* m_slot_3_button = nullptr;
     godot::Button* m_back_button = nullptr;
 };

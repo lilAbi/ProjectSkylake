@@ -7,11 +7,9 @@ bg_color = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(1920, 1080)
 custom_maximum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="Background" type="Panel" parent="." unique_id=324817322]
 custom_minimum_size = Vector2(1920, 1080)
@@ -25,11 +23,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4hykq")
 custom_minimum_size = Vector2(1920, 1080)
 custom_maximum_size = Vector2(1920, 1080)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1880.0
-offset_bottom = -1040.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="ActivityStatus" type="CenterContainer" parent="Layout" unique_id=322212408]
 custom_minimum_size = Vector2(0, 360)
@@ -37,7 +32,7 @@ custom_maximum_size = Vector2(-1, 360)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Layout/ActivityStatus" unique_id=623439945]
+[node name="ActivityLabel" type="Label" parent="Layout/ActivityStatus" unique_id=623439945]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "The Endless Tower

@@ -38,18 +38,23 @@ void SceneCoordinator::display_title_screen() {
     core::utils::resource::preload::PackedScene<TitleSceneController> title_scene{core::labels::path::scene::ui::title::title};
     const auto title_scene_controller = title_scene.instantiate();
     //bind "new_game_requested" signal
-    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::new_game_requested, callable_mp(this, &SceneCoordinator::display_new_game_screen));
+    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::new_game_requested, callable_mp(this, &SceneCoordinator::display_camp_screen));
     //bind "load_game_requested" signal
     core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::load_game_requested, callable_mp(this, &SceneCoordinator::display_load_game_screen));
     this->mount_screen(title_scene_controller);
 }
 
 void SceneCoordinator::display_camp_screen() {
-
+    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    this->clear_screen();
+    //load & initialize the scene
+    core::utils::resource::preload::PackedScene<godot::Control> camp_ui_scene{core::labels::path::scene::ui::camp::camp_ui};
+    const auto camp_ui = camp_ui_scene.instantiate();
+    this->mount_screen(camp_ui);
 }
 
 void SceneCoordinator::display_battle_screen() {
-
+    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
 }
 
 void SceneCoordinator::display_new_game_screen() {
@@ -62,6 +67,8 @@ void SceneCoordinator::display_load_game_screen() {
     //load & initialize the scene
     core::utils::resource::preload::PackedScene<SaveSceneController> save_scene{core::labels::path::scene::ui::title::save};
     const auto save_scene_controller = save_scene.instantiate();
+    //bind "start_game_requested" signal
+    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::start_game_requested, callable_mp(this, &SceneCoordinator::display_camp_screen));
     //bind "game_title_requested" signal
     core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::game_title_requested, callable_mp(this, &SceneCoordinator::display_title_screen));
     this->mount_screen(save_scene_controller);

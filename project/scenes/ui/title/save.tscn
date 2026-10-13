@@ -38,6 +38,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 50
 
 [node name="Slot1Button" type="Button" parent="Layout/SlotContainer" unique_id=1541850902]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 540)
 custom_maximum_size = Vector2(320, 540)
 layout_mode = 2
@@ -45,6 +46,7 @@ theme_override_font_sizes/font_size = 60
 text = "Slot 1"
 
 [node name="Slot2Button" type="Button" parent="Layout/SlotContainer" unique_id=808051614]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 540)
 custom_maximum_size = Vector2(320, 540)
 layout_mode = 2
@@ -52,6 +54,7 @@ theme_override_font_sizes/font_size = 60
 text = "Slot 2"
 
 [node name="Slot3Button" type="Button" parent="Layout/SlotContainer" unique_id=1817681279]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 540)
 custom_maximum_size = Vector2(320, 540)
 layout_mode = 2

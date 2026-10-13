@@ -14,6 +14,7 @@ namespace core::inline labels {
 
         namespace SaveSceneController {
             constexpr inline auto game_title_requested{"game_title_requested"};
+            constexpr inline auto start_game_requested{"start_game_requested"};
         }
 
         //godot "Button" node signals
@@ -72,6 +73,9 @@ namespace core::inline labels {
         }
 
         namespace Save {
+            constexpr inline auto Slot1Button{"%Slot1Button"};
+            constexpr inline auto Slot2Button{"%Slot2Button"};
+            constexpr inline auto Slot3Button{"%Slot3Button"};
             constexpr inline auto BackButton{"%BackButton"};
         }
 
@@ -86,6 +90,10 @@ namespace core::inline labels {
         namespace scene {
 
             namespace ui {
+
+                namespace camp {
+                    constexpr inline auto camp_ui{"res://scenes/ui/camp/camp_ui.tscn"};
+                }
 
                 namespace title {
                     constexpr inline auto title{"res://scenes/ui/title/title.tscn"};
