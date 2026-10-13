@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://t8u2sn5twu5q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hykq"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="CampUI" type="Control" unique_id=1142360814]
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="." unique_id=324817322]
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4hykq")
+
+[node name="Layout" type="VBoxContainer" parent="." unique_id=1059578754]
+custom_minimum_size = Vector2(1920, 1080)
+custom_maximum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1880.0
+offset_bottom = -1040.0
+
+[node name="ActivityStatus" type="CenterContainer" parent="Layout" unique_id=322212408]
+custom_minimum_size = Vector2(0, 360)
+custom_maximum_size = Vector2(-1, 360)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Layout/ActivityStatus" unique_id=623439945]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "The Endless Tower
+Your Next Floor Await"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hotspots" type="GridContainer" parent="Layout" unique_id=1610203594]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="BarracksButton" type="Button" parent="Layout/Hotspots" unique_id=133979627]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Barrack"
+
+[node name="WarTableButton" type="Button" parent="Layout/Hotspots" unique_id=780436975]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "War Table"
+
+[node name="ForgeButton" type="Button" parent="Layout/Hotspots" unique_id=165226958]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Forge"
+
+[node name="CampfireButton" type="Button" parent="Layout/Hotspots" unique_id=2113669499]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Campfire"
+
+[node name="AdventureButton" type="Button" parent="Layout/Hotspots" unique_id=1135941387]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Adventures"
+
+[node name="ShrineButton" type="Button" parent="Layout/Hotspots" unique_id=1196989465]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 48
+text = "Shrine"
+
+[node name="ResourceBar" type="HBoxContainer" parent="Layout" unique_id=668637628]
+custom_minimum_size = Vector2(0, 120)
+custom_maximum_size = Vector2(-1, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GoldDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=2043344586]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 48
+text = "Gold: 999
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SummonCurrencyDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=2037202036]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 48
+text = "Summon Token: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FloorProgressDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=1961423739]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 48
+text = "X Floor"
+horizontal_alignment = 1
+vertical_alignment = 1
