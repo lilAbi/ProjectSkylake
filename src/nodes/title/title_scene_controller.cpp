@@ -5,7 +5,6 @@
 #include "util/godot_bindings.hpp"
 #include "util/constants.hpp"
 
-
 void TitleSceneController::_bind_methods() {
     // Bind Godot-facing methods, properties, and signals here.
     core::add_signal<TitleSceneController>(godot::MethodInfo(core::labels::signal::TitleSceneController::new_game_requested));
