@@ -1,9 +1,9 @@
 #ifndef PROJECTSKYLAKE_CHARACTER_INSTANCE_H
 #define PROJECTSKYLAKE_CHARACTER_INSTANCE_H
 
-#include "equipment.h"
 #include "generated_character.h"
 #include "game/id/id.h"
+#include "game/item/equipment.h"
 
 struct CharacterProgression {
     std::int32_t         m_level{1};

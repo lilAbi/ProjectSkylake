@@ -9,4 +9,7 @@ struct ResourceBundle {
     std::map<ResourceID, std::int64_t> m_amounts;
 };
 
+using ResourceDelta = ResourceBundle;
+using ResourceCost = ResourceBundle;
+
 #endif //PROJECTSKYLAKE_RESOURCE_BUNDLE_H
