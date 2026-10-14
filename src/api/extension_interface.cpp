@@ -7,8 +7,8 @@
 #include "nodes/systems/save_controller.h"
 #include "nodes/systems/scene_coordinator.h"
 #include "nodes/systems/transition_controller.h"
-#include "nodes/title/save_scene_controller.h"
-#include "nodes/title/title_scene_controller.h"
+#include "nodes/ui/save_scene_controller.h"
+#include "nodes/ui/title_scene_controller.h"
 #include "util/console.hpp"
 
 #include <gdextension_interface.h>

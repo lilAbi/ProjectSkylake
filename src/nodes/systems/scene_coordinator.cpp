@@ -1,7 +1,7 @@
 #include "scene_coordinator.h"
 
-#include "nodes/title/save_scene_controller.h"
-#include "nodes/title/title_scene_controller.h"
+#include "nodes/ui/save_scene_controller.h"
+#include "nodes/ui/title_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/engine.hpp"
 #include "util/godot_bindings.hpp"
