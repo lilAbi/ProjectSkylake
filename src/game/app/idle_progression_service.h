@@ -7,9 +7,9 @@
 
 struct ServiceContext;
 
-class IDleProgressionService {
+class IdleProgressionService {
 public:
-    explicit IDleProgressionService(ServiceContext&);
+    explicit IdleProgressionService(ServiceContext&);
     IdleView                 view() const;
     Result<IdleAssignmentID> assign(TeamID, IdleActivityID);
     Result<void>             unassign(IdleAssignmentID);

@@ -1,19 +1,26 @@
 #pragma once
 
+#include "util/console.hpp"
+
 #include <godot_cpp/classes/node.hpp>
 
 class Main : public godot::Node {
     GDCLASS(Main, godot::Node);
+
 public:
-    Main();
+    Main() = default;
     ~Main() override = default;
 
 protected:
     static void _bind_methods();
 
+private:
+    inline void get_godot_objects();
+    inline void bind_signals();
+
 public:
     void _ready() override;
-    void _physics_process(double delta) override;
 
 private:
+    Logger* m_logger = Logger::get();
 };

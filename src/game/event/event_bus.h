@@ -196,10 +196,9 @@ Post_result EventBus::post(Event&& event) {
     if (is_shutting_down())
         return Post_result::shutting_down;
 
-    auto queued = std::make_unique<EventModel<EventType>>(
-        std::in_place, std::forward<Event>(event)
-    );
-    return enqueue(std::move(queued));
+    auto queued_event = std::make_unique<EventModel<EventType>>(std::in_place, std::forward<Event>(event));
+
+    return enqueue(std::move(queued_event));
 }
 
 template <typename Event, typename... Args>
@@ -211,9 +210,9 @@ Post_result EventBus::emplace(Args&&... args) {
     if (is_shutting_down())
         return Post_result::shutting_down;
 
-    auto queued = std::make_unique<EventModel<EventType>>(std::in_place, std::forward<Args>(args)...);
+    auto queued_event = std::make_unique<EventModel<EventType>>(std::in_place, std::forward<Args>(args)...);
 
-    return enqueue(std::move(queued));
+    return enqueue(std::move(queued_event));
 }
 
 #endif // PROJECTSKYLAKE_EVENT_BUS_H

@@ -7,12 +7,16 @@
 [node name="GameApplication" type="GameApplication" parent="Systems" unique_id=1850672158]
 
 [node name="SceneCoordinator" type="SceneCoordinator" parent="Systems/GameApplication" unique_id=1229237207]
+unique_name_in_owner = true
 
 [node name="SaveController" type="SaveController" parent="Systems/GameApplication" unique_id=1697474984]
+unique_name_in_owner = true
 
 [node name="AudioController" type="AudioController" parent="Systems/GameApplication" unique_id=1614475952]
+unique_name_in_owner = true
 
 [node name="InputController" type="InputController" parent="Systems/GameApplication" unique_id=525520256]
+unique_name_in_owner = true
 
 [node name="World" type="Node" parent="." unique_id=860107118]
 

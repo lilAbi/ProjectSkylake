@@ -1,12 +1,21 @@
 #pragma once
 
+#include "game/app/game_runtime.h"
+#include "util/console.hpp"
+
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
 #include <memory>
 
+class SceneCoordinator;
+class SaveController;
+class AudioController;
+class InputController;
+
 class GameApplication : public godot::Node {
     GDCLASS(GameApplication, godot::Node)
+
 public:
     GameApplication() = default;
     ~GameApplication() override = default;
@@ -14,12 +23,20 @@ public:
 protected:
     static void _bind_methods();
 
+private:
+    inline void get_godot_objects();
+    inline void bind_signals();
+
 public:
     void _enter_tree() override;
     void _exit_tree() override;
     void _ready() override;
 
 private:
-    
-
+    Logger*                      m_logger = Logger::get();
+    SceneCoordinator*            m_scene_coordinator = nullptr;
+    SaveController*              m_save_controller = nullptr;
+    AudioController*             m_audio_controller = nullptr;
+    InputController*             m_input_controller = nullptr;
+    std::unique_ptr<GameRuntime> m_runtime = nullptr;
 };

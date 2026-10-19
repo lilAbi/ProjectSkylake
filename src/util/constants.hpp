@@ -63,6 +63,11 @@ namespace core::inline labels {
         namespace Main {
             constexpr inline auto ScreenRoot{"%ScreenRoot"};
             constexpr inline auto ActivityRoot{"%ActivityRoot"};
+            constexpr inline auto SceneCoordinator{"%SceneCoordinator"};
+            constexpr inline auto SaveController{"%SaveController"};
+            constexpr inline auto AudioController{"%AudioController"};
+            constexpr inline auto InputController{"%InputController"};
+
         }
 
         namespace Title {
