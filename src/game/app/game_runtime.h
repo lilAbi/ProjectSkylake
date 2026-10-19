@@ -29,7 +29,8 @@ public:
     GameRuntime() = default;
     ~GameRuntime() = default;
 
-    Result<void> boot();
+    Result<void> initialize();
+    /*
     Result<void> new_game(const NewGameRequest&);
     Result<void> load_profile(SaveSlot);
     Result<void> shutdown();
@@ -50,9 +51,11 @@ public:
     IdleProgressionService&      get_idle_service();
     SaveService&                 get_save_service();
     ActivityCoordinator&         get_activities_service();
+    */
 
 private:
-    ContentCatalog       m_content;
+    ContentCatalog       m_content{{}};
+    /*
     GameState            m_state{};
     Revision             m_revision{};
     ActivityGeneration   m_generation{};
@@ -78,6 +81,7 @@ private:
     ActivityCoordinator         m_activities;
     // metadata
     bool m_profile_active = false;
+    */
 };
 
 #endif //PROJECTSKYLAKE_GAME_RUNTIME_H
