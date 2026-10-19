@@ -105,7 +105,7 @@ struct StatusDefinition {
     std::vector<EffectDefinition> m_turn_start_effects;
 };
 
-struct EquipmentDefinition {
+struct ItemDefinition {
     ItemDefinitionID          m_id;
     std::string               m_name;
     Equipment_slot            m_slot;

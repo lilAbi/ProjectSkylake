@@ -16,6 +16,18 @@ struct DefinitionID {
     auto        operator<=>(const DefinitionID&) const = default;
 };
 
+struct IDHash {
+    template <class Tag>
+    std::size_t operator()(const DefinitionID<Tag>& id) const noexcept {
+        return std::hash<std::string>{}(id.m_value);
+    }
+
+    template <class Tag>
+    std::size_t operator()(const EntityID<Tag>& id) const noexcept {
+        return std::hash<std::int64_t>{}(id.m_value);
+    }
+};
+
 struct CharacterTag;
 using CharacterID = EntityID<CharacterTag>;
 

@@ -54,7 +54,7 @@ public:
     */
 
 private:
-    ContentCatalog       m_content{{}};
+    //ContentCatalog       m_content{{}};
     /*
     GameState            m_state{};
     Revision             m_revision{};

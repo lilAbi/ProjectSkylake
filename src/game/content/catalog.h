@@ -7,42 +7,19 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 
-struct ContentVersion {
-    std::string m_value;
-};
-
-struct CatalogData {
-    ContentVersion                        m_version;
-    std::vector<CharacterClassDefinition> m_classes;
-    std::vector<TraitDefinition>          m_traits;
-    std::vector<AbilityDefinition>        m_abilities;
-    std::vector<StatusDefinition>         m_statuses;
-    std::vector<EquipmentDefinition>      m_equipment;
-    std::vector<RecipeDefinition>         m_recipes;
-    std::vector<BannerDefinition>         m_banners;
-    std::vector<ResourceDefinition>       m_resources;
-    std::vector<EnemyDefinition>          m_enemies;
-    std::vector<BattlefieldTemplate>      m_battlefields;
-    std::vector<ObjectiveDefinition>      m_objectives;
-    std::vector<EncounterDefinition>      m_encounters;
-    std::vector<RegionDefinition>         m_regions;
-    std::vector<CampBuildingDefinition>   m_buildings;
-    std::vector<RewardTableDefinition>    m_reward_tables;
-    std::vector<IdleActivityDefinition>   m_idle_activities;
-};
 
 class ContentCatalog {
 public:
-    explicit ContentCatalog(CatalogData);
-    ~ContentCatalog();
+    ContentCatalog() = default;
+    ~ContentCatalog() = default;
     Result<void>                    validate() const;
-    ContentVersion                  version() const;
     const CharacterClassDefinition* find(const ClassID&) const;
     const TraitDefinition*          find(const TraitID&) const;
     const AbilityDefinition*        find(const AbilityID&) const;
     const StatusDefinition*         find(const StatusID&) const;
-    const EquipmentDefinition*      find(const ItemDefinitionID&) const;
+    const ItemDefinition*           find(const ItemDefinitionID&) const;
     const RecipeDefinition*         find(const RecipeID&) const;
     const BannerDefinition*         find(const BannerID&) const;
     const ResourceDefinition*       find(const ResourceID&) const;
@@ -56,14 +33,22 @@ public:
     const IdleActivityDefinition*   find(const IdleActivityID&) const;
 
 private:
-    struct Impl;
-    std::unique_ptr<Impl> impl_;
-};
-
-class IContentSource {
-public:
-    virtual ~IContentSource() = default;
-    virtual Result<CatalogData> load() = 0;
+    std::unordered_map<ClassID, CharacterClassDefinition, IDHash>      m_classes;
+    std::unordered_map<TraitID, TraitDefinition, IDHash>               m_traits;
+    std::unordered_map<AbilityID, AbilityDefinition, IDHash>           m_abilities;
+    std::unordered_map<StatusID, StatusDefinition, IDHash>             m_statuses;
+    std::unordered_map<ItemDefinitionID, ItemDefinition, IDHash>       m_equipment;
+    std::unordered_map<RecipeID, RecipeDefinition, IDHash>             m_recipes;
+    std::unordered_map<BannerID, BannerDefinition, IDHash>             m_banners;
+    std::unordered_map<ResourceID, ResourceDefinition, IDHash>         m_resouces;
+    std::unordered_map<EnemyID, EnemyDefinition, IDHash>               m_enemies;
+    std::unordered_map<BattlefieldID, BattlefieldTemplate, IDHash>     m_battles;
+    std::unordered_map<ObjectiveID, ObjectiveDefinition, IDHash>       m_objectives;
+    std::unordered_map<EncounterID, EncounterDefinition, IDHash>       m_encounters;
+    std::unordered_map<RegionID, RegionDefinition, IDHash>             m_regions;
+    std::unordered_map<BuildingID, CampBuildingDefinition, IDHash>     m_buildings;
+    std::unordered_map<RewardTableID, RewardTableDefinition, IDHash>   m_rewards;
+    std::unordered_map<IdleActivityID, IdleActivityDefinition, IDHash> m_idle_activities;
 };
 
 #endif //PROJECTSKYLAKE_CATALOG_H

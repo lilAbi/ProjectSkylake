@@ -1,5 +1,9 @@
 #pragma once
 
+#include "audio_controller.h"
+#include "input_controller.h"
+#include "save_controller.h"
+#include "scene_coordinator.h"
 #include "game/app/game_runtime.h"
 #include "util/console.hpp"
 
@@ -7,11 +11,6 @@
 #include <godot_cpp/core/class_db.hpp>
 
 #include <memory>
-
-class SceneCoordinator;
-class SaveController;
-class AudioController;
-class InputController;
 
 class GameApplication : public godot::Node {
     GDCLASS(GameApplication, godot::Node)
