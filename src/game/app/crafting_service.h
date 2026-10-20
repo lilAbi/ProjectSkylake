@@ -13,14 +13,15 @@ struct CraftRequest;
 
 class CraftingService {
 public:
-    CraftingService(ServiceContext&, const ItemGenerator&);
+    CraftingService(ServiceContext& context, const ItemGenerator& item_generator) : m_context(context), m_item_generator(item_generator) {};
+    ~CraftingService() = default;
     std::vector<RecipeView> recipes() const;
     Result<CraftResult>     craft(const CraftRequest&);
     Result<void>            upgrade(ItemID);
 
 private:
-    ServiceContext&      m_context;
-    const ItemGenerator& m_generator;
+    const ServiceContext& m_context;
+    const ItemGenerator&  m_item_generator;
 };
 
 #endif //PROJECTSKYLAKE_CRAFTING_SERVICE_H

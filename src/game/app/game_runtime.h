@@ -23,6 +23,7 @@
 #include "game/generation/item_generator.h"
 #include "game/generation/reward_generator.h"
 #include "game/state/game_state.h"
+#include "util/console.hpp"
 
 class GameRuntime {
 public:
@@ -30,13 +31,10 @@ public:
     ~GameRuntime() = default;
 
     Result<void> initialize();
-    /*
-    Result<void> new_game(const NewGameRequest&);
+    Result<void> new_game(const NewGameRequest& new_game_request);
     Result<void> load_profile(SaveSlot);
     Result<void> shutdown();
-
-    Revision                     get_revision() const;
-    ActivityGeneration           get_generation() const;
+    /*
     const GameState&             get_state() const;
     const ContentCatalog&        get_content() const;
     DomainEventBus&              get_event_bus();
@@ -54,34 +52,31 @@ public:
     */
 
 private:
-    //ContentCatalog       m_content{{}};
-    /*
+    Logger*              m_logger = Logger::get();
     GameState            m_state{};
-    Revision             m_revision{};
-    ActivityGeneration   m_generation{};
+    ContentCatalog       m_content{};
     EventBus             m_events{};
     ActivityReservations m_reservations{};
-    ServiceContext       m_context;
+    ServiceContext       m_context{.m_state = m_state, .m_content = m_content, .m_events = m_events};
     // Domain/application helpers.
-    CharacterGenerator m_character_generator;
-    EncounterGenerator m_encounter_generator;
+    CharacterGenerator m_character_generator{m_content};
+    EncounterGenerator m_encounter_generator{m_content};
     ItemGenerator      m_item_generator;
     RewardGenerator    m_reward_generator;
     // Application services.
-    RosterService               m_roster_service;
-    SummoningService            m_summoning_service;
-    EquipmentService            m_equipment_service;
-    CharacterProgressionService m_character_progression_service;
-    CraftingService             m_crafting_service;
-    CampService                 m_camp_service;
-    ProgressionService          m_progression_service;
-    BattleApplicationService    m_battles_service;
-    IdleProgressionService      m_idle_service;
+    RosterService               m_roster_service{m_context};
+    SummoningService            m_summoning_service{m_context, m_character_generator};
+    EquipmentService            m_equipment_service{m_context};
+    CharacterProgressionService m_character_progression_service{m_context};
+    CraftingService             m_crafting_service{m_context, m_item_generator};
+    CampService                 m_camp_service{m_context};
+    ProgressionService          m_progression_service{m_context};
+    BattleApplicationService    m_battles_service{m_context, m_encounter_generator, m_reward_generator};
+    IdleProgressionService      m_idle_service{m_context};
     SaveService                 m_saves_service;
-    ActivityCoordinator         m_activities;
+    ActivityCoordinator         m_activities{m_progression_service, m_roster_service, m_battles_service};
     // metadata
     bool m_profile_active = false;
-    */
 };
 
 #endif //PROJECTSKYLAKE_GAME_RUNTIME_H

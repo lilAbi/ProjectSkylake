@@ -7,7 +7,8 @@ struct ServiceContext;
 
 class ProgressionService {
 public:
-    explicit ProgressionService(ServiceContext&);
+    explicit ProgressionService(ServiceContext& context) : m_context(context) {};
+    ~ProgressionService() = default;
     ProgressionView view() const;
     Result<void>    can_enter(FloorNumber, const RegionID&) const;
 

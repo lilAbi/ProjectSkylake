@@ -5,6 +5,7 @@
 [node name="Systems" type="Node" parent="." unique_id=2114072612]
 
 [node name="GameApplication" type="GameApplication" parent="Systems" unique_id=1850672158]
+unique_name_in_owner = true
 
 [node name="SceneCoordinator" type="SceneCoordinator" parent="Systems/GameApplication" unique_id=1229237207]
 unique_name_in_owner = true

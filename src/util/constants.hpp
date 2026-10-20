@@ -60,6 +60,15 @@ namespace core::inline labels {
     //labels of nodes in a scene
     namespace node {
 
+        namespace CampUI {
+            constexpr inline auto BarracksButton{"%BarracksButton"};
+            constexpr inline auto WarTableButton{"%WarTableButton"};
+            constexpr inline auto ForgeButton{"%ForgeButton"};
+            constexpr inline auto CampfireButton{"%CampfireButton"};
+            constexpr inline auto AdventureButton{"%AdventureButton"};
+            constexpr inline auto ShrineButton{"%ShrineButton"};
+        }
+
         namespace Main {
             constexpr inline auto ScreenRoot{"%ScreenRoot"};
             constexpr inline auto ActivityRoot{"%ActivityRoot"};
@@ -67,7 +76,6 @@ namespace core::inline labels {
             constexpr inline auto SaveController{"%SaveController"};
             constexpr inline auto AudioController{"%AudioController"};
             constexpr inline auto InputController{"%InputController"};
-
         }
 
         namespace Title {

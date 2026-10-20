@@ -9,7 +9,8 @@ class CharacterGenerator;
 
 class SummoningService {
 public:
-    SummoningService(ServiceContext&, const CharacterGenerator&);
+    SummoningService(ServiceContext& context, const CharacterGenerator& character_generator) : m_context(context), m_character_generator(character_generator) {};
+    ~SummoningService() = default;
     std::vector<BannerView> banners() const;
     Result<SummonResult>    summon(const SummonRequest&);
 

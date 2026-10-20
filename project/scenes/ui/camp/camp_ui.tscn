@@ -3,11 +3,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hykq"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="CampUI" type="Control" unique_id=1142360814]
+[node name="CampUI" type="CampUISceneController" unique_id=1278520988]
 custom_minimum_size = Vector2(1920, 1080)
 custom_maximum_size = Vector2(1920, 1080)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
@@ -46,6 +44,7 @@ size_flags_vertical = 3
 columns = 3
 
 [node name="BarracksButton" type="Button" parent="Layout/Hotspots" unique_id=133979627]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -53,6 +52,7 @@ theme_override_font_sizes/font_size = 48
 text = "Barrack"
 
 [node name="WarTableButton" type="Button" parent="Layout/Hotspots" unique_id=780436975]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -60,6 +60,7 @@ theme_override_font_sizes/font_size = 48
 text = "War Table"
 
 [node name="ForgeButton" type="Button" parent="Layout/Hotspots" unique_id=165226958]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -67,6 +68,7 @@ theme_override_font_sizes/font_size = 48
 text = "Forge"
 
 [node name="CampfireButton" type="Button" parent="Layout/Hotspots" unique_id=2113669499]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -74,6 +76,7 @@ theme_override_font_sizes/font_size = 48
 text = "Campfire"
 
 [node name="AdventureButton" type="Button" parent="Layout/Hotspots" unique_id=1135941387]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -81,6 +84,7 @@ theme_override_font_sizes/font_size = 48
 text = "Adventures"
 
 [node name="ShrineButton" type="Button" parent="Layout/Hotspots" unique_id=1196989465]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

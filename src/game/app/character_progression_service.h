@@ -8,7 +8,8 @@ struct ServiceContext;
 
 class CharacterProgressionService {
 public:
-    explicit CharacterProgressionService(ServiceContext&);
+    explicit CharacterProgressionService(ServiceContext& context) : m_context(context) {};
+    ~CharacterProgressionService() = default;
     Result<void> unlock_skill(CharacterID, SkillNodeID);
     Result<void> level_up(CharacterID);
 

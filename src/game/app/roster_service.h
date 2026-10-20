@@ -7,7 +7,8 @@ struct ServiceContext;
 
 class RosterService {
 public:
-    explicit RosterService(ServiceContext&);
+    explicit RosterService(ServiceContext& context) : m_context(context) {};
+    ~RosterService() = default;
     RosterView                   view() const;
     Result<CharacterDetailsView> character(CharacterID) const;
     Result<TeamID>               create_team(std::string name, std::int32_t slots);

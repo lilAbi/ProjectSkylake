@@ -8,12 +8,13 @@ struct ServiceContext;
 
 class EquipmentService {
 public:
-    explicit EquipmentService(ServiceContext&);
+    explicit EquipmentService(ServiceContext& context) : m_context(context) {};
+    ~EquipmentService() = default;
     InventoryView inventory() const;
     Result<void> equip(CharacterID, ItemID, Equipment_slot);
     Result<void> unequip(CharacterID, Equipment_slot);
 private:
-    ServiceContext& context_;
+    ServiceContext& m_context;
 };
 
 #endif //PROJECTSKYLAKE_EQUIPMENT_SERVICE_H

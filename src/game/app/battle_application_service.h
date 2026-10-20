@@ -17,8 +17,9 @@ struct StartBattleRequest;
 
 class BattleApplicationService {
 public:
-    BattleApplicationService(ServiceContext&, const EncounterGenerator&, const RewardGenerator&);
-    ~BattleApplicationService();
+    BattleApplicationService(ServiceContext& context, const EncounterGenerator& encounter_generator, const RewardGenerator& reward_generator)
+        : m_context(context), m_encounter_generator(encounter_generator), m_reward_generator(reward_generator) {};
+    ~BattleApplicationService() = default;
     Result<BattleStart>               start(const StartBattleRequest&);
     Result<BattleState>               snapshot(BattleID) const;
     Result<std::vector<GridPosition>> reachable(BattleID, CombatantID) const;
@@ -30,8 +31,9 @@ public:
     std::optional<BattleID>           active_battle() const;
 
 private:
-    //struct Impl;
-    //std::unique_ptr<Impl> impl_;
+    const ServiceContext&     m_context;
+    const EncounterGenerator& m_encounter_generator;
+    const RewardGenerator&    m_reward_generator;
 };
 
 using BattleCoordinator = BattleApplicationService;

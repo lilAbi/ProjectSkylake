@@ -6,7 +6,8 @@ class ServiceContext;
 
 class CampService {
 public:
-    explicit CampService(ServiceContext&);
+    explicit CampService(ServiceContext& context) : m_context(context) {};
+    ~CampService() = default;
     CampView           view() const;
     Result<BuildingID> construct(BuildingDefinitionID);
     Result<void>       upgrade(BuildingID);

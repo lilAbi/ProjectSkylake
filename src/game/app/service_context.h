@@ -6,7 +6,7 @@
 #include <set>
 
 class ContentCatalog;
-class DomainEventBus;
+class EventBus;
 class IClock;
 class RandomStreamFactory;
 struct GameState;
@@ -20,12 +20,10 @@ struct ActivityReservations {
 
 struct ServiceContext {
     GameState&                 m_state;
-    Revision&                  m_revision;
     const ContentCatalog&      m_content;
-    DomainEventBus&            m_events;
-    const RandomStreamFactory& m_rng;
-    const IClock&              m_clock;
-    ActivityReservations&      m_reservations;
+    EventBus&            m_events;
+    //const RandomStreamFactory& m_rng;
+    //const IClock&              m_clock;
 };
 
 #endif //PROJECTSKYLAKE_SERVICE_CONTEXT_H

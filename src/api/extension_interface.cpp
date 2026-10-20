@@ -7,6 +7,7 @@
 #include "nodes/systems/save_controller.h"
 #include "nodes/systems/scene_coordinator.h"
 #include "nodes/systems/transition_controller.h"
+#include "nodes/ui/camp_ui_scene_controller.h"
 #include "nodes/ui/save_scene_controller.h"
 #include "nodes/ui/title_scene_controller.h"
 #include "util/console.hpp"
@@ -40,6 +41,7 @@ void godot::initialize_extension_module(const godot::ModuleInitializationLevel i
     godot::ClassDB::register_class<TransitionController>();
 
     //title
+    godot::ClassDB::register_class<CampUISceneController>();
     godot::ClassDB::register_class<SaveSceneController>();
     godot::ClassDB::register_class<TitleSceneController>();
 

@@ -14,8 +14,9 @@ class SaveMapper;
 
 class SaveService {
 public:
-    SaveService(ISaveStore&, const ISaveCodec&, const MigrationRegistry&, const SaveMapper&, const ContentCatalog&, const IClock&);
-    ~SaveService();
+    //SaveService(ISaveStore&, const ISaveCodec&, const MigrationRegistry&, const SaveMapper&, const ContentCatalog&, const IClock&);
+    SaveService() = default;
+    ~SaveService() = default;
     Result<void>                      save(SaveSlot, const GameState&);
     Result<LoadCandidate>             load_candidate(SaveSlot) const;
     Result<std::vector<SaveSlotInfo>> slots() const;

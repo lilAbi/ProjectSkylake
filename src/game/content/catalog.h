@@ -5,8 +5,6 @@
 #include "game/core/ids.h"
 #include "game/core/results.h"
 
-#include <string>
-#include <vector>
 #include <unordered_map>
 
 
@@ -40,7 +38,7 @@ private:
     std::unordered_map<ItemDefinitionID, ItemDefinition, IDHash>       m_equipment;
     std::unordered_map<RecipeID, RecipeDefinition, IDHash>             m_recipes;
     std::unordered_map<BannerID, BannerDefinition, IDHash>             m_banners;
-    std::unordered_map<ResourceID, ResourceDefinition, IDHash>         m_resouces;
+    std::unordered_map<ResourceID, ResourceDefinition, IDHash>         m_resources;
     std::unordered_map<EnemyID, EnemyDefinition, IDHash>               m_enemies;
     std::unordered_map<BattlefieldID, BattlefieldTemplate, IDHash>     m_battles;
     std::unordered_map<ObjectiveID, ObjectiveDefinition, IDHash>       m_objectives;

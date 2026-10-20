@@ -8,7 +8,8 @@ struct EncounterGenerationRequest;
 
 class EncounterGenerator {
 public:
-    explicit EncounterGenerator(const ContentCatalog&);
+    explicit EncounterGenerator(const ContentCatalog& content_catalog) : m_content_catalog(content_catalog) {};
+    ~EncounterGenerator() = default;
     Result<GeneratedEncounter> generate(const EncounterGenerationRequest&, IRandomStream&) const;
 
 private:

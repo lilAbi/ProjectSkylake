@@ -31,14 +31,15 @@ struct NavigationPlan {
 
 class ActivityCoordinator {
 public:
-    ActivityCoordinator(ProgressionService&, RosterService&, BattleApplicationService&);
+    ActivityCoordinator(ProgressionService& progression_service, RosterService& roster_service, BattleApplicationService& battle_application_service)
+        : m_progression_service(progression_service), m_roster_service(roster_service), m_battle_application_service(battle_application_service) {};
     Result<NavigationPlan> plan_camp(Revision) const;
     Result<NavigationPlan> plan_battle(const StartBattleRequest&, Revision) const;
 
 private:
-    ProgressionService&       m_progression;
-    RosterService&            m_roster;
-    BattleApplicationService& m_battles;
+    ProgressionService&       m_progression_service;
+    RosterService&            m_roster_service;
+    BattleApplicationService& m_battle_application_service;
 };
 
 #endif //PROJECTSKYLAKE_ACTIVITY_COORDINATOR_H

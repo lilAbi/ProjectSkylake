@@ -19,7 +19,8 @@ struct CharacterGenerationRequest {
 
 class CharacterGenerator {
 public:
-    explicit CharacterGenerator(const ContentCatalog&);
+    explicit CharacterGenerator(const ContentCatalog& content_catalog) : m_content_catalog(content_catalog) {};
+    ~CharacterGenerator() = default;
     Result<GeneratedCharacter> generate(const CharacterGenerationRequest&, IRandomStream& character_rng, IRandomStream& skill_tree_rng) const;
 
 private:
