@@ -7,9 +7,8 @@ namespace core::inline labels {
     //defined signals
     namespace signal {
 
-        namespace TitleSceneController {
-            constexpr inline auto new_game_requested{"new_game_requested"};
-            constexpr inline auto load_game_requested{"load_game_requested"};
+        namespace CampUISceneController {
+            constexpr inline auto shrine_scene_requested{"shrine_scene_requested"};
         }
 
         namespace SaveSceneController {
@@ -17,6 +16,12 @@ namespace core::inline labels {
             constexpr inline auto start_game_requested{"start_game_requested"};
         }
 
+        namespace TitleSceneController {
+            constexpr inline auto new_game_requested{"new_game_requested"};
+            constexpr inline auto load_game_requested{"load_game_requested"};
+        }
+
+        //GODOT API
         //godot "Button" node signals
         namespace BaseButton {
             constexpr inline auto pressed{"pressed"};

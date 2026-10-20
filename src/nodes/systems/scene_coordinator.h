@@ -22,23 +22,24 @@ public:
     void _ready() override;
 
 private:
-    void display_title_screen();
-    void display_camp_screen();
-    void display_battle_screen();
-    void display_new_game_screen();
-    void display_load_game_screen();
+    void display_title_scene();
+    void display_camp_scene();
+    void display_battle_scene();
+    void display_shrine_scene();
+    void display_new_game_scene();
+    void display_load_game_scene();
 
-    void mount_screen(godot::Node* screen);
-    void mount_activity(godot::Node* activity);
+    void mount_scene(godot::Node* root);
+    void mount_activity(godot::Node* root);
 
-    void clear_screen();
+    void clear_scene();
     void clear_activity();
 
 private:
     Logger*      m_logger = Logger::get();
     godot::Node* m_screen_root = nullptr;
     godot::Node* m_activity_root = nullptr;
-    godot::Node* m_current_screen = nullptr;
+    godot::Node* m_current_scene = nullptr;
     godot::Node* m_current_activity = nullptr;
     bool         m_is_transitioning = false;
 };

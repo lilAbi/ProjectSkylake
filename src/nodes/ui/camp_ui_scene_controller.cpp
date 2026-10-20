@@ -7,6 +7,7 @@
 
 void CampUISceneController::_bind_methods() {
     // Bind Godot-facing methods, properties, and signals here.
+    core::add_signal<CampUISceneController>(godot::MethodInfo(core::labels::signal::CampUISceneController::shrine_scene_requested));
 }
 
 void CampUISceneController::get_godot_objects() {
@@ -59,4 +60,5 @@ void CampUISceneController::on_adventure_button_pressed() {
 
 void CampUISceneController::on_shrine_button_pressed() {
     m_logger->print("[CampUISceneController] {}() called", __FUNCTION__);
+    this->emit_signal(core::labels::signal::CampUISceneController::shrine_scene_requested);
 }

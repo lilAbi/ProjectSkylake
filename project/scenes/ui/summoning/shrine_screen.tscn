@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://ctbvdt7yo4vqy"]
+
+[node name="Shrine" type="Control" unique_id=708368039]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="VBoxContainer" parent="." unique_id=173693004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=287605863]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Layout/Header" unique_id=1886014869]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shrine of Echoes"
+
+[node name="CurrencyCaption" type="Label" parent="Layout/Header" unique_id=1181447543]
+layout_mode = 2
+text = "Echo Sigils:"
+
+[node name="CurrencyLabel" type="Label" parent="Layout/Header" unique_id=1968745658]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "380"
+
+[node name="RosterCaption" type="Label" parent="Layout/Header" unique_id=944790293]
+layout_mode = 2
+text = "Roster:"
+
+[node name="RosterCountLabel" type="Label" parent="Layout/Header" unique_id=200889163]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+text = "12"
+
+[node name="HeaderSeparator" type="HSeparator" parent="Layout" unique_id=1593272542]
+layout_mode = 2
+
+[node name="Body" type="HBoxContainer" parent="Layout" unique_id=124662784]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SummoningStage" type="PanelContainer" parent="Layout/Body" unique_id=1632919909]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StageContent" type="VBoxContainer" parent="Layout/Body/SummoningStage" unique_id=300457001]
+layout_mode = 2
+
+[node name="StageTitle" type="Label" parent="Layout/Body/SummoningStage/StageContent" unique_id=1442949179]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Character Preview"
+horizontal_alignment = 1
+
+[node name="PreviewArea" type="Control" parent="Layout/Body/SummoningStage/StageContent" unique_id=2033869581]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CharacterPreview" type="TextureRect" parent="Layout/Body/SummoningStage/StageContent/PreviewArea" unique_id=704602049]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PreviewPlaceholder" type="Label" parent="Layout/Body/SummoningStage/StageContent/PreviewArea" unique_id=1707284730]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Character sprite goes here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StageSubtitle" type="Label" parent="Layout/Body/SummoningStage/StageContent" unique_id=1493016305]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Summon a character, inspect their stats, then save or reroll."
+horizontal_alignment = 1
+
+[node name="ColumnGap" type="Control" parent="Layout/Body" unique_id=1059800545]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CharacterDossier" type="PanelContainer" parent="Layout/Body" unique_id=1532853520]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="Details" type="VBoxContainer" parent="Layout/Body/CharacterDossier" unique_id=95650963]
+layout_mode = 2
+
+[node name="DetailsTitle" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=625576933]
+layout_mode = 2
+text = "Character Stats"
+
+[node name="IdentitySeparator" type="HSeparator" parent="Layout/Body/CharacterDossier/Details" unique_id=470658525]
+layout_mode = 2
+
+[node name="Identity" type="GridContainer" parent="Layout/Body/CharacterDossier/Details" unique_id=1176068439]
+layout_mode = 2
+columns = 2
+
+[node name="NameCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/Identity" unique_id=1132122257]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Name"
+
+[node name="CharacterNameLabel" type="Label" parent="Layout/Body/CharacterDossier/Details/Identity" unique_id=957052935]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Eira Fen"
+
+[node name="ClassCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/Identity" unique_id=846449235]
+layout_mode = 2
+text = "Class"
+
+[node name="CharacterClassLabel" type="Label" parent="Layout/Body/CharacterDossier/Details/Identity" unique_id=365029024]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ember Warden"
+
+[node name="StatsGap" type="Control" parent="Layout/Body/CharacterDossier/Details" unique_id=639832353]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StatsContainer" type="GridContainer" parent="Layout/Body/CharacterDossier/Details" unique_id=782960587]
+layout_mode = 2
+columns = 2
+
+[node name="VitalityCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=147554575]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vitality"
+
+[node name="VitalityValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1957684891]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "88"
+horizontal_alignment = 2
+
+[node name="StrengthCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1201500790]
+layout_mode = 2
+text = "Strength"
+
+[node name="StrengthValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=716326725]
+unique_name_in_owner = true
+layout_mode = 2
+text = "64"
+horizontal_alignment = 2
+
+[node name="DefenseCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=375139612]
+layout_mode = 2
+text = "Defense"
+
+[node name="DefenseValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=867123358]
+unique_name_in_owner = true
+layout_mode = 2
+text = "82"
+horizontal_alignment = 2
+
+[node name="AgilityCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1697102411]
+layout_mode = 2
+text = "Agility"
+
+[node name="AgilityValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=2036070158]
+unique_name_in_owner = true
+layout_mode = 2
+text = "35"
+horizontal_alignment = 2
+
+[node name="SpiritCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1896689528]
+layout_mode = 2
+text = "Spirit"
+
+[node name="SpiritValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1353996702]
+unique_name_in_owner = true
+layout_mode = 2
+text = "59"
+horizontal_alignment = 2
+
+[node name="LuckCaption" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=522957038]
+layout_mode = 2
+text = "Luck"
+
+[node name="LuckValue" type="Label" parent="Layout/Body/CharacterDossier/Details/StatsContainer" unique_id=1393749713]
+unique_name_in_owner = true
+layout_mode = 2
+text = "42"
+horizontal_alignment = 2
+
+[node name="TraitsGap" type="Control" parent="Layout/Body/CharacterDossier/Details" unique_id=1717568898]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TraitsSeparator" type="HSeparator" parent="Layout/Body/CharacterDossier/Details" unique_id=532301645]
+layout_mode = 2
+
+[node name="TraitCaption" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=1110761874]
+layout_mode = 2
+text = "Positive trait"
+
+[node name="TraitNameLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=193529964]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Unyielding"
+
+[node name="TraitDescriptionLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=379789505]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gains defense when wounded."
+autowrap_mode = 2
+
+[node name="DrawbackGap" type="Control" parent="Layout/Body/CharacterDossier/Details" unique_id=400853903]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DrawbackCaption" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=1803285416]
+layout_mode = 2
+text = "Drawback"
+
+[node name="DrawbackNameLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=1066819899]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Slow Recovery"
+
+[node name="DrawbackDescriptionLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=1956498368]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reduced healing received."
+autowrap_mode = 2
+
+[node name="GrowthGap" type="Control" parent="Layout/Body/CharacterDossier/Details" unique_id=1353651523]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GrowthLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=2032596471]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Growth potential: Exceptional"
+
+[node name="FooterGap" type="Control" parent="Layout" unique_id=2091562201]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FooterSeparator" type="HSeparator" parent="Layout" unique_id=1059936864]
+layout_mode = 2
+
+[node name="ActionBar" type="HBoxContainer" parent="Layout" unique_id=627658183]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="Layout/ActionBar" unique_id=1436448986]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Summon: 100 sigils  |  Reroll: 100 sigils  |  Save: free"
+
+[node name="SummonButton" type="Button" parent="Layout/ActionBar" unique_id=1151196083]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Summon"
+
+[node name="KeepButton" type="Button" parent="Layout/ActionBar" unique_id=1118582013]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Save to Roster"
+
+[node name="RerollButton" type="Button" parent="Layout/ActionBar" unique_id=887094512]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Reroll"
+
+[node name="BackButton" type="Button" parent="Layout/ActionBar" unique_id=188920148]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Back"
+
+[node name="StatusMessage" type="Label" parent="Layout" unique_id=1607797963]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Inspect this character, then save or reroll."

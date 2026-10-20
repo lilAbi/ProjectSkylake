@@ -1,5 +1,6 @@
 #include "scene_coordinator.h"
 
+#include "nodes/ui/camp_ui_scene_controller.h"
 #include "nodes/ui/save_scene_controller.h"
 #include "nodes/ui/title_scene_controller.h"
 #include "util/constants.hpp"
@@ -28,89 +29,94 @@ void SceneCoordinator::_ready() {
     //bind respective signals to callback functions
     this->bind_signals();
 
-    this->display_title_screen();
+    this->display_title_scene();
 }
 
-void SceneCoordinator::display_title_screen() {
+void SceneCoordinator::display_title_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
-    this->clear_screen();
+    this->clear_scene();
     //load & initialize the scene
     core::utils::resource::preload::PackedScene<TitleSceneController> title_scene{core::labels::path::scene::ui::title::title};
     const auto title_scene_controller = title_scene.instantiate();
     //bind "new_game_requested" signal
-    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::new_game_requested, callable_mp(this, &SceneCoordinator::display_camp_screen));
+    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::new_game_requested, callable_mp(this, &SceneCoordinator::display_camp_scene));
     //bind "load_game_requested" signal
-    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::load_game_requested, callable_mp(this, &SceneCoordinator::display_load_game_screen));
-    this->mount_screen(title_scene_controller);
+    core::connect_signal(title_scene_controller, core::labels::signal::TitleSceneController::load_game_requested, callable_mp(this, &SceneCoordinator::display_load_game_scene));
+    this->mount_scene(title_scene_controller);
 }
 
-void SceneCoordinator::display_camp_screen() {
+void SceneCoordinator::display_camp_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
-    this->clear_screen();
+    this->clear_scene();
     //load & initialize the scene
-    core::utils::resource::preload::PackedScene<godot::Control> camp_ui_scene{core::labels::path::scene::ui::camp::camp_ui};
-    const auto camp_ui = camp_ui_scene.instantiate();
-    this->mount_screen(camp_ui);
+    core::utils::resource::preload::PackedScene<CampUISceneController> camp_ui_scene{core::labels::path::scene::ui::camp::camp_ui};
+    const auto camp_ui_scene_controller = camp_ui_scene.instantiate();
+    core::connect_signal(camp_ui_scene_controller, core::labels::signal::CampUISceneController::shrine_scene_requested, callable_mp(this, &SceneCoordinator::display_shrine_scene));
+    this->mount_scene(camp_ui_scene_controller);
 }
 
-void SceneCoordinator::display_battle_screen() {
+void SceneCoordinator::display_battle_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
 }
 
-void SceneCoordinator::display_new_game_screen() {
+void SceneCoordinator::display_shrine_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
 }
 
-void SceneCoordinator::display_load_game_screen() {
+void SceneCoordinator::display_new_game_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
-    this->clear_screen();
+}
+
+void SceneCoordinator::display_load_game_scene() {
+    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    this->clear_scene();
     //load & initialize the scene
     core::utils::resource::preload::PackedScene<SaveSceneController> save_scene{core::labels::path::scene::ui::title::save};
     const auto save_scene_controller = save_scene.instantiate();
     //bind "start_game_requested" signal
-    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::start_game_requested, callable_mp(this, &SceneCoordinator::display_camp_screen));
+    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::start_game_requested, callable_mp(this, &SceneCoordinator::display_camp_scene));
     //bind "game_title_requested" signal
-    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::game_title_requested, callable_mp(this, &SceneCoordinator::display_title_screen));
-    this->mount_screen(save_scene_controller);
+    core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::game_title_requested, callable_mp(this, &SceneCoordinator::display_title_scene));
+    this->mount_scene(save_scene_controller);
 }
 
-void SceneCoordinator::mount_screen(godot::Node* screen) {
+void SceneCoordinator::mount_scene(godot::Node* root) {
     runtime_assert(m_screen_root != nullptr);
-    runtime_assert(screen != nullptr);
+    runtime_assert(root != nullptr);
 
     // A scene being mounted should not already belong to another parent.
-    runtime_assert(screen->get_parent() == nullptr);
+    runtime_assert(root->get_parent() == nullptr);
 
     // Navigation code should clear the previous screen first.
-    runtime_assert(m_current_screen == nullptr);
+    runtime_assert(m_current_scene == nullptr);
 
-    m_screen_root->add_child(screen);
-    m_current_screen = screen;
+    m_screen_root->add_child(root);
+    m_current_scene = root;
 }
 
-void SceneCoordinator::mount_activity(godot::Node* activity) {
+void SceneCoordinator::mount_activity(godot::Node* root) {
     runtime_assert(m_activity_root != nullptr);
-    runtime_assert(activity != nullptr);
+    runtime_assert(root != nullptr);
 
-    runtime_assert(activity->get_parent() == nullptr);
+    runtime_assert(root->get_parent() == nullptr);
     runtime_assert(m_current_activity == nullptr);
 
-    m_activity_root->add_child(activity);
-    m_current_activity = activity;
+    m_activity_root->add_child(root);
+    m_current_activity = root;
 }
 
-void SceneCoordinator::clear_screen() {
-    if (m_current_screen == nullptr) {
+void SceneCoordinator::clear_scene() {
+    if (m_current_scene == nullptr) {
         return;
     }
 
     runtime_assert(m_screen_root != nullptr);
-    runtime_assert(m_current_screen->get_parent() == m_screen_root);
+    runtime_assert(m_current_scene->get_parent() == m_screen_root);
 
-    m_screen_root->remove_child(m_current_screen);
-    m_current_screen->queue_free();
+    m_screen_root->remove_child(m_current_scene);
+    m_current_scene->queue_free();
 
-    m_current_screen = nullptr;
+    m_current_scene = nullptr;
 }
 
 void SceneCoordinator::clear_activity() {
