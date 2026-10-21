@@ -1,8 +1,8 @@
 #include "scene_coordinator.h"
 
-#include "nodes/ui/camp_ui_scene_controller.h"
-#include "nodes/ui/save_scene_controller.h"
-#include "nodes/ui/title_scene_controller.h"
+#include "nodes/controllers/camp_ui_scene_controller.h"
+#include "nodes/controllers/save_scene_controller.h"
+#include "nodes/controllers/title_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/engine.hpp"
 #include "util/godot_bindings.hpp"
@@ -83,13 +83,8 @@ void SceneCoordinator::display_load_game_scene() {
 void SceneCoordinator::mount_scene(godot::Node* root) {
     runtime_assert(m_screen_root != nullptr);
     runtime_assert(root != nullptr);
-
-    // A scene being mounted should not already belong to another parent.
     runtime_assert(root->get_parent() == nullptr);
-
-    // Navigation code should clear the previous screen first.
     runtime_assert(m_current_scene == nullptr);
-
     m_screen_root->add_child(root);
     m_current_scene = root;
 }
@@ -97,10 +92,8 @@ void SceneCoordinator::mount_scene(godot::Node* root) {
 void SceneCoordinator::mount_activity(godot::Node* root) {
     runtime_assert(m_activity_root != nullptr);
     runtime_assert(root != nullptr);
-
     runtime_assert(root->get_parent() == nullptr);
     runtime_assert(m_current_activity == nullptr);
-
     m_activity_root->add_child(root);
     m_current_activity = root;
 }
@@ -109,13 +102,10 @@ void SceneCoordinator::clear_scene() {
     if (m_current_scene == nullptr) {
         return;
     }
-
     runtime_assert(m_screen_root != nullptr);
     runtime_assert(m_current_scene->get_parent() == m_screen_root);
-
     m_screen_root->remove_child(m_current_scene);
     m_current_scene->queue_free();
-
     m_current_scene = nullptr;
 }
 
@@ -123,12 +113,9 @@ void SceneCoordinator::clear_activity() {
     if (m_current_activity == nullptr) {
         return;
     }
-
     runtime_assert(m_activity_root != nullptr);
     runtime_assert(m_current_activity->get_parent() == m_activity_root);
-
     m_activity_root->remove_child(m_current_activity);
     m_current_activity->queue_free();
-
     m_current_activity = nullptr;
 }

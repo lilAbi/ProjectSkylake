@@ -237,6 +237,7 @@ text = "Unyielding"
 
 [node name="TraitDescriptionLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=379789505]
 unique_name_in_owner = true
+custom_maximum_size = Vector2(440, -1)
 layout_mode = 2
 text = "Gains defense when wounded."
 autowrap_mode = 2
@@ -257,6 +258,7 @@ text = "Slow Recovery"
 
 [node name="DrawbackDescriptionLabel" type="Label" parent="Layout/Body/CharacterDossier/Details" unique_id=1956498368]
 unique_name_in_owner = true
+custom_maximum_size = Vector2(440, -1)
 layout_mode = 2
 text = "Reduced healing received."
 autowrap_mode = 2

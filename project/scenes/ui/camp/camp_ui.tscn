@@ -1,7 +1,4 @@
-[gd_scene format=3 uid="uid://t8u2sn5twu5q"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hykq"]
-bg_color = Color(0, 0, 0, 1)
+[gd_scene format=3 uid="uid://dph12jh4bmk7p"]
 
 [node name="CampUI" type="CampUISceneController" unique_id=1278520988]
 custom_minimum_size = Vector2(1920, 1080)
@@ -10,114 +7,404 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="Background" type="Panel" parent="." unique_id=324817322]
-custom_minimum_size = Vector2(1920, 1080)
-custom_maximum_size = Vector2(1920, 1080)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4hykq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Layout" type="VBoxContainer" parent="." unique_id=1059578754]
-custom_minimum_size = Vector2(1920, 1080)
-custom_maximum_size = Vector2(1920, 1080)
 layout_mode = 1
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
 
-[node name="ActivityStatus" type="CenterContainer" parent="Layout" unique_id=322212408]
-custom_minimum_size = Vector2(0, 360)
-custom_maximum_size = Vector2(-1, 360)
+[node name="Header" type="HBoxContainer" parent="Layout" unique_id=946840733]
+custom_minimum_size = Vector2(0, 88)
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 32
 
-[node name="ActivityLabel" type="Label" parent="Layout/ActivityStatus" unique_id=623439945]
+[node name="CampTitle" type="Label" parent="Layout/Header" unique_id=3190687]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "The Endless Tower
-Your Next Floor Await"
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 42
+text = "The Camp"
+
+[node name="ResourceBar" type="HBoxContainer" parent="Layout/Header" unique_id=668637628]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="GoldGroup" type="VBoxContainer" parent="Layout/Header/ResourceBar" unique_id=391219018]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="GoldCaption" type="Label" parent="Layout/Header/ResourceBar/GoldGroup" unique_id=1740111926]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Gold"
+
+[node name="GoldDisplay" type="RichTextLabel" parent="Layout/Header/ResourceBar/GoldGroup" unique_id=2043344586]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 36
+text = "999"
+fit_content = true
+scroll_active = false
+
+[node name="SummonGroup" type="VBoxContainer" parent="Layout/Header/ResourceBar" unique_id=1383290645]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SummonCaption" type="Label" parent="Layout/Header/ResourceBar/SummonGroup" unique_id=1502759488]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Summon tokens"
+
+[node name="SummonCurrencyDisplay" type="RichTextLabel" parent="Layout/Header/ResourceBar/SummonGroup" unique_id=2037202036]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 36
+text = "1"
+fit_content = true
+scroll_active = false
+
+[node name="HeaderSeparator" type="HSeparator" parent="Layout" unique_id=1365262625]
+layout_mode = 2
+
+[node name="ActivityStatus" type="PanelContainer" parent="Layout" unique_id=322212408]
+custom_minimum_size = Vector2(0, 208)
+layout_mode = 2
+
+[node name="Padding" type="MarginContainer" parent="Layout/ActivityStatus" unique_id=1680489992]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="ActivityRow" type="HBoxContainer" parent="Layout/ActivityStatus/Padding" unique_id=1060021436]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="TowerSummary" type="VBoxContainer" parent="Layout/ActivityStatus/Padding/ActivityRow" unique_id=268648177]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ActivityCaption" type="Label" parent="Layout/ActivityStatus/Padding/ActivityRow/TowerSummary" unique_id=1816472782]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "CURRENT ACTIVITY"
+
+[node name="ActivityLabel" type="Label" parent="Layout/ActivityStatus/Padding/ActivityRow/TowerSummary" unique_id=623439945]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "The Endless Tower"
+
+[node name="ActivityDescription" type="Label" parent="Layout/ActivityStatus/Padding/ActivityRow/TowerSummary" unique_id=1491131265]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Your next floor awaits."
+
+[node name="FloorSeparator" type="VSeparator" parent="Layout/ActivityStatus/Padding/ActivityRow" unique_id=63572614]
+layout_mode = 2
+
+[node name="FloorSummary" type="VBoxContainer" parent="Layout/ActivityStatus/Padding/ActivityRow" unique_id=917496872]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="FloorCaption" type="Label" parent="Layout/ActivityStatus/Padding/ActivityRow/FloorSummary" unique_id=1652598161]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Floor"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="FloorProgressDisplay" type="RichTextLabel" parent="Layout/ActivityStatus/Padding/ActivityRow/FloorSummary" unique_id=1961423739]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 44
+text = "X"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="DestinationsLabel" type="Label" parent="Layout" unique_id=292505178]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Camp destinations"
 
 [node name="Hotspots" type="GridContainer" parent="Layout" unique_id=1610203594]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
 columns = 3
 
 [node name="BarracksButton" type="Button" parent="Layout/Hotspots" unique_id=133979627]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
-text = "Barrack"
+tooltip_text = "Barracks - Manage your characters"
+accessibility_name = "Barracks"
+accessibility_description = "Manage your characters"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/BarracksButton" unique_id=2126979818]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/BarracksButton/Content" unique_id=526333506]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/BarracksButton/Content/Labels" unique_id=1541964968]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Barracks"
+
+[node name="Description" type="Label" parent="Layout/Hotspots/BarracksButton/Content/Labels" unique_id=1454838703]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Manage your characters"
+autowrap_mode = 2
 
 [node name="WarTableButton" type="Button" parent="Layout/Hotspots" unique_id=780436975]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
+tooltip_text = "War Table - Prepare your party"
+accessibility_name = "War Table"
+accessibility_description = "Prepare your party"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/WarTableButton" unique_id=1402529509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/WarTableButton/Content" unique_id=19673026]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/WarTableButton/Content/Labels" unique_id=854005936]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "War Table"
+
+[node name="Description" type="Label" parent="Layout/Hotspots/WarTableButton/Content/Labels" unique_id=2100876418]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Prepare your party"
+autowrap_mode = 2
 
 [node name="ForgeButton" type="Button" parent="Layout/Hotspots" unique_id=165226958]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
+tooltip_text = "Forge - Craft and upgrade equipment"
+accessibility_name = "Forge"
+accessibility_description = "Craft and upgrade equipment"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/ForgeButton" unique_id=1466408520]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/ForgeButton/Content" unique_id=921263229]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/ForgeButton/Content/Labels" unique_id=2069426487]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Forge"
+
+[node name="Description" type="Label" parent="Layout/Hotspots/ForgeButton/Content/Labels" unique_id=1951011133]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Craft and upgrade equipment"
+autowrap_mode = 2
 
 [node name="CampfireButton" type="Button" parent="Layout/Hotspots" unique_id=2113669499]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
+tooltip_text = "Campfire - Rest and recover"
+accessibility_name = "Campfire"
+accessibility_description = "Rest and recover"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/CampfireButton" unique_id=1118609385]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/CampfireButton/Content" unique_id=701825270]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/CampfireButton/Content/Labels" unique_id=866956713]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Campfire"
+
+[node name="Description" type="Label" parent="Layout/Hotspots/CampfireButton/Content/Labels" unique_id=2937739]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Rest and recover"
+autowrap_mode = 2
 
 [node name="AdventureButton" type="Button" parent="Layout/Hotspots" unique_id=1135941387]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
+tooltip_text = "Adventures - Explore and gather resources"
+accessibility_name = "Adventures"
+accessibility_description = "Explore and gather resources"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/AdventureButton" unique_id=700147034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/AdventureButton/Content" unique_id=1955183809]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/AdventureButton/Content/Labels" unique_id=536857851]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Adventures"
+
+[node name="Description" type="Label" parent="Layout/Hotspots/AdventureButton/Content/Labels" unique_id=1430019959]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Explore and gather resources"
+autowrap_mode = 2
 
 [node name="ShrineButton" type="Button" parent="Layout/Hotspots" unique_id=1196989465]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 48
+tooltip_text = "Shrine - Summon a new character"
+accessibility_name = "Shrine"
+accessibility_description = "Summon a new character"
+
+[node name="Content" type="MarginContainer" parent="Layout/Hotspots/ShrineButton" unique_id=1911692136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Labels" type="VBoxContainer" parent="Layout/Hotspots/ShrineButton/Content" unique_id=1255939408]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Heading" type="Label" parent="Layout/Hotspots/ShrineButton/Content/Labels" unique_id=356156875]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Shrine"
 
-[node name="ResourceBar" type="HBoxContainer" parent="Layout" unique_id=668637628]
-custom_minimum_size = Vector2(0, 120)
-custom_maximum_size = Vector2(-1, 120)
+[node name="Description" type="Label" parent="Layout/Hotspots/ShrineButton/Content/Labels" unique_id=249538921]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_font_sizes/font_size = 22
+text = "Summon a new character"
+autowrap_mode = 2
 
-[node name="GoldDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=2043344586]
+[node name="StatusMessage" type="Label" parent="Layout" unique_id=1705291892]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 48
-text = "Gold: 999
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SummonCurrencyDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=2037202036]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 48
-text = "Summon Token: 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FloorProgressDisplay" type="RichTextLabel" parent="Layout/ResourceBar" unique_id=1961423739]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 48
-text = "X Floor"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 22
+text = "Choose a camp destination."
