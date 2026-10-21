@@ -5,6 +5,8 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/core/class_db.hpp>
 
+class GameRuntime;
+
 class SceneCoordinator : public godot::Node {
     GDCLASS(SceneCoordinator, godot::Node)
 public:
@@ -20,6 +22,9 @@ private:
 
 public:
     void _ready() override;
+
+public:
+    void configure(GameRuntime& runtime);
 
 private:
     void display_title_scene();
@@ -37,6 +42,7 @@ private:
 
 private:
     Logger*      m_logger = Logger::get();
+    GameRuntime* m_runtime = nullptr;
     godot::Node* m_screen_root = nullptr;
     godot::Node* m_activity_root = nullptr;
     godot::Node* m_current_scene = nullptr;

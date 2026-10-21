@@ -33,6 +33,10 @@ void SceneCoordinator::_ready() {
     this->display_title_scene();
 }
 
+void SceneCoordinator::configure(GameRuntime& runtime) {
+    m_runtime = &runtime;
+}
+
 void SceneCoordinator::display_title_scene() {
     m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
     this->clear_scene();
@@ -69,6 +73,7 @@ void SceneCoordinator::display_shrine_scene() {
     const auto shrine_scene_controller = shrine_scene.instantiate();
     //bind "camp_ui_scene_requested" signal - transition to camp_ui scene
     core::connect_signal(shrine_scene_controller, core::labels::signal::ShrineSceneController::camp_ui_scene_requested, callable_mp(this, &SceneCoordinator::display_camp_scene));
+    shrine_scene_controller->configure(*m_runtime);
     this->mount_scene(shrine_scene_controller);
 }
 

@@ -26,6 +26,8 @@
 #include "util/console.hpp"
 
 class GameRuntime {
+    friend class SceneCoordinator;
+
 public:
     GameRuntime() = default;
     ~GameRuntime() = default;
@@ -34,10 +36,10 @@ public:
     Result<void> new_game(const NewGameRequest& new_game_request);
     Result<void> load_profile(SaveSlot);
     Result<void> shutdown();
-    /*
+
     const GameState&             get_state() const;
     const ContentCatalog&        get_content() const;
-    DomainEventBus&              get_event_bus();
+    EventBus&                    get_event_bus();
     RosterService&               get_roster_service();
     SummoningService&            get_summoning_service();
     EquipmentService&            get_equipment_service();
@@ -48,16 +50,15 @@ public:
     BattleApplicationService&    get_battles_service();
     IdleProgressionService&      get_idle_service();
     SaveService&                 get_save_service();
-    ActivityCoordinator&         get_activities_service();
-    */
+    ActivityCoordinator&         get_activities();
 
 private:
     Logger*              m_logger = Logger::get();
     GameState            m_state{};
     ContentCatalog       m_content{};
-    EventBus             m_events{};
+    EventBus             m_event_bus{};
     ActivityReservations m_reservations{};
-    ServiceContext       m_context{.m_state = m_state, .m_content = m_content, .m_events = m_events};
+    ServiceContext       m_context{.m_state = m_state, .m_content = m_content, .m_events = m_event_bus};
     // Domain/application helpers.
     CharacterGenerator m_character_generator{m_content};
     EncounterGenerator m_encounter_generator{m_content};

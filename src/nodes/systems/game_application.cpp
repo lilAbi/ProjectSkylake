@@ -21,7 +21,7 @@ void GameApplication::bind_signals() {
 
 void GameApplication::_enter_tree() {
     if (core::Engine::is_editor_active()) return;
-    m_logger->print("[GameApplication] {} called", __FUNCTION__);
+    m_logger->print("[GameApplication] {}() called", __FUNCTION__);
     //create GameRuntime
     m_runtime = std::make_unique<GameRuntime>();
     //initialize the runtime
@@ -31,15 +31,18 @@ void GameApplication::_enter_tree() {
 
 void GameApplication::_exit_tree() {
     if (core::Engine::is_editor_active()) return;
-    m_logger->print("[GameApplication] {} called", __FUNCTION__);
+    m_logger->print("[GameApplication] {}() called", __FUNCTION__);
     m_runtime.reset();
 }
 
 void GameApplication::_ready() {
     if (core::Engine::is_editor_active()) return;
-    m_logger->print("[GameApplication] {} called", __FUNCTION__);
+    m_logger->print("[GameApplication] {}() called", __FUNCTION__);
     //grab references to godot objects within the scene
     this->get_godot_objects();
     //bind respective signals to callback functions
     this->bind_signals();
+    //pass the Runtime object to the scene coordinator
+    m_scene_coordinator->configure(*m_runtime);
+    m_logger->print("[GameApplication] Passed GameRuntime object to SceneCoordinator");
 }

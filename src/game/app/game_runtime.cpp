@@ -25,3 +25,59 @@ Result<void> GameRuntime::shutdown() {
     //safely de-construct objects
     return std::monostate{};
 }
+
+const GameState& GameRuntime::get_state() const {
+    return m_state;
+}
+
+const ContentCatalog& GameRuntime::get_content() const {
+    return m_content;
+}
+
+EventBus& GameRuntime::get_event_bus() {
+    return m_event_bus;
+}
+
+RosterService& GameRuntime::get_roster_service() {
+    return m_roster_service;
+}
+
+SummoningService& GameRuntime::get_summoning_service() {
+    return m_summoning_service;
+}
+
+EquipmentService& GameRuntime::get_equipment_service() {
+    return m_equipment_service;
+}
+
+CharacterProgressionService& GameRuntime::get_character_progression_service() {
+    return m_character_progression_service;
+}
+
+CraftingService& GameRuntime::get_crafting_service() {
+    return m_crafting_service;
+}
+
+CampService& GameRuntime::get_camp_service() {
+    return m_camp_service;
+}
+
+ProgressionService& GameRuntime::get_progression_service() {
+    return m_progression_service;
+}
+
+BattleApplicationService& GameRuntime::get_battles_service() {
+    return m_battles_service;
+}
+
+IdleProgressionService& GameRuntime::get_idle_service() {
+    return m_idle_service;
+}
+
+SaveService& GameRuntime::get_save_service() {
+    return m_saves_service;
+}
+
+ActivityCoordinator& GameRuntime::get_activities() {
+    return m_activities;
+}

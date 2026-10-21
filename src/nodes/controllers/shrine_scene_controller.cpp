@@ -1,5 +1,6 @@
 #include "shrine_scene_controller.h"
 
+#include "game/app/game_runtime.h"
 #include "util/constants.hpp"
 #include "util/conversions.hpp"
 #include "util/engine.hpp"
@@ -29,7 +30,16 @@ void ShrineSceneController::_ready() {
     this->bind_signals();
 }
 
+void ShrineSceneController::configure(GameRuntime& runtime) {
+    m_summoning_service = &runtime.get_summoning_service();
+    m_roster_service = &runtime.get_roster_service();
+}
+
 void ShrineSceneController::on_back_button_pressed() {
     m_logger->print("[ShrineSceneController] {}() called", __FUNCTION__);
     this->emit_signal(core::labels::signal::ShrineSceneController::camp_ui_scene_requested);
+}
+
+void ShrineSceneController::on_summon_button_pressed() {
+
 }
