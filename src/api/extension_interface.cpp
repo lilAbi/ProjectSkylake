@@ -9,6 +9,7 @@
 #include "nodes/systems/transition_controller.h"
 #include "nodes/controllers/camp_ui_scene_controller.h"
 #include "nodes/controllers/save_scene_controller.h"
+#include "nodes/controllers/shrine_scene_controller.h"
 #include "nodes/controllers/title_scene_controller.h"
 #include "util/console.hpp"
 
@@ -41,6 +42,7 @@ void godot::initialize_extension_module(const godot::ModuleInitializationLevel i
     godot::ClassDB::register_class<TransitionController>();
 
     //title
+    godot::ClassDB::register_class<ShrineSceneController>();
     godot::ClassDB::register_class<CampUISceneController>();
     godot::ClassDB::register_class<SaveSceneController>();
     godot::ClassDB::register_class<TitleSceneController>();

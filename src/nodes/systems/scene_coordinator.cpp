@@ -2,6 +2,7 @@
 
 #include "nodes/controllers/camp_ui_scene_controller.h"
 #include "nodes/controllers/save_scene_controller.h"
+#include "nodes/controllers/shrine_scene_controller.h"
 #include "nodes/controllers/title_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/engine.hpp"
@@ -51,24 +52,32 @@ void SceneCoordinator::display_camp_scene() {
     //load & initialize the scene
     core::utils::resource::preload::PackedScene<CampUISceneController> camp_ui_scene{core::labels::path::scene::ui::camp::camp_ui};
     const auto camp_ui_scene_controller = camp_ui_scene.instantiate();
+    //bind "shrine_scene_requested" signal - transition to shrine scene
     core::connect_signal(camp_ui_scene_controller, core::labels::signal::CampUISceneController::shrine_scene_requested, callable_mp(this, &SceneCoordinator::display_shrine_scene));
     this->mount_scene(camp_ui_scene_controller);
 }
 
 void SceneCoordinator::display_battle_scene() {
-    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    m_logger->print("[SceneCoordinator] {}() called", __FUNCTION__);
 }
 
 void SceneCoordinator::display_shrine_scene() {
-    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    m_logger->print("[SceneCoordinator] {}() called", __FUNCTION__);
+    this->clear_scene();
+    //load & initialize the scene
+    core::utils::resource::preload::PackedScene<ShrineSceneController> shrine_scene{core::labels::path::scene::ui::summon::shrine};
+    const auto shrine_scene_controller = shrine_scene.instantiate();
+    //bind "camp_ui_scene_requested" signal - transition to camp_ui scene
+    core::connect_signal(shrine_scene_controller, core::labels::signal::ShrineSceneController::camp_ui_scene_requested, callable_mp(this, &SceneCoordinator::display_camp_scene));
+    this->mount_scene(shrine_scene_controller);
 }
 
 void SceneCoordinator::display_new_game_scene() {
-    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    m_logger->print("[SceneCoordinator] {}() called", __FUNCTION__);
 }
 
 void SceneCoordinator::display_load_game_scene() {
-    m_logger->print("[SceneCoordinator] {} called", __FUNCTION__);
+    m_logger->print("[SceneCoordinator] {}() called", __FUNCTION__);
     this->clear_scene();
     //load & initialize the scene
     core::utils::resource::preload::PackedScene<SaveSceneController> save_scene{core::labels::path::scene::ui::title::save};

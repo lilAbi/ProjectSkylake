@@ -1,12 +1,8 @@
 [gd_scene format=3 uid="uid://ctbvdt7yo4vqy"]
 
-[node name="Shrine" type="Control" unique_id=708368039]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Shrine" type="ShrineSceneController" unique_id=560831295]
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="Layout" type="VBoxContainer" parent="." unique_id=173693004]
 layout_mode = 1

@@ -34,19 +34,19 @@ void TitleSceneController::_ready() {
 }
 
 void TitleSceneController::on_new_game_button_pressed() {
-    m_logger->print("[TitleSceneController] {} called", __FUNCTION__);
+    m_logger->print("[TitleSceneController] {}() called", __FUNCTION__);
     this->emit_signal(core::labels::signal::TitleSceneController::new_game_requested);
 }
 
 void TitleSceneController::on_load_game_button_pressed() {
-    m_logger->print("[TitleSceneController] {} called", __FUNCTION__);
+    m_logger->print("[TitleSceneController] {}() called", __FUNCTION__);
     this->emit_signal(core::labels::signal::TitleSceneController::load_game_requested);
 }
 
 void TitleSceneController::on_settings_button_pressed() {
-    m_logger->print("[TitleSceneController] {} called", __FUNCTION__);
+    m_logger->print("[TitleSceneController] {}() called", __FUNCTION__);
 }
 
 void TitleSceneController::on_quit_button_pressed() {
-    m_logger->print("[TitleSceneController] {} called", __FUNCTION__);
+    m_logger->print("[TitleSceneController] {}() called", __FUNCTION__);
 }

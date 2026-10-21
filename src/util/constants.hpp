@@ -16,6 +16,10 @@ namespace core::inline labels {
             constexpr inline auto start_game_requested{"start_game_requested"};
         }
 
+        namespace ShrineSceneController {
+            constexpr inline auto camp_ui_scene_requested{"camp_ui_scene_requested"};
+        }
+
         namespace TitleSceneController {
             constexpr inline auto new_game_requested{"new_game_requested"};
             constexpr inline auto load_game_requested{"load_game_requested"};
@@ -97,6 +101,10 @@ namespace core::inline labels {
             constexpr inline auto BackButton{"%BackButton"};
         }
 
+        namespace Shrine {
+            constexpr inline auto BackButton{"%BackButton"};
+        }
+
     } //END OF "NODE" NAMESPACE
 
     namespace animations {
@@ -116,6 +124,10 @@ namespace core::inline labels {
                 namespace title {
                     constexpr inline auto title{"res://scenes/ui/title/title.tscn"};
                     constexpr inline auto save{"res://scenes/ui/title/save.tscn"};
+                }
+
+                namespace summon {
+                    constexpr inline auto shrine{"res://scenes/ui/summon/shrine.tscn"};
                 }
 
             }
