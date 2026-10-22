@@ -2,26 +2,26 @@
   "schema_version": 1,
   "kind": "building",
   "definitions": [
-    {
-      "id": "building.blacksmith",
-      "name": "Blacksmith",
-      "description": "Allows equipment crafting and upgrades.",
-      "max_level": 10,
-      "levels": [
-        {
-          "level": 1,
-          "construction_cost": [
-            {
-              "item": "item.iron_ingot",
-              "count": 10
-            }
-          ],
-          "construction_time_seconds": 60,
-          "unlocks": [
+	{
+	  "id": "building.blacksmith",
+	  "name": "Blacksmith",
+	  "description": "Allows equipment crafting and upgrades.",
+	  "max_level": 10,
+	  "levels": [
+		{
+		  "level": 1,
+		  "construction_cost": [
+			{
+			  "item": "item.iron_ingot",
+			  "count": 10
+			}
+		  ],
+		  "construction_time_seconds": 60,
+		  "unlocks": [
             "recipe.iron_sword"
-          ]
-        }
-      ]
-    }
+		  ]
+		}
+	  ]
+	}
   ]
 }

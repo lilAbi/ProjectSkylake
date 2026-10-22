@@ -2,20 +2,20 @@
   "schema_version": 1,
   "kind": "region",
   "definitions": [
-    {
-      "id": "region.greenwood",
-      "name": "Greenwood",
-      "description": "A dense forest surrounding the lower tower floors.",
-      "recommended_level": {
-        "min": 1,
-        "max": 10
-      },
-      "encounters": [
-        {
-          "encounter": "encounter.forest_goblins",
-          "weight": 100
-        }
-      ]
-    }
+	{
+	  "id": "region.greenwood",
+	  "name": "Greenwood",
+	  "description": "A dense forest surrounding the lower tower floors.",
+	  "recommended_level": {
+		"min": 1,
+		"max": 10
+	  },
+	  "encounters": [
+		{
+		  "encounter": "encounter.forest_goblins",
+		  "weight": 100
+		}
+	  ]
+	}
   ]
 }
