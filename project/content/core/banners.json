@@ -1,0 +1,15 @@
+{
+    "schema_version": 1,
+    "kind": "banners",
+    "definitions": [
+        {
+            "id": "banner.starter",
+            "cost_per_summon": {
+                "resource.summon_token": 1
+            },
+            "allowed_classes": [
+                "class.warrior"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "schema_version": 1,
+    "kind": "encounters",
+    "definitions": [
+        {
+            "id": "encounter.training",
+            "battlefield": "battlefield.training",
+            "enemies": [
+                "enemy.goblin"
+            ],
+            "objectives": [
+                "objective.defeat_goblin"
+            ],
+            "rewards": "reward.training"
+        }
+    ]
+}

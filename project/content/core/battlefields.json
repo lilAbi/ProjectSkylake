@@ -1,0 +1,31 @@
+{
+    "schema_version": 1,
+    "kind": "battlefields",
+    "definitions": [
+        {
+            "id": "battlefield.training",
+            "width": 3,
+            "height": 2,
+            "tiles": [
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+            ],
+            "ally_spawns": [
+                {
+                    "x": 0,
+                    "y": 0
+                }
+            ],
+            "enemy_spawns": [
+                {
+                    "x": 2,
+                    "y": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "schema_version": 1,
+    "kind": "recipes",
+    "definitions": [
+        {
+            "id": "recipe.iron_sword",
+            "cost": {
+                "resource.iron": 4,
+                "resource.gold": 20
+            },
+            "outputs": [
+                "item.iron_sword"
+            ],
+            "required_unlocks": [
+                "unlock.forge"
+            ]
+        }
+    ]
+}

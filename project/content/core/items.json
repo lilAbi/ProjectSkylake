@@ -1,0 +1,39 @@
+{
+    "schema_version": 1,
+    "kind": "items",
+    "definitions": [
+        {
+            "id": "item.iron_sword",
+            "name": "Iron Sword",
+            "slot": "main_hand",
+            "maximum_level": 3,
+            "modifiers": [
+                {
+                    "stat": "attack",
+                    "operation": "flat_add",
+                    "value": 5
+                }
+            ],
+            "upgrade_costs": [
+                {
+                    "resource.gold": 25
+                },
+                {
+                    "resource.gold": 50
+                }
+            ]
+        },
+        {
+            "id": "item.iron_helmet",
+            "name": "Iron Helmet",
+            "slot": "helmet",
+            "modifiers": [
+                {
+                    "stat": "defense",
+                    "operation": "flat_add",
+                    "value": 3
+                }
+            ]
+        }
+    ]
+}

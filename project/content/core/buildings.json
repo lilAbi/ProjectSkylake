@@ -1,0 +1,21 @@
+{
+    "schema_version": 1,
+    "kind": "buildings",
+    "definitions": [
+        {
+            "id": "building.forge",
+            "maximum_level": 3,
+            "construction_cost": {
+                "resource.gold": 100
+            },
+            "upgrade_costs": [
+                {
+                    "resource.gold": 150
+                },
+                {
+                    "resource.gold": 300
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "schema_version": 1,
+    "kind": "traits",
+    "definitions": [
+        {
+            "id": "trait.tough",
+            "name": "Tough",
+            "modifiers": [
+                {
+                    "stat": "max_hp",
+                    "operation": "flat_add",
+                    "value": 20
+                }
+            ]
+        }
+    ]
+}

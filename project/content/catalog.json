@@ -1,54 +1,22 @@
 {
-  "schema_version": 1,
-  "content_version": "0.1.0",
-  "sources": [
-	{
-	  "kind": "class",
-	  "path": "res://content/characters/classes.json"
-	},
-	{
-	  "kind": "ability",
-	  "path": "res://content/characters/abilities.json"
-	},
-	{
-	  "kind": "trait",
-	  "path": "res://content/characters/traits.json"
-	},
-	{
-	  "kind": "item",
-	  "path": "res://content/items/items.json"
-	},
-	{
-	  "kind": "recipe",
-	  "path": "res://content/items/recipes.json"
-	},
-	{
-	  "kind": "loot_table",
-	  "path": "res://content/items/loot_tables.json"
-	},
-	{
-	  "kind": "enemy",
-	  "path": "res://content/combat/enemies.json"
-	},
-	{
-	  "kind": "status",
-	  "path": "res://content/combat/statuses.json"
-	},
-	{
-	  "kind": "encounter",
-	  "path": "res://content/combat/encounters.json"
-	},
-	{
-	  "kind": "region",
-	  "path": "res://content/world/regions.json"
-	},
-	{
-	  "kind": "building",
-	  "path": "res://content/world/buildings.json"
-	},
-	{
-	  "kind": "floor",
-	  "path": "res://content/progression/floors.json"
-	}
-  ]
+    "schema_version": 1,
+    "content_version": "0.1.0",
+    "sources": [
+        "core/recipes.json",
+        "core/classes.json",
+        "core/traits.json",
+        "core/abilities.json",
+        "core/statuses.json",
+        "core/items.json",
+        "core/banners.json",
+        "core/resources.json",
+        "core/enemies.json",
+        "core/battlefields.json",
+        "core/objectives.json",
+        "core/encounters.json",
+        "core/regions.json",
+        "core/buildings.json",
+        "core/rewards.json",
+        "core/idle_activities.json"
+    ]
 }

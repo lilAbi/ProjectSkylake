@@ -17,7 +17,7 @@ public:
     JSONContentSource(std::string manifest_path, ContentFileReader reader)
         : m_manifest_path(std::move(manifest_path)), m_reader(std::move(reader)) {};
 
-    [[nodiscard]] Result<CatalogData> load() override;
+    [[nodiscard]] Result<CatalogData> load() override {};
 
 private:
     std::string       m_manifest_path;

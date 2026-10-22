@@ -1,0 +1,12 @@
+{
+    "schema_version": 1,
+    "kind": "idle_activities",
+    "definitions": [
+        {
+            "id": "idle.mining",
+            "rewards": "reward.mining",
+            "interval": 60,
+            "offline_cap": 28800
+        }
+    ]
+}

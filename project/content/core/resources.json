@@ -1,0 +1,18 @@
+{
+    "schema_version": 1,
+    "kind": "resources",
+    "definitions": [
+        {
+            "id": "resource.gold",
+            "name": "Gold"
+        },
+        {
+            "id": "resource.iron",
+            "name": "Iron"
+        },
+        {
+            "id": "resource.summon_token",
+            "name": "Summon Token"
+        }
+    ]
+}

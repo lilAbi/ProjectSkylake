@@ -1,0 +1,70 @@
+{
+    "schema_version": 1,
+    "kind": "abilities",
+    "definitions": [
+        {
+            "id": "ability.strike",
+            "name": "Strike",
+            "targeting": {
+                "relation": "enemy",
+                "shape": "unit"
+            },
+            "effects": [
+                {
+                    "kind": "damage",
+                    "damage_kind": "physical",
+                    "base_amount": 10,
+                    "scaling_stat": "attack",
+                    "scaling": 5000
+                }
+            ]
+        },
+        {
+            "id": "ability.heal",
+            "name": "Heal",
+            "targeting": {
+                "relation": "ally",
+                "shape": "unit",
+                "maximum_range": 3
+            },
+            "effects": [
+                {
+                    "kind": "heal",
+                    "base_amount": 20
+                }
+            ]
+        },
+        {
+            "id": "ability.poison",
+            "name": "Poison",
+            "targeting": {
+                "relation": "enemy",
+                "shape": "unit",
+                "maximum_range": 3
+            },
+            "effects": [
+                {
+                    "kind": "apply_status",
+                    "status": "status.poison",
+                    "turns": 3,
+                    "chance": 8000
+                }
+            ]
+        },
+        {
+            "id": "ability.push",
+            "name": "Push",
+            "targeting": {
+                "relation": "enemy",
+                "shape": "unit"
+            },
+            "effects": [
+                {
+                    "kind": "move",
+                    "distance": 1,
+                    "push": true
+                }
+            ]
+        }
+    ]
+}

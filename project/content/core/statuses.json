@@ -1,0 +1,19 @@
+{
+    "schema_version": 1,
+    "kind": "statuses",
+    "definitions": [
+        {
+            "id": "status.poison",
+            "name": "Poisoned",
+            "maximum_stacks": 3,
+            "stack_policy": "stack_and_refresh",
+            "turn_start_effects": [
+                {
+                    "kind": "damage",
+                    "damage_kind": "poison",
+                    "base_amount": 2
+                }
+            ]
+        }
+    ]
+}

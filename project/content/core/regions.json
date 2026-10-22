@@ -1,0 +1,17 @@
+{
+    "schema_version": 1,
+    "kind": "regions",
+    "definitions": [
+        {
+            "id": "region.training",
+            "first_floor": 1,
+            "last_floor": 10,
+            "battlefields": [
+                "battlefield.training"
+            ],
+            "enemies": [
+                "enemy.goblin"
+            ]
+        }
+    ]
+}
