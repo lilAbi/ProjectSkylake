@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "kind": "status",
+  "definitions": [
+    {
+      "id": "status.guarding",
+      "name": "Guarding",
+      "description": "Increases defense temporarily.",
+      "stacking": "refresh_duration",
+      "max_stacks": 1,
+      "modifiers": [
+        {
+          "stat": "defense",
+          "operation": "multiply",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "id": "status.poisoned",
+      "name": "Poisoned",
+      "description": "Takes damage at the beginning of each turn.",
+      "stacking": "stack",
+      "max_stacks": 5,
+      "periodic_effects": [
+        {
+          "trigger": "turn_start",
+          "type": "damage",
+          "damage_type": "poison",
+          "base_value": 5
+        }
+      ]
+    }
+  ]
+}

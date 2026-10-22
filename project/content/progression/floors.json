@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "floor",
+  "definitions": [
+    {
+      "id": "floor.001",
+      "number": 1,
+      "name": "The Beginning",
+      "region": "region.greenwood",
+      "encounters": [
+        {
+          "encounter": "encounter.forest_goblins",
+          "weight": 100
+        }
+      ],
+      "completion_rewards": {
+        "experience": 250,
+        "items": [
+          {
+            "item": "item.iron_ingot",
+            "count": 5
+          }
+        ]
+      }
+    }
+  ]
+}

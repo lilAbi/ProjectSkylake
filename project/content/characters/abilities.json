@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "ability",
+  "definitions": [
+    {
+      "id": "ability.power_strike",
+      "name": "Power Strike",
+      "description": "A heavy melee attack dealing increased physical damage.",
+      "target_type": "enemy",
+      "cost": {
+        "resource": "energy",
+        "amount": 20
+      },
+      "cooldown": 2,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "physical",
+          "base_value": 20,
+          "scaling_stat": "attack",
+          "scaling": 1.5
+        }
+      ]
+    },
+    {
+      "id": "ability.guard",
+      "name": "Guard",
+      "description": "Temporarily increases defense.",
+      "target_type": "self",
+      "cost": {
+        "resource": "energy",
+        "amount": 10
+      },
+      "cooldown": 3,
+      "effects": [
+        {
+          "type": "apply_status",
+          "status": "status.guarding",
+          "duration": 2
+        }
+      ]
+    }
+  ]
+}

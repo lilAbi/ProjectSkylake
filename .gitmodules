@@ -10,3 +10,7 @@
 	path = extern/vcpkg
 	url = https://github.com/microsoft/vcpkg
 	branch = master
+[submodule "extern/nlohmann-json"]
+	path = extern/nlohmann-json
+	url = https://github.com/nlohmann/json.git
+	branch = master

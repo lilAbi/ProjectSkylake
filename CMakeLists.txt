@@ -111,7 +111,20 @@ include(godot-dev-configuration)
 # Tip: Includes cmake/godot-dev-configuration.cmake and runs it
 
 # =======================================================================
-# 3rd party library setup/configuration (leverages vcpkg)
+# 3rd party library setup/configuration
+# =======================================================================
+
+# -----------------------------------------------------------------------
+# Vendored dependencies
+# -----------------------------------------------------------------------
+
+set(JSON_BuildTests OFF CACHE BOOL "" FORCE)
+set(JSON_Install OFF CACHE BOOL "" FORCE)
+
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/extern/nlohmann-json" EXCLUDE_FROM_ALL)
+
+# =======================================================================
+# vcpkg dependencies
 # =======================================================================
 
 find_package(fmt CONFIG REQUIRED)
@@ -213,9 +226,13 @@ endif()
 #     The other libraries are found thanks to their definition earlier in "find_package", which
 #     is defined by the vcpkg package manager for each dependency added to the project.
 target_link_libraries(${PROJECT_NAME}
-    PUBLIC godot::cpp
-    PRIVATE fmt::fmt-header-only
-    PRIVATE spdlog::spdlog_header_only
+        PUBLIC
+        godot::cpp
+
+        PRIVATE
+        fmt::fmt-header-only
+        spdlog::spdlog_header_only
+        nlohmann_json::nlohmann_json
 )
 # Tip1: PUBLIC: our .dll depends on the library. PRIVATE: the library is expendable.
 # Tip2: godot::cpp, fmt::fmt etc... each library name is declared by each of it's

@@ -7,7 +7,6 @@
 
 #include <unordered_map>
 
-
 class ContentCatalog {
 public:
     ContentCatalog() = default;
@@ -48,5 +47,6 @@ private:
     std::unordered_map<RewardTableID, RewardTableDefinition, IDHash>   m_rewards;
     std::unordered_map<IdleActivityID, IdleActivityDefinition, IDHash> m_idle_activities;
 };
+
 
 #endif //PROJECTSKYLAKE_CATALOG_H

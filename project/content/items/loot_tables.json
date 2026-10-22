@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "kind": "loot_table",
+  "definitions": [
+    {
+      "id": "loot.goblin_basic",
+      "rolls": 1,
+      "entries": [
+        {
+          "item": "item.iron_ingot",
+          "weight": 80,
+          "min_count": 1,
+          "max_count": 3
+        },
+        {
+          "item": "item.iron_sword",
+          "weight": 5,
+          "min_count": 1,
+          "max_count": 1
+        }
+      ]
+    }
+  ]
+}
