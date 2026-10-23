@@ -1,9 +1,16 @@
 #include "game_runtime.h"
 
+#include "game/content/json_content_source.h"
+
 Result<void> GameRuntime::initialize() {
     m_logger->print("[GameRuntime] {} called", __FUNCTION__);
     //initialization check
     //load content_catalog from content_data
+    JSONContentSource content_source{"res://content/catalog.json", read_godot_content_file};
+    auto loaded_content = content_source.load();
+    if (const auto* error = std::get_if<Error>(&loaded_content)) {
+        return *error;
+    }
     //initialize "ContentCatalog" with pre-defined definitions
     return std::monostate{};
 }

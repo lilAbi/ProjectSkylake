@@ -15,6 +15,7 @@
 #include "progression_service.h"
 #include "roster_service.h"
 #include "game/content/catalog.h"
+#include "game/content/content_source.h"
 #include "game/core/results.h"
 #include "game/core/types.h"
 #include "game/event/event_bus.h"

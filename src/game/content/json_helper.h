@@ -20,23 +20,18 @@ constexpr std::size_t max_sources = 256;
 constexpr std::size_t max_definitions = 100'000;
 constexpr int         max_json_depth = 64;
 
-struct DecodeError {
-    Error m_error;
-};
-
 [[noreturn]] inline void fail(const std::string& path, const std::string& message, Error_code code = Error_code::invalid_content) {
-    throw DecodeError{
-        Error{
-            .m_code = code,
-            .m_message = path + ": " + message
-        }
+    throw Error{
+        .m_code = code,
+        .m_message = path + ": " + message
     };
 }
 
 inline std::string child_path(const std::string& path, const std::string_view key) {
     std::string result = path + "/";
     for (const char c : key) {
-        result += c == '~' ? "~0" : c == '/' ? "~1" : std::string(1, c);
+        result += c == '~' ? "~0" : c == '/' ? "~1"
+                                             : std::string(1, c);
     }
     return result;
 }
@@ -60,6 +55,7 @@ struct Decoder;
 
 template <typename T>
 T decode(const Json& value, const std::string& path) {
+    //attempt to extract a string if T is a string
     if constexpr (std::is_same_v<T, std::string>) {
         if (!value.is_string()) {
             fail(path, "expected a string");
@@ -70,11 +66,13 @@ T decode(const Json& value, const std::string& path) {
         }
         return result;
     } else if constexpr (std::is_same_v<T, bool>) {
+        //attempt to extract a boolean if T is a bool
         if (!value.is_boolean()) {
             fail(path, "expected a boolean");
         }
         return value.get<bool>();
     } else if constexpr (std::integral<T>) {
+        //attempt to extract an unsigned int if T is an integer type
         if (value.is_number_unsigned()) {
             const auto number = value.get<std::uint64_t>();
             if (!std::in_range<T>(number)) {
@@ -82,6 +80,7 @@ T decode(const Json& value, const std::string& path) {
             }
             return static_cast<T>(number);
         }
+        //attempt to extract an int if T is an integer type
         if (value.is_number_integer()) {
             const auto number = value.get<std::int64_t>();
             if (!std::in_range<T>(number)) {
@@ -91,8 +90,10 @@ T decode(const Json& value, const std::string& path) {
         }
         fail(path, "expected an integer (floating-point values are not accepted)");
     } else if constexpr (DefinitionIDType<T>::value) {
+        //attempt to extract an DefinitionID value if T is an DefinitionID type
         return T{decode<std::string>(value, path)};
     } else if constexpr (std::is_enum_v<T>) {
+        //attempt to extract an enum value
         const auto name = decode<std::string>(value, path);
         for (const auto& [label, result] : EnumNames<T>::values) {
             if (name == label) {
@@ -678,7 +679,8 @@ void schema_version(const Json& value) {
 
 Json parse_json(const std::string& text) {
     std::vector<std::set<std::string>> object_keys;
-    const auto                         callback = [&](int depth, Json::parse_event_t event, Json& parsed) {
+
+    const auto callback = [&](const int depth, const Json::parse_event_t event, const Json& parsed) {
         if (depth > max_json_depth) {
             fail("#", "JSON nesting exceeds depth limit");
         }
@@ -694,6 +696,7 @@ Json parse_json(const std::string& text) {
         }
         return true;
     };
+
     return Json::parse(text, callback);
 }
 

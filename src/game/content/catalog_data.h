@@ -6,6 +6,7 @@
 #include <vector>
 
 struct CatalogData {
+    std::string                           m_content_version;
     std::vector<CharacterClassDefinition> m_classes;
     std::vector<TraitDefinition>          m_traits;
     std::vector<AbilityDefinition>        m_abilities;
