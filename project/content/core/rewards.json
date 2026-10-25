@@ -3,32 +3,109 @@
     "kind": "rewards",
     "definitions": [
         {
-            "id": "reward.training",
+            "id": "reward.headons_test",
             "entries": [
                 {
-                    "resource": "resource.gold",
-                    "minimum": 10,
-                    "maximum": 20,
+                    "resource": "resource.points",
+                    "minimum": 25,
+                    "maximum": 40,
+                    "weight": 1
+                },
+                {
+                    "resource": "resource.suspendium",
+                    "minimum": 1,
+                    "maximum": 2,
                     "weight": 1
                 }
             ],
             "rolls": 1,
-            "experience_per_participant": 25,
+            "experience_per_participant": 50,
             "item_entries": [
                 {
-                    "definition": "item.iron_sword",
+                    "definition": "item.training_needle",
                     "weight": 1
                 }
             ],
             "item_rolls": 1
         },
         {
-            "id": "reward.mining",
+            "id": "reward.floor_of_test",
             "entries": [
                 {
-                    "resource": "resource.iron",
+                    "resource": "resource.points",
+                    "minimum": 20,
+                    "maximum": 35,
+                    "weight": 1
+                },
+                {
+                    "resource": "resource.suspendium",
                     "minimum": 1,
-                    "maximum": 3
+                    "maximum": 3,
+                    "weight": 1
+                }
+            ],
+            "rolls": 1,
+            "experience_per_participant": 35,
+            "item_entries": [
+                {
+                    "definition": "item.scout_observer",
+                    "weight": 1
+                },
+                {
+                    "definition": "item.basic_lighthouse",
+                    "weight": 1
+                }
+            ],
+            "item_rolls": 1
+        },
+        {
+            "id": "reward.crown_game",
+            "entries": [
+                {
+                    "resource": "resource.points",
+                    "minimum": 30,
+                    "maximum": 50,
+                    "weight": 1
+                },
+                {
+                    "resource": "resource.summon_token",
+                    "minimum": 1,
+                    "maximum": 1,
+                    "weight": 1
+                }
+            ],
+            "rolls": 1,
+            "experience_per_participant": 45,
+            "item_entries": [
+                {
+                    "definition": "item.regular_spear",
+                    "weight": 1
+                },
+                {
+                    "definition": "item.training_needle",
+                    "weight": 1
+                }
+            ],
+            "item_rolls": 1
+        },
+        {
+            "id": "reward.shinsu_training",
+            "entries": [
+                {
+                    "resource": "resource.points",
+                    "minimum": 2,
+                    "maximum": 5
+                }
+            ],
+            "rolls": 1
+        },
+        {
+            "id": "reward.suspendium_salvage",
+            "entries": [
+                {
+                    "resource": "resource.suspendium",
+                    "minimum": 1,
+                    "maximum": 2
                 }
             ],
             "rolls": 1

@@ -3,15 +3,39 @@
     "kind": "encounters",
     "definitions": [
         {
-            "id": "encounter.training",
-            "battlefield": "battlefield.training",
+            "id": "encounter.headons_ball_test",
+            "battlefield": "battlefield.headons_ball_test",
             "enemies": [
-                "enemy.goblin"
+                "enemy.white_steel_eel"
             ],
             "objectives": [
-                "objective.defeat_goblin"
+                "objective.clear_headons_test"
             ],
-            "rewards": "reward.training"
+            "rewards": "reward.headons_test"
+        },
+        {
+            "id": "encounter.floor_of_test_bull",
+            "battlefield": "battlefield.floor_of_test_arena",
+            "enemies": [
+                "enemy.bull"
+            ],
+            "objectives": [
+                "objective.defeat_bull"
+            ],
+            "rewards": "reward.floor_of_test"
+        },
+        {
+            "id": "encounter.crown_game",
+            "battlefield": "battlefield.crown_game_arena",
+            "enemies": [
+                "enemy.crown_game_fisherman",
+                "enemy.crown_game_spear_bearer",
+                "enemy.crown_game_wave_controller"
+            ],
+            "objectives": [
+                "objective.defeat_regular_team"
+            ],
+            "rewards": "reward.crown_game"
         }
     ]
 }

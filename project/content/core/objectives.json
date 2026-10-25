@@ -3,9 +3,19 @@
     "kind": "objectives",
     "definitions": [
         {
-            "id": "objective.defeat_goblin",
+            "id": "objective.clear_headons_test",
             "kind": "defeat_enemies",
             "target_count": 1
+        },
+        {
+            "id": "objective.defeat_bull",
+            "kind": "defeat_enemies",
+            "target_count": 1
+        },
+        {
+            "id": "objective.defeat_regular_team",
+            "kind": "defeat_enemies",
+            "target_count": 3
         }
     ]
 }

@@ -3,17 +3,19 @@
     "kind": "buildings",
     "definitions": [
         {
-            "id": "building.forge",
+            "id": "building.workshop",
             "maximum_level": 3,
             "construction_cost": {
-                "resource.gold": 100
+                "resource.points": 100
             },
             "upgrade_costs": [
                 {
-                    "resource.gold": 150
+                    "resource.points": 150,
+                    "resource.suspendium": 5
                 },
                 {
-                    "resource.gold": 300
+                    "resource.points": 300,
+                    "resource.suspendium": 10
                 }
             ]
         }

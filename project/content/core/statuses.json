@@ -3,8 +3,8 @@
     "kind": "statuses",
     "definitions": [
         {
-            "id": "status.poison",
-            "name": "Poisoned",
+            "id": "status.shinsu_burn",
+            "name": "Shinsu Burn",
             "maximum_stacks": 3,
             "stack_policy": "stack_and_refresh",
             "turn_start_effects": [

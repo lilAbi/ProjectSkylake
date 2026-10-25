@@ -3,22 +3,23 @@
 #include "game/content/json_content_source.h"
 
 Result<void> GameRuntime::initialize() {
-    m_logger->print("[GameRuntime] {} called", __FUNCTION__);
+    m_logger->print("[GameRuntime] {}() called", __FUNCTION__);
     //initialization check
     //load content_catalog from content_data
     JSONContentSource catalog_data_content_source{"res://content/catalog.json"};
     auto catalog_data = catalog_data_content_source.load();
     if (const auto* catalog_data_error = std::get_if<Error>(&catalog_data)) {
-        m_logger->print("[GameRuntime] initialize() ERROR: {}", catalog_data_error->m_message);
+        m_logger->critical("[GameRuntime] catalog_data_error: {}", catalog_data_error->m_message);
         return *catalog_data_error;
     }
     //initialize "ContentCatalog" with pre-defined definitions
     auto catalog = ContentCatalog::build(std::get<CatalogData>(std::move(catalog_data)));
     if (const auto* catalog_error = std::get_if<Error>(&catalog)) {
-        m_logger->print("[GameRuntime] initialize() ERROR: {}", catalog_error->m_message);
+        m_logger->critical("[GameRuntime] catalog_error: {}", catalog_error->m_message);
         return *catalog_error;
     }
-    m_content = std::get<ContentCatalog>(std::move(catalog));
+    //
+    m_content = std::move(std::get<ContentCatalog>(std::move(catalog)));
     return std::monostate{};
 }
 

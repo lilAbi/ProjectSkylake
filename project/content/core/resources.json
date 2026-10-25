@@ -3,16 +3,16 @@
     "kind": "resources",
     "definitions": [
         {
-            "id": "resource.gold",
-            "name": "Gold"
+            "id": "resource.points",
+            "name": "Points"
         },
         {
-            "id": "resource.iron",
-            "name": "Iron"
+            "id": "resource.suspendium",
+            "name": "Suspendium"
         },
         {
             "id": "resource.summon_token",
-            "name": "Summon Token"
+            "name": "Regular Selection Ticket"
         }
     ]
 }

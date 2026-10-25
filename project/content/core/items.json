@@ -3,8 +3,8 @@
     "kind": "items",
     "definitions": [
         {
-            "id": "item.iron_sword",
-            "name": "Iron Sword",
+            "id": "item.training_needle",
+            "name": "Training Needle",
             "slot": "main_hand",
             "maximum_level": 3,
             "modifiers": [
@@ -16,16 +16,79 @@
             ],
             "upgrade_costs": [
                 {
-                    "resource.gold": 25
+                    "resource.points": 25
                 },
                 {
-                    "resource.gold": 50
+                    "resource.points": 50
                 }
             ]
         },
         {
-            "id": "item.iron_helmet",
-            "name": "Iron Helmet",
+            "id": "item.regular_spear",
+            "name": "Regular's Spear",
+            "slot": "main_hand",
+            "maximum_level": 3,
+            "modifiers": [
+                {
+                    "stat": "attack",
+                    "operation": "flat_add",
+                    "value": 6
+                }
+            ],
+            "upgrade_costs": [
+                {
+                    "resource.points": 30
+                },
+                {
+                    "resource.points": 60
+                }
+            ]
+        },
+        {
+            "id": "item.basic_lighthouse",
+            "name": "Basic Lighthouse",
+            "slot": "main_hand",
+            "maximum_level": 3,
+            "modifiers": [
+                {
+                    "stat": "intelligence",
+                    "operation": "flat_add",
+                    "value": 4
+                }
+            ],
+            "upgrade_costs": [
+                {
+                    "resource.points": 30
+                },
+                {
+                    "resource.points": 60
+                }
+            ]
+        },
+        {
+            "id": "item.scout_observer",
+            "name": "Scout Observer",
+            "slot": "main_hand",
+            "maximum_level": 3,
+            "modifiers": [
+                {
+                    "stat": "speed",
+                    "operation": "flat_add",
+                    "value": 2
+                }
+            ],
+            "upgrade_costs": [
+                {
+                    "resource.points": 30
+                },
+                {
+                    "resource.points": 60
+                }
+            ]
+        },
+        {
+            "id": "item.shinsu_resistant_armor",
+            "name": "Shinsu-Resistant Armor",
             "slot": "helmet",
             "modifiers": [
                 {

@@ -3,14 +3,42 @@
     "kind": "regions",
     "definitions": [
         {
-            "id": "region.training",
+            "id": "region.headons_floor",
             "first_floor": 1,
-            "last_floor": 10,
+            "last_floor": 1,
             "battlefields": [
-                "battlefield.training"
+                "battlefield.headons_ball_test"
             ],
             "enemies": [
-                "enemy.goblin"
+                "enemy.white_steel_eel"
+            ]
+        },
+        {
+            "id": "region.floor_of_test",
+            "first_floor": 2,
+            "last_floor": 2,
+            "battlefields": [
+                "battlefield.floor_of_test_arena",
+                "battlefield.crown_game_arena"
+            ],
+            "enemies": [
+                "enemy.bull",
+                "enemy.crown_game_fisherman",
+                "enemy.crown_game_spear_bearer",
+                "enemy.crown_game_wave_controller"
+            ]
+        },
+        {
+            "id": "region.lower_tower",
+            "first_floor": 3,
+            "last_floor": 19,
+            "battlefields": [
+                "battlefield.floor_of_test_arena"
+            ],
+            "enemies": [
+                "enemy.crown_game_fisherman",
+                "enemy.crown_game_spear_bearer",
+                "enemy.crown_game_wave_controller"
             ]
         }
     ]

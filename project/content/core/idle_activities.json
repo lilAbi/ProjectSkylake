@@ -3,10 +3,16 @@
     "kind": "idle_activities",
     "definitions": [
         {
-            "id": "idle.mining",
-            "rewards": "reward.mining",
+            "id": "idle.shinsu_training",
+            "rewards": "reward.shinsu_training",
             "interval": 60,
             "offline_cap": 28800
+        },
+        {
+            "id": "idle.suspendium_salvage",
+            "rewards": "reward.suspendium_salvage",
+            "interval": 120,
+            "offline_cap": 21600
         }
     ]
 }

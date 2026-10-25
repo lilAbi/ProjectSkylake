@@ -3,16 +3,70 @@
     "kind": "enemies",
     "definitions": [
         {
-            "id": "enemy.goblin",
-            "class_id": "class.warrior",
+            "id": "enemy.white_steel_eel",
+            "class_id": "class.fisherman",
             "stats": {
-                "max_hp": 30,
-                "attack": 6,
-                "defense": 2,
-                "speed": 4
+                "max_hp": 50,
+                "attack": 9,
+                "defense": 5,
+                "speed": 7
             },
             "abilities": [
-                "ability.strike"
+                "ability.shinheuh_bite",
+                "ability.shinheuh_charge"
+            ]
+        },
+        {
+            "id": "enemy.bull",
+            "class_id": "class.fisherman",
+            "stats": {
+                "max_hp": 75,
+                "attack": 13,
+                "defense": 7,
+                "speed": 6
+            },
+            "abilities": [
+                "ability.shinheuh_bite",
+                "ability.shinheuh_charge"
+            ]
+        },
+        {
+            "id": "enemy.crown_game_fisherman",
+            "class_id": "class.fisherman",
+            "stats": {
+                "max_hp": 45,
+                "attack": 10,
+                "defense": 5,
+                "speed": 6
+            },
+            "abilities": [
+                "ability.needle_thrust"
+            ]
+        },
+        {
+            "id": "enemy.crown_game_spear_bearer",
+            "class_id": "class.spear_bearer",
+            "stats": {
+                "max_hp": 40,
+                "attack": 11,
+                "defense": 4,
+                "speed": 5
+            },
+            "abilities": [
+                "ability.spear_throw"
+            ]
+        },
+        {
+            "id": "enemy.crown_game_wave_controller",
+            "class_id": "class.wave_controller",
+            "stats": {
+                "max_hp": 38,
+                "attack": 8,
+                "defense": 4,
+                "speed": 6
+            },
+            "abilities": [
+                "ability.shinsu_burst"
             ]
         }
     ]

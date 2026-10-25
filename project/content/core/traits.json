@@ -3,13 +3,35 @@
     "kind": "traits",
     "definitions": [
         {
-            "id": "trait.tough",
-            "name": "Tough",
+            "id": "trait.shinsu_resistant",
+            "name": "Shinsu Resistant",
             "modifiers": [
                 {
                     "stat": "max_hp",
                     "operation": "flat_add",
                     "value": 20
+                }
+            ]
+        },
+        {
+            "id": "trait.quick_reflexes",
+            "name": "Quick Reflexes",
+            "modifiers": [
+                {
+                    "stat": "speed",
+                    "operation": "flat_add",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": "trait.tower_prodigy",
+            "name": "Tower Prodigy",
+            "modifiers": [
+                {
+                    "stat": "attack",
+                    "operation": "flat_add",
+                    "value": 3
                 }
             ]
         }

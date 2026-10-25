@@ -3,16 +3,55 @@
     "kind": "recipes",
     "definitions": [
         {
-            "id": "recipe.iron_sword",
+            "id": "recipe.training_needle",
             "cost": {
-                "resource.iron": 4,
-                "resource.gold": 20
+                "resource.suspendium": 2,
+                "resource.points": 20
             },
             "outputs": [
-                "item.iron_sword"
+                "item.training_needle"
             ],
             "required_unlocks": [
-                "unlock.forge"
+                "unlock.workshop"
+            ]
+        },
+        {
+            "id": "recipe.regular_spear",
+            "cost": {
+                "resource.suspendium": 3,
+                "resource.points": 25
+            },
+            "outputs": [
+                "item.regular_spear"
+            ],
+            "required_unlocks": [
+                "unlock.workshop"
+            ]
+        },
+        {
+            "id": "recipe.basic_lighthouse",
+            "cost": {
+                "resource.suspendium": 4,
+                "resource.points": 35
+            },
+            "outputs": [
+                "item.basic_lighthouse"
+            ],
+            "required_unlocks": [
+                "unlock.workshop"
+            ]
+        },
+        {
+            "id": "recipe.scout_observer",
+            "cost": {
+                "resource.suspendium": 3,
+                "resource.points": 30
+            },
+            "outputs": [
+                "item.scout_observer"
+            ],
+            "required_unlocks": [
+                "unlock.workshop"
             ]
         }
     ]

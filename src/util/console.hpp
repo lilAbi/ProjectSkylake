@@ -57,6 +57,11 @@ public:
         m_logger->info(format_str, std::forward<TArgs>(args)...);
     }
 
+    template <typename... TArgs>
+    void critical(fmt::format_string<TArgs...> format_str, TArgs&&... args) {
+        m_logger->critical(format_str, std::forward<TArgs>(args)...);
+    }
+
 protected:
     static void _bind_methods() {}
 

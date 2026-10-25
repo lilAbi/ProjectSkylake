@@ -3,12 +3,26 @@
     "kind": "banners",
     "definitions": [
         {
-            "id": "banner.starter",
+            "id": "banner.regular_selection",
             "cost_per_summon": {
                 "resource.summon_token": 1
             },
             "allowed_classes": [
-                "class.warrior"
+                "class.fisherman",
+                "class.spear_bearer",
+                "class.scout",
+                "class.light_bearer",
+                "class.wave_controller"
+            ]
+        },
+        {
+            "id": "banner.shinsu_specialist",
+            "cost_per_summon": {
+                "resource.summon_token": 2
+            },
+            "allowed_classes": [
+                "class.light_bearer",
+                "class.wave_controller"
             ]
         }
     ]
