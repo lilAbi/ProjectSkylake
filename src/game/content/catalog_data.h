@@ -11,7 +11,7 @@ struct CatalogData {
     std::vector<TraitDefinition>          m_traits;
     std::vector<AbilityDefinition>        m_abilities;
     std::vector<StatusDefinition>         m_statuses;
-    std::vector<ItemDefinition>           m_equipment;
+    std::vector<ItemDefinition>           m_items;
     std::vector<RecipeDefinition>         m_recipes;
     std::vector<BannerDefinition>         m_banners;
     std::vector<ResourceDefinition>       m_resources;
@@ -21,7 +21,7 @@ struct CatalogData {
     std::vector<EncounterDefinition>      m_encounters;
     std::vector<RegionDefinition>         m_regions;
     std::vector<CampBuildingDefinition>   m_buildings;
-    std::vector<RewardTableDefinition>    m_reward_tables;
+    std::vector<RewardTableDefinition>    m_rewards;
     std::vector<IdleActivityDefinition>   m_idle_activities;
 };
 

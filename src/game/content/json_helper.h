@@ -700,21 +700,26 @@ Json parse_json(const std::string& text) {
     return Json::parse(text, callback);
 }
 
-std::string resolve_source(const std::string& manifest_path, const std::string& source, const std::string& path) {
-    if (source.empty() || source.find_first_of("\\\r\n?#") != std::string::npos) {
-        fail(path, "source must be a nonempty, forward-slash file path");
+//takes a filename listed in the catalog manifest, validates its format, then produces the path the file reader should open
+std::string resolve_source(const std::string& manifest_file_path, const std::string& file_path, const std::string& json_path) {
+    //check if path is empty or contains invalid characters
+    if (file_path.empty() || file_path.find_first_of("\\\r\n?#") != std::string::npos) {
+        fail(json_path, "source must be a nonempty, forward-slash file path");
     }
-    const bool virtual_path = source.starts_with("res://") || source.starts_with("user://");
-    if ((!virtual_path && source.find(':') != std::string::npos) || source.front() == '/') {
-        fail(path, "source must be relative to the manifest or use res:// or user://");
+    //test if we are using a "godot" path
+    const bool virtual_path = file_path.starts_with("res://") || file_path.starts_with("user://");
+    //path cannot have a ":" unless its a godot prefix or cannot start with a "/"
+    if ( (!virtual_path && file_path.find(':') != std::string::npos) || file_path.front() == '/' ) {
+        fail(json_path, "source must be relative to the manifest or use res:// or user://");
     }
-    const auto  local_path = virtual_path ? source.substr(source.find("://") + 3) : source;
+    const auto  local_path = virtual_path ? file_path.substr(file_path.find("://") + 3) : file_path;
     std::size_t start = 0;
+    //examines each slash-separated component and ensure its a valid format
     while (start <= local_path.size()) {
         const auto slash = local_path.find('/', start);
         const auto part = local_path.substr(start, slash == std::string::npos ? slash : slash - start);
         if (part.empty() || part == "." || part == "..") {
-            fail(path, "empty, '.' and '..' path components are not allowed");
+            fail(json_path, "empty, '.' and '..' path components are not allowed");
         }
         if (slash == std::string::npos) {
             break;
@@ -722,10 +727,68 @@ std::string resolve_source(const std::string& manifest_path, const std::string& 
         start = slash + 1;
     }
     if (virtual_path) {
-        return source;
+        return file_path;
     }
-    const auto slash = manifest_path.rfind('/');
-    return (slash == std::string::npos ? std::string{} : manifest_path.substr(0, slash + 1)) + source;
+    //If the manifest has no slash, there is no directory prefix to prepend.
+    const auto slash = manifest_file_path.rfind('/');
+    return (slash == std::string::npos ? std::string{} : manifest_file_path.substr(0, slash + 1)) + file_path;
+}
+
+template <typename T>
+void append_definitions(std::vector<T>& destination, const Json& definitions) {
+    // Decode one source at a time; discard its JSON tree before reading the next.
+    auto loaded = decode<std::vector<T>>(definitions, "#/definitions");
+    destination.insert(destination.end(), std::make_move_iterator(loaded.begin()), std::make_move_iterator(loaded.end()));
+}
+
+void load_definitions(CatalogData& data, const Json& source, std::size_t& definition_count) {
+    schema_version(source);
+    Object      object{source, "#", {"schema_version", "kind", "definitions"}};
+    std::string kind;
+    object.field("kind", kind, true);
+    if (!source.contains("definitions") || !source.at("definitions").is_array()) {
+        fail("#/definitions", "expected an array of definitions");
+    }
+    const auto& definitions = source.at("definitions");
+    if (definitions.size() > max_definitions - definition_count) {
+        fail("#/definitions", "catalog exceeds definition limit");
+    }
+    definition_count += definitions.size();
+    if (kind == "classes") {
+        append_definitions(data.m_classes, definitions);
+    } else if (kind == "traits") {
+        append_definitions(data.m_traits, definitions);
+    } else if (kind == "abilities") {
+        append_definitions(data.m_abilities, definitions);
+    } else if (kind == "statuses") {
+        append_definitions(data.m_statuses, definitions);
+    } else if (kind == "items") {
+        append_definitions(data.m_items, definitions);
+    } else if (kind == "recipes") {
+        append_definitions(data.m_recipes, definitions);
+    } else if (kind == "banners") {
+        append_definitions(data.m_banners, definitions);
+    } else if (kind == "resources") {
+        append_definitions(data.m_resources, definitions);
+    } else if (kind == "enemies") {
+        append_definitions(data.m_enemies, definitions);
+    } else if (kind == "battlefields") {
+        append_definitions(data.m_battlefields, definitions);
+    } else if (kind == "objectives") {
+        append_definitions(data.m_objectives, definitions);
+    } else if (kind == "encounters") {
+        append_definitions(data.m_encounters, definitions);
+    } else if (kind == "regions") {
+        append_definitions(data.m_regions, definitions);
+    } else if (kind == "buildings") {
+        append_definitions(data.m_buildings, definitions);
+    } else if (kind == "rewards") {
+        append_definitions(data.m_rewards, definitions);
+    } else if (kind == "idle_activities") {
+        append_definitions(data.m_idle_activities, definitions);
+    } else {
+        fail("#/kind", "unknown definition kind '" + kind + "'");
+    }
 }
 
 #endif //PROJECTSKYLAKE_JSON_HELPER_H

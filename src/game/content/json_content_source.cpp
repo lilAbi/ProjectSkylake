@@ -4,7 +4,7 @@
 
 #include <godot_cpp/classes/file_access.hpp>
 
-Result<std::string> JSONContentSource::read_godot_content_file(const std::string& path) {
+Result<std::string> JSONContentSource::read_file(const std::string& path) {
     //open file godot file access api
     const auto file = godot::FileAccess::open(godot::String::utf8(path.c_str()), godot::FileAccess::READ);
     //check if file was opened
@@ -33,7 +33,7 @@ Result<CatalogData> JSONContentSource::load() {
     }
     try {
         //attempt to read the content manifest file into a string buffer
-        const auto manifest_read_result = JSONContentSource::read_godot_content_file(m_manifest_path);
+        const auto manifest_read_result = JSONContentSource::read_file(m_manifest_path);
         if (const auto* manifest_read_error = std::get_if<Error>(&manifest_read_result)) {
             throw Error{*manifest_read_error};
         }
@@ -46,17 +46,16 @@ Result<CatalogData> JSONContentSource::load() {
         const Object             object{manifest, "#", {"schema_version", "content_version", "sources"}};
         CatalogData              catalog_data;
         std::vector<std::string> sources;
+        //attempt to extract a possible content_version value & check
         object.field("content_version", catalog_data.m_content_version, true);
-        object.field("sources", sources, true);
-
         if (catalog_data.m_content_version.empty()) {
             fail("#/content_version", "must not be empty");
         }
-
+        //attempt to extract a possible sources value & check
+        object.field("sources", sources, true);
         if (sources.size() > max_sources) {
             fail("#/sources", "manifest exceeds source count limit");
         }
-
         // Resolve and check the complete manifest before opening source files.
         std::vector<std::string> paths;
         std::set<std::string>    seen;
@@ -69,7 +68,14 @@ Result<CatalogData> JSONContentSource::load() {
         }
         std::size_t definition_count = 0;
         for (const auto& path : paths) {
-            //load_definitions(data, read_json(path), definition_count);
+            const auto definition_read_result = JSONContentSource::read_file(path);
+            if (const auto* definition_read_error = std::get_if<Error>(&definition_read_result)) {
+                throw Error{*definition_read_error};
+                continue;
+            }
+            const auto& definition_string_buffer = std::get<std::string>(definition_read_result);
+            const auto definition_json = parse_json(definition_string_buffer);
+            load_definitions(catalog_data, definition_json, definition_count);
         }
         return catalog_data;
     } catch (const Error& failure) {

@@ -6,12 +6,19 @@ Result<void> GameRuntime::initialize() {
     m_logger->print("[GameRuntime] {} called", __FUNCTION__);
     //initialization check
     //load content_catalog from content_data
-    JSONContentSource content_source{"res://content/catalog.json", read_godot_content_file};
-    auto loaded_content = content_source.load();
-    if (const auto* error = std::get_if<Error>(&loaded_content)) {
-        return *error;
+    JSONContentSource catalog_data_content_source{"res://content/catalog.json"};
+    auto catalog_data = catalog_data_content_source.load();
+    if (const auto* catalog_data_error = std::get_if<Error>(&catalog_data)) {
+        m_logger->print("[GameRuntime] initialize() ERROR: {}", catalog_data_error->m_message);
+        return *catalog_data_error;
     }
     //initialize "ContentCatalog" with pre-defined definitions
+    auto catalog = ContentCatalog::build(std::get<CatalogData>(std::move(catalog_data)));
+    if (const auto* catalog_error = std::get_if<Error>(&catalog)) {
+        m_logger->print("[GameRuntime] initialize() ERROR: {}", catalog_error->m_message);
+        return *catalog_error;
+    }
+    m_content = std::get<ContentCatalog>(std::move(catalog));
     return std::monostate{};
 }
 

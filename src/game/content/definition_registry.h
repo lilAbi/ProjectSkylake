@@ -31,7 +31,7 @@ class DefinitionRegistry {
 public:
     using ID = decltype(std::declval<Definition>().m_id);
 
-    [[nodiscard]] static Result<DefinitionRegistry> build(std::vector<Definition> definitions, const std::string_view kind);
+    [[nodiscard]] static Result<DefinitionRegistry> build(std::vector<Definition> definitions, std::string_view kind);
     [[nodiscard]] const Definition*                 find(const ID& id) const;
     [[nodiscard]] std::span<const Definition>       all() const noexcept;
 
@@ -42,6 +42,7 @@ private:
 
 template <typename Definition>
 Result<DefinitionRegistry<Definition>> DefinitionRegistry<Definition>::build(std::vector<Definition> definitions, const std::string_view kind) {
+    //sort definitions by id
     std::ranges::sort(
         definitions,
         {},
@@ -49,12 +50,13 @@ Result<DefinitionRegistry<Definition>> DefinitionRegistry<Definition>::build(std
             return definition.m_id.m_value;
         }
     );
-
+    //create a new definition registry
     DefinitionRegistry registry;
     registry.m_definitions = std::move(definitions);
     registry.m_index.reserve(registry.m_definitions.size());
-
+    //iterate through the current imported definitions and create associated lookup entry
     for (std::size_t index = 0; index < registry.m_definitions.size(); ++index) {
+        //grab a reference to the ID and check if its valid
         const auto& id = registry.m_definitions[index].m_id;
         if (!valid_definition_id(id.m_value)) {
             return Error{
@@ -62,6 +64,7 @@ Result<DefinitionRegistry<Definition>> DefinitionRegistry<Definition>::build(std
                 .m_message = std::string(kind) + ": invalid definition ID '" + id.m_value + "' (use 1-128 ASCII letters, digits, '.', '_' or '-')"
             };
         }
+        //inserts the lookup entry and check if there is a duplicate
         if (!registry.m_index.emplace(id, index).second) {
             return Error{
                 .m_code = Error_code::invalid_content,
@@ -69,14 +72,14 @@ Result<DefinitionRegistry<Definition>> DefinitionRegistry<Definition>::build(std
             };
         }
     }
-
+    //return newly created definition registry
     return registry;
 }
 
 template <typename Definition>
 const Definition* DefinitionRegistry<Definition>::find(const ID& id) const {
-    const auto it = m_index.find(id);
-    return it == m_index.end() ? nullptr : &m_definitions[it->second];
+    const auto itr = m_index.find(id);
+    return itr == m_index.end() ? nullptr : &m_definitions[itr->second];
 }
 
 template <typename Definition>

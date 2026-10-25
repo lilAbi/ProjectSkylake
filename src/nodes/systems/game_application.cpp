@@ -24,7 +24,6 @@ void GameApplication::_enter_tree() {
     m_logger->print("[GameApplication] {}() called", __FUNCTION__);
     //create GameRuntime
     m_runtime = std::make_unique<GameRuntime>();
-    //JsonContentSource content_source{"res://content/catalog.json", read_godot_content_file};
     //initialize the runtime
     m_runtime->initialize();
     m_logger->print("[GameApplication] GameRuntime object initialized");
