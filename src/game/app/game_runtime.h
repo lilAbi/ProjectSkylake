@@ -56,13 +56,13 @@ public:
 private:
     Logger*              m_logger = Logger::get();
     GameState            m_state{};
-    ContentCatalog       m_content{};
+    ContentCatalog       m_content_catalog{};
     EventBus             m_event_bus{};
     ActivityReservations m_reservations{};
-    ServiceContext       m_context{.m_state = m_state, .m_content = m_content, .m_events = m_event_bus};
+    ServiceContext       m_context{.m_state = m_state, .m_content = m_content_catalog, .m_events = m_event_bus};
     // Domain/application helpers.
-    CharacterGenerator m_character_generator{m_content};
-    EncounterGenerator m_encounter_generator{m_content};
+    CharacterGenerator m_character_generator{m_content_catalog};
+    EncounterGenerator m_encounter_generator{m_content_catalog};
     ItemGenerator      m_item_generator;
     RewardGenerator    m_reward_generator;
     // Application services.

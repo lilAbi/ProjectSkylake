@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://e74hyf81ykcs"]
+
+[ext_resource type="Theme" path="res://scenes/debug/content_catalog_theme.tres" id="1_theme"]
+
+[node name="ContentCatalogBrowser" type="ContentCatalogSceneController" unique_id=219242711]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_theme")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=74136140]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="OuterMargin" type="MarginContainer" parent="." unique_id=1544760321]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Window" type="PanelContainer" parent="OuterMargin" unique_id=1138954114]
+layout_mode = 2
+
+[node name="InnerMargin" type="MarginContainer" parent="OuterMargin/Window" unique_id=1663440875]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="Layout" type="VBoxContainer" parent="OuterMargin/Window/InnerMargin" unique_id=143218382]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=1680805398]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Headings" type="VBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/Header" unique_id=1844966775]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Eyebrow" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/Header/Headings" unique_id=971989309]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 13
+text = "PROJECTSKYLAKE  /  DEBUG TOOLS"
+
+[node name="Title" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/Header/Headings" unique_id=733130682]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Content catalog"
+
+[node name="CloseButton" type="Button" parent="OuterMargin/Window/InnerMargin/Layout/Header" unique_id=1089457914]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Close the catalog (F3 or Escape)"
+text = "Close · F3"
+
+[node name="CatalogSummary" type="Label" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=1243875640]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 16
+text = "Loaded runtime definitions"
+
+[node name="Separator" type="HSeparator" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=1186066048]
+layout_mode = 2
+
+[node name="CategorySplit" type="HSplitContainer" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=353134551]
+layout_mode = 2
+size_flags_vertical = 3
+split_offsets = PackedInt32Array(220)
+split_offset = 220
+
+[node name="CategoryPane" type="VBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit" unique_id=976325307]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/CategoryPane" unique_id=902660614]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 14
+text = "DEFINITION TYPES"
+
+[node name="Categories" type="Tree" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/CategoryPane" unique_id=337184487]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+hide_folding = true
+hide_root = true
+select_mode = 1
+
+[node name="EntrySplit" type="HSplitContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit" unique_id=629516720]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offsets = PackedInt32Array(290)
+split_offset = 290
+
+[node name="EntryPane" type="VBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit" unique_id=1649397065]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Heading" type="HBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/EntryPane" unique_id=1996495245]
+layout_mode = 2
+
+[node name="CategoryTitle" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/EntryPane/Heading" unique_id=96339351]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Classes"
+
+[node name="EntryCount" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/EntryPane/Heading" unique_id=1965266770]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+text = "0"
+
+[node name="Entries" type="ItemList" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/EntryPane" unique_id=1994144536]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+max_text_lines = 2
+same_column_width = true
+
+[node name="CppType" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/EntryPane" unique_id=2140052989]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 13
+text = "CharacterClassDefinition"
+autowrap_mode = 3
+
+[node name="Inspector" type="VBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit" unique_id=777370731]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="DetailHeader" type="HBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector" unique_id=734262462]
+layout_mode = 2
+
+[node name="DetailType" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/DetailHeader" unique_id=1120193499]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 13
+text = "CLASS"
+
+[node name="BackButton" type="Button" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/DetailHeader" unique_id=1819667907]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Return to the previous definition and tab"
+disabled = true
+text = "Back"
+
+[node name="DetailName" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector" unique_id=77207038]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Select a definition"
+autowrap_mode = 3
+
+[node name="DetailID" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector" unique_id=1876060696]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 15
+autowrap_mode = 3
+
+[node name="InspectorTabs" type="TabContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector" unique_id=733804997]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Fields" type="MarginContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs" unique_id=1819580008]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 0
+
+[node name="FieldsText" type="RichTextLabel" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs/Fields" unique_id=1588458758]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+text = "Run the main scene to inspect its initialized catalog."
+selection_enabled = true
+
+[node name="References" type="MarginContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs" unique_id=18238881]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 1
+
+[node name="ReferencesText" type="RichTextLabel" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs/References" unique_id=1231012826]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+selection_enabled = true
+
+[node name="Data" type="MarginContainer" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs" unique_id=1163363710]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="DataText" type="TextEdit" parent="OuterMargin/Window/InnerMargin/Layout/CategorySplit/EntrySplit/Inspector/InspectorTabs/Data" unique_id=1342963356]
+unique_name_in_owner = true
+layout_mode = 2
+editable = false
+wrap_mode = 1
+
+[node name="FooterSeparator" type="HSeparator" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=1403346835]
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="OuterMargin/Window/InnerMargin/Layout" unique_id=1975211635]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ReadOnly" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/Footer" unique_id=1579459540]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 13
+text = "READ ONLY  ·  Loaded catalog"
+
+[node name="SelectionPath" type="Label" parent="OuterMargin/Window/InnerMargin/Layout/Footer" unique_id=910031561]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6353, 0.6941, 0.7765, 1)
+theme_override_font_sizes/font_size = 13
+horizontal_alignment = 2
+text_overrun_behavior = 3

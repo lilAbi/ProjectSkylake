@@ -1,0 +1,145 @@
+[gd_resource type="Theme" format=3 uid="uid://xwubeet0rkhr"]
+
+[sub_resource type="StyleBoxFlat" id="Style_button"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.1882, 0.2314, 0.3059, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6588, 0.8, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_hover"]
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2196, 0.2784, 0.3725, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_selected"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2039, 0.3059, 0.4549, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxLine" id="Style_separator"]
+color = Color(0.2353, 0.2824, 0.3608, 1)
+
+[sub_resource type="StyleBoxFlat" id="Style_surface"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.1451, 0.1765, 0.2353, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Style_window"]
+bg_color = Color(0.1098, 0.1373, 0.1882, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2353, 0.2824, 0.3608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="SystemFont" id="Font_mono"]
+font_names = PackedStringArray("Consolas", "Menlo", "DejaVu Sans Mono")
+
+[sub_resource type="StyleBoxFlat" id="Style_tab"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1451, 0.1765, 0.2353, 1)
+border_width_bottom = 2
+border_color = Color(0.6588, 0.8, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="Style_empty"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+
+[resource]
+default_font_size = 18
+Button/colors/font_color = Color(0.8627, 0.898, 0.9529, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(0.8431, 0.9098, 1, 1)
+Button/font_sizes/font_size = 16
+Button/styles/disabled = SubResource("Style_button")
+Button/styles/focus = SubResource("Style_focus")
+Button/styles/hover = SubResource("Style_hover")
+Button/styles/normal = SubResource("Style_button")
+Button/styles/pressed = SubResource("Style_selected")
+ContentCatalog/colors/link = Color(0.6588, 0.8, 1, 1)
+ContentCatalog/colors/muted = Color(0.6353, 0.6941, 0.7765, 1)
+HSeparator/styles/separator = SubResource("Style_separator")
+ItemList/colors/font_color = Color(0.8627, 0.898, 0.9529, 1)
+ItemList/colors/font_selected_color = Color(0.8431, 0.9098, 1, 1)
+ItemList/constants/line_separation = 6
+ItemList/constants/v_separation = 12
+ItemList/font_sizes/font_size = 16
+ItemList/styles/focus = SubResource("Style_focus")
+ItemList/styles/panel = SubResource("Style_surface")
+ItemList/styles/selected = SubResource("Style_selected")
+ItemList/styles/selected_focus = SubResource("Style_selected")
+Label/colors/font_color = Color(0.8627, 0.898, 0.9529, 1)
+PanelContainer/styles/panel = SubResource("Style_window")
+RichTextLabel/colors/default_color = Color(0.8627, 0.898, 0.9529, 1)
+RichTextLabel/constants/line_separation = 4
+RichTextLabel/constants/table_h_separation = 20
+RichTextLabel/constants/table_v_separation = 12
+RichTextLabel/font_sizes/normal_font_size = 17
+RichTextLabel/fonts/mono_font = SubResource("Font_mono")
+TabContainer/colors/font_selected_color = Color(0.8627, 0.898, 0.9529, 1)
+TabContainer/colors/font_unselected_color = Color(0.6353, 0.6941, 0.7765, 1)
+TabContainer/font_sizes/font_size = 16
+TabContainer/styles/panel = SubResource("Style_surface")
+TabContainer/styles/tab_selected = SubResource("Style_tab")
+TabContainer/styles/tab_unselected = SubResource("Style_empty")
+TextEdit/colors/font_color = Color(0.8627, 0.898, 0.9529, 1)
+TextEdit/colors/font_readonly_color = Color(0.8627, 0.898, 0.9529, 1)
+TextEdit/constants/line_spacing = 5
+TextEdit/font_sizes/font_size = 15
+TextEdit/fonts/font = SubResource("Font_mono")
+TextEdit/styles/focus = SubResource("Style_focus")
+TextEdit/styles/normal = SubResource("Style_surface")
+TextEdit/styles/read_only = SubResource("Style_surface")
+Tree/colors/font_color = Color(0.8627, 0.898, 0.9529, 1)
+Tree/colors/font_selected_color = Color(0.8431, 0.9098, 1, 1)
+Tree/constants/h_separation = 8
+Tree/constants/v_separation = 10
+Tree/font_sizes/font_size = 16
+Tree/styles/focus = SubResource("Style_focus")
+Tree/styles/panel = SubResource("Style_surface")
+Tree/styles/selected = SubResource("Style_selected")
+Tree/styles/selected_focus = SubResource("Style_selected")

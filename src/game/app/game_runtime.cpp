@@ -18,8 +18,8 @@ Result<void> GameRuntime::initialize() {
         m_logger->critical("[GameRuntime] catalog_error: {}", catalog_error->m_message);
         return *catalog_error;
     }
-    //
-    m_content = std::move(std::get<ContentCatalog>(std::move(catalog)));
+    //update game's content catalog
+    m_content_catalog = std::move(std::get<ContentCatalog>(std::move(catalog)));
     return std::monostate{};
 }
 
@@ -46,7 +46,7 @@ const GameState& GameRuntime::get_state() const {
 }
 
 const ContentCatalog& GameRuntime::get_content() const {
-    return m_content;
+    return m_content_catalog;
 }
 
 EventBus& GameRuntime::get_event_bus() {
