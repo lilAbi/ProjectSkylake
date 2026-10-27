@@ -6,6 +6,8 @@
 
 #include "util/engine.hpp"
 
+#include "godot_cpp/classes/os.hpp"
+
 namespace core::inline utils {
 
     godot::Engine* Engine::get_engine() {
@@ -45,5 +47,10 @@ namespace core::inline utils {
     bool Engine::is_editor_active() {
         const auto godot_engine{Engine::get_engine()};
         return godot_engine->is_editor_hint();
+    }
+
+    bool Engine::is_in_debug_mode() {
+        const auto godot_os{godot::OS::get_singleton()};
+        return godot_os->is_debug_build();
     }
 }

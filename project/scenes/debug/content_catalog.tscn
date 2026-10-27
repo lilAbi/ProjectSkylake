@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://e74hyf81ykcs"]
 
-[ext_resource type="Theme" path="res://scenes/debug/content_catalog_theme.tres" id="1_theme"]
+[ext_resource type="Theme" uid="uid://xwubeet0rkhr" path="res://scenes/debug/content_catalog_theme.tres" id="1_theme"]
 
-[node name="ContentCatalogBrowser" type="ContentCatalogSceneController" unique_id=219242711]
-layout_mode = 3
+[node name="ContentCatalogBrowser" type="ContentCatalogSceneController" unique_id=244499185]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,6 +11,7 @@ grow_vertical = 2
 theme = ExtResource("1_theme")
 
 [node name="Backdrop" type="ColorRect" parent="." unique_id=74136140]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,6 +20,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
 [node name="OuterMargin" type="MarginContainer" parent="." unique_id=1544760321]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

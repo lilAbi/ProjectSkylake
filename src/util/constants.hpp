@@ -42,6 +42,10 @@ namespace core::inline labels {
             constexpr inline auto mouse_exited{"mouse_exited"};
         }
 
+        namespace ItemList {
+            constexpr inline auto item_selected{"item_selected"};
+        }
+
         namespace Timer {
             constexpr inline auto timeout{"timeout"};
         }
@@ -78,6 +82,25 @@ namespace core::inline labels {
             constexpr inline auto ShrineButton{"%ShrineButton"};
         }
 
+        namespace ContentCatalogBrowser {
+            constexpr inline auto CloseButton{"%CloseButton"};
+            constexpr inline auto CatalogSummary{"%CatalogSummary"};
+            constexpr inline auto Categories{"%Categories"};
+            constexpr inline auto CategoryTitle{"%CategoryTitle"};
+            constexpr inline auto EntryCount{"%EntryCount"};
+            constexpr inline auto Entries{"%Entries"};
+            constexpr inline auto CppType{"%CppType"};
+            constexpr inline auto DetailType{"%DetailType"};
+            constexpr inline auto BackButton{"%BackButton"};
+            constexpr inline auto DetailName{"%DetailName"};
+            constexpr inline auto DetailID{"%DetailID"};
+            constexpr inline auto InspectorTabs{"%InspectorTabs"};
+            constexpr inline auto FieldsText{"%FieldsText"};
+            constexpr inline auto ReferencesText{"%ReferencesText"};
+            constexpr inline auto DataText{"%DataText"};
+            constexpr inline auto SelectionPath{"%SelectionPath"};
+        }
+
         namespace Main {
             constexpr inline auto ScreenRoot{"%ScreenRoot"};
             constexpr inline auto ActivityRoot{"%ActivityRoot"};
@@ -104,6 +127,8 @@ namespace core::inline labels {
         namespace Shrine {
             constexpr inline auto BackButton{"%BackButton"};
         }
+
+
 
     } //END OF "NODE" NAMESPACE
 

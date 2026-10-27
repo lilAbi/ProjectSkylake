@@ -20,5 +20,6 @@ namespace core::inline utils {
         static void              set_fps(int32_t fps);
         static int32_t           get_max_fps();
         static bool              is_editor_active();
+        static bool              is_in_debug_mode();
     };
 }

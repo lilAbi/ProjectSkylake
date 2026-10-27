@@ -11,6 +11,7 @@
 #include "nodes/controllers/save_scene_controller.h"
 #include "nodes/controllers/shrine_scene_controller.h"
 #include "nodes/controllers/title_scene_controller.h"
+#include "nodes/debug/content_catalog_scene_controller.h"
 #include "util/console.hpp"
 
 #include <gdextension_interface.h>
@@ -46,6 +47,9 @@ void godot::initialize_extension_module(const godot::ModuleInitializationLevel i
     godot::ClassDB::register_class<CampUISceneController>();
     godot::ClassDB::register_class<SaveSceneController>();
     godot::ClassDB::register_class<TitleSceneController>();
+
+    //Debug
+    godot::ClassDB::register_class<ContentCatalogSceneController>();
 
     //Util
     godot::ClassDB::register_class<Logger>();
