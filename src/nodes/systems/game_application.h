@@ -30,6 +30,12 @@ public:
     void _enter_tree() override;
     void _exit_tree() override;
     void _ready() override;
+    //run startup processes
+    void start_game();
+
+private:
+
+    void configure_debug();
 
 private:
     Logger*                      m_logger = Logger::get();
@@ -37,5 +43,6 @@ private:
     SaveController*              m_save_controller = nullptr;
     AudioController*             m_audio_controller = nullptr;
     InputController*             m_input_controller = nullptr;
+    godot::Node*                 m_debug_root = nullptr;
     std::unique_ptr<GameRuntime> m_runtime = nullptr;
 };

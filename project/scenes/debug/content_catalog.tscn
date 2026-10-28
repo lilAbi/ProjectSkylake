@@ -2,12 +2,10 @@
 
 [ext_resource type="Theme" uid="uid://xwubeet0rkhr" path="res://scenes/debug/content_catalog_theme.tres" id="1_theme"]
 
-[node name="ContentCatalogBrowser" type="ContentCatalogSceneController" unique_id=244499185]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ContentCatalog" type="ContentCatalogSceneController" unique_id=244499185]
+anchors_preset = -1
+offset_right = 1920.0
+offset_bottom = 1080.0
 theme = ExtResource("1_theme")
 
 [node name="Backdrop" type="ColorRect" parent="." unique_id=74136140]

@@ -26,13 +26,16 @@ public:
 public:
     void configure(GameRuntime& runtime);
 
-private:
     void display_title_scene();
+
+private:
     void display_camp_scene();
     void display_battle_scene();
     void display_shrine_scene();
     void display_new_game_scene();
     void display_load_game_scene();
+
+    void attach_debug_tools();
 
     void mount_scene(godot::Node* root);
     void mount_activity(godot::Node* root);
@@ -47,5 +50,6 @@ private:
     godot::Node* m_activity_root = nullptr;
     godot::Node* m_current_scene = nullptr;
     godot::Node* m_current_activity = nullptr;
+    godot::Node* m_debug_root = nullptr;
     bool         m_is_transitioning = false;
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "nodes/systems/game_application.h"
 #include "util/console.hpp"
 
 #include <godot_cpp/classes/node.hpp>
@@ -22,5 +23,6 @@ public:
     void _ready() override;
 
 private:
-    Logger* m_logger = Logger::get();
+    Logger*          m_logger = Logger::get();
+    GameApplication* m_game_application = nullptr;
 };

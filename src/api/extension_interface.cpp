@@ -18,13 +18,11 @@
 #include <godot_cpp/classes/engine.hpp>
 
 void godot::initialize_static_objects() {
-    g_console_singleton = memnew(Logger);
-    godot::Engine::get_singleton()->register_singleton("Console", Logger::get());
+    Logger::get()->start_logging();
 }
 
 void godot::teardown_static_objects() {
-    godot::Engine::get_singleton()->unregister_singleton("Console");
-    memdelete(g_console_singleton);
+    Logger::get()->stop_logging();
 }
 
 void godot::initialize_extension_module(const godot::ModuleInitializationLevel init_level) {
@@ -50,9 +48,6 @@ void godot::initialize_extension_module(const godot::ModuleInitializationLevel i
 
     //Debug
     godot::ClassDB::register_class<ContentCatalogSceneController>();
-
-    //Util
-    godot::ClassDB::register_class<Logger>();
 
     initialize_static_objects();
 }

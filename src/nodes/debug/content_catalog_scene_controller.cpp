@@ -93,6 +93,7 @@ void ContentCatalogSceneController::_ready() {
     m_categories->set_column_expand(1, false);
     m_categories->set_column_custom_minimum_width(1, 32);
     //build source
+    m_ready = true;
     this->rebuild();
 }
 
@@ -102,6 +103,7 @@ void ContentCatalogSceneController::_input(const godot::Ref<godot::InputEvent>& 
     if (!m_ready || event.is_null())
         return;
     if (event->is_action_pressed("debug_content_catalog")) {
+        m_logger->print("[ContentCatalogSceneController] F3 Pressed");
         this->set_visible(!is_visible());
         if (this->is_visible())
             m_categories->grab_focus();
@@ -289,6 +291,39 @@ void ContentCatalogSceneController::render_fields(const debug::CatalogEntry& ent
 }
 
 void ContentCatalogSceneController::render_references(const debug::CatalogEntry& entry) {
+    m_references->clear();
+    std::map<debug::CatalogKey, std::vector<std::string>> outgoing;
+    std::map<debug::CatalogKey, std::vector<std::string>> incoming;
+    for (const auto& reference : entry.m_references)
+        outgoing[reference.m_target].push_back(reference.m_path);
+    if (const auto it = m_snapshot.m_used_by.find(entry.m_key); it != m_snapshot.m_used_by.end())
+        for (const auto& use : it->second)
+            incoming[use.m_source].push_back(use.m_path);
+    const auto section = [&](const char* name, const auto& references) {
+        append_heading(*m_references, text(name) + "  (" + godot::String::num_uint64(references.size()) + ")");
+        if (references.empty())
+            m_references->add_text("None\n");
+        for (const auto& [key, paths] : references) {
+            append_link(*m_references, key);
+            m_references->add_text("\n");
+            m_references->push_color(get_theme_color("muted", "ContentCatalog"));
+            m_references->push_font_size(13);
+            for (const auto& path : paths)
+                m_references->add_text(text(path) + "\n");
+            m_references->pop();
+            m_references->pop();
+            m_references->add_text("\n");
+        }
+        m_references->add_text("\n");
+    };
+    section("References", outgoing);
+    section("Referenced by", incoming);
+    if (!entry.m_unlocks.empty()) {
+        append_heading(*m_references, "Unlock keys");
+        for (const auto& unlock : entry.m_unlocks)
+            m_references->add_text(text(unlock.m_id) + "\n");
+    }
+    m_tabs->set_tab_title(1, "References (" + godot::String::num_uint64(outgoing.size() + incoming.size()) + ")");
 }
 
 void ContentCatalogSceneController::append_value(godot::RichTextLabel& label, const debug::CatalogEntry& entry, const nlohmann::ordered_json& value, const std::string& path) {

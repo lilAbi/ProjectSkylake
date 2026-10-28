@@ -2,6 +2,7 @@
 
 #include "game/content/catalog.h"
 #include "game/debug/catalog_inspection.h"
+#include "util/console.hpp"
 
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/item_list.hpp>
@@ -58,6 +59,7 @@ private:
     void on_close_pressed();
 
 private:
+    Logger*                          m_logger = Logger::get();
     debug::CatalogSnapshot           m_snapshot;
     std::string                      m_error;
     std::optional<debug::CatalogKey> m_selection;

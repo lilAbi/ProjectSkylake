@@ -4,6 +4,7 @@
 #include "nodes/controllers/save_scene_controller.h"
 #include "nodes/controllers/shrine_scene_controller.h"
 #include "nodes/controllers/title_scene_controller.h"
+#include "nodes/debug/content_catalog_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/engine.hpp"
 #include "util/godot_bindings.hpp"
@@ -16,6 +17,7 @@ void SceneCoordinator::_bind_methods() {
 void SceneCoordinator::get_godot_objects() {
     m_screen_root = core::gdcast<godot::Control>(this->get_node_or_null(core::labels::node::Main::ScreenRoot));
     m_activity_root = core::gdcast<godot::Control>(this->get_node_or_null(core::labels::node::Main::ActivityRoot));
+    m_debug_root = core::gdcast<godot::Control>(this->get_node_or_null(core::labels::node::Main::DebugRoot));
 }
 
 void SceneCoordinator::bind_signals() {
@@ -29,8 +31,7 @@ void SceneCoordinator::_ready() {
     this->get_godot_objects();
     //bind respective signals to callback functions
     this->bind_signals();
-
-    this->display_title_scene();
+    this->attach_debug_tools();
 }
 
 void SceneCoordinator::configure(GameRuntime& runtime) {
@@ -92,6 +93,14 @@ void SceneCoordinator::display_load_game_scene() {
     //bind "game_title_requested" signal
     core::connect_signal(save_scene_controller, core::labels::signal::SaveSceneController::game_title_requested, callable_mp(this, &SceneCoordinator::display_title_scene));
     this->mount_scene(save_scene_controller);
+}
+
+void SceneCoordinator::attach_debug_tools() {
+    m_logger->print("[SceneCoordinator] {}() called", __FUNCTION__);
+    core::utils::resource::preload::PackedScene<ContentCatalogSceneController> content_catalog_scene{core::labels::path::scene::debug::content_catalog};
+    const auto content_catalog_scene_controller = content_catalog_scene.instantiate();
+    m_debug_root->add_child(content_catalog_scene_controller);
+    content_catalog_scene_controller->set_unique_name_in_owner(true);
 }
 
 void SceneCoordinator::mount_scene(godot::Node* root) {

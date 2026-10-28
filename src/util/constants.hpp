@@ -108,6 +108,11 @@ namespace core::inline labels {
             constexpr inline auto SaveController{"%SaveController"};
             constexpr inline auto AudioController{"%AudioController"};
             constexpr inline auto InputController{"%InputController"};
+            constexpr inline auto GameApplication{"%GameApplication"};
+            constexpr inline auto DebugRoot{"%DebugRoot"};
+            constexpr inline auto ContentCatalog{"ContentCatalog"};
+
+
         }
 
         namespace Title {
@@ -155,6 +160,10 @@ namespace core::inline labels {
                     constexpr inline auto shrine{"res://scenes/ui/summon/shrine.tscn"};
                 }
 
+            }
+
+            namespace debug {
+                constexpr inline auto content_catalog{"res://scenes/debug/content_catalog.tscn"};
             }
 
         }
