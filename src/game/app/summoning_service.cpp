@@ -71,7 +71,7 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
         }
     }
     //grab total cost of the requested amount of summons to perform
-    const auto  total_summon_cost_result = this->calculate_total_banner_cost(*banner_definition, summon_request.m_count, content_catalog);
+    const auto total_summon_cost_result = this->calculate_total_banner_cost(*banner_definition, summon_request.m_count, content_catalog);
     if (const auto* error = std::get_if<Error>(&total_summon_cost_result)) {
         return *error;
     }
@@ -84,7 +84,30 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
         };
     }
     //grab next id counter
-    const auto next_character_id = game_state.m_identities.m_next_character;
+    const auto new_character_id = game_state.m_identities.m_next_character;
+    //check if new character id
+    if (new_character_id < 1 || m_context.m_revision.m_value < 0) {
+        return Error{
+            .m_code = Error_code::invalid_phase,
+            .m_message = "Character identities or state revision is invalid."
+        };
+    }
+    //make sure the next id is valid
+    if (new_character_id > maximum - summon_request.m_count || m_context.m_revision.m_value == maximum) {
+        return Error{
+            .m_code = Error_code::overflow,
+            .m_message = "Character identities or state revision would overflow."
+        };
+    }
+    //check if the next character ids are in use
+    for (std::int32_t i = 0; i < summon_request.m_count; ++i) {
+        if (game_state.m_roster.m_characters.contains(CharacterID{new_character_id + i})) {
+            return Error{
+                .m_code = Error_code::invalid_phase,
+                .m_message = "The next character identity is already in use."
+            };
+        }
+    }
     
 }
 
