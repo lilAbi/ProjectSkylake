@@ -29,7 +29,7 @@ struct CharacterDetailsView {
 };
 
 struct RosterView {
-    Revision                          m_revision;
+    //Revision                          m_revision;
     std::vector<CharacterSummaryView> m_characters;
     std::vector<Team>                 m_teams;
 };

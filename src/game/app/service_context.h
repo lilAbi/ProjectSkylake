@@ -2,6 +2,7 @@
 #define PROJECTSKYLAKE_SERVICE_CONTEXT_H
 
 #include "game/core/ids.h"
+#include "game/core/results.h"
 
 #include <set>
 
@@ -19,11 +20,19 @@ struct ActivityReservations {
 };
 
 struct ServiceContext {
-    GameState&                 m_state;
-    const ContentCatalog&      m_content;
-    EventBus&            m_events;
+    GameState&                 m_game_state;
+    const ContentCatalog&      m_content_catalog;
+    EventBus&                  m_events;
+    Revision&                  m_revision;
+    const ActivityReservations m_reservations;
     //const RandomStreamFactory& m_rng;
     //const IClock&              m_clock;
 };
+
+//state changes can only be done on the thread owned by the event bus & requires an active profile
+Result<void> check_service_mutation(const ServiceContext& context);
+
+//notify that the roster has been changed
+[[nodiscard]] bool notify_on_roster_changed(const ServiceContext& context) noexcept;
 
 #endif //PROJECTSKYLAKE_SERVICE_CONTEXT_H

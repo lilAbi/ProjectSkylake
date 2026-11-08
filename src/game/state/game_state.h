@@ -1,7 +1,7 @@
 #ifndef PROJECTSKYLAKE_GAME_STATE_H
 #define PROJECTSKYLAKE_GAME_STATE_H
 
-#include "game/character/character.h"
+#include "roster_state.h"
 #include "game/core/ids.h"
 #include "game/core/types.h"
 #include "game/economy/rewards.h"
@@ -12,10 +12,6 @@
 #include <set>
 #include <vector>
 #include <chrono>
-
-struct RosterState {
-    std::map<CharacterID, CharacterInstance> m_characters;
-};
 
 struct InventoryState {
     std::map<ItemID, ItemInstance> m_items;
@@ -44,7 +40,7 @@ struct ProgressionState {
 
 struct IdleAssignment {
     IdleAssignmentID         m_id;
-    TeamID                   m_team;
+    TeamID                   m_team_id;
     IdleActivityID           m_activity;
     std::chrono::sys_seconds m_checkpoint;
 };

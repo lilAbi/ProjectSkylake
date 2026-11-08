@@ -59,7 +59,13 @@ private:
     ContentCatalog       m_content_catalog{};
     EventBus             m_event_bus{};
     ActivityReservations m_reservations{};
-    ServiceContext       m_context{.m_state = m_state, .m_content = m_content_catalog, .m_events = m_event_bus};
+    Revision             m_revision{};
+    ServiceContext       m_context{
+              .m_game_state = m_state,
+              .m_content_catalog = m_content_catalog,
+              .m_events = m_event_bus,
+              .m_revision = m_revision
+    };
     // Domain/application helpers.
     CharacterGenerator m_character_generator{m_content_catalog};
     EncounterGenerator m_encounter_generator{m_content_catalog};
