@@ -51,6 +51,7 @@ void GameApplication::_ready() {
     //pass the Runtime object to the scene coordinator
     m_scene_coordinator->configure(*m_runtime);
     m_logger->print("[GameApplication] Passed GameRuntime object to SceneCoordinator");
+
 }
 
 void GameApplication::start_game() {

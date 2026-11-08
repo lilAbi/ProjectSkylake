@@ -37,6 +37,8 @@ private:
 
     void configure_debug();
 
+    //void configure__
+
 private:
     Logger*                      m_logger = Logger::get();
     SceneCoordinator*            m_scene_coordinator = nullptr;

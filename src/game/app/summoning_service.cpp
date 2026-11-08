@@ -8,13 +8,13 @@ std::vector<BannerView> SummoningService::get_banners() {
     banner_views.reserve(banner_definitions.size());
     //iterate through each banner and grab its metadata
     for (const auto& banner_definition : banner_definitions) {
-        const auto  cost = this->calculate_total_banner_cost(banner_definition, 1, m_context.m_content_catalog);
-        const auto* valid_cost = std::get_if<ResourceCost>(&cost);
+        const auto  total_summon_cost_result = this->calculate_total_banner_cost(banner_definition, 1, m_context.m_content_catalog);
+        const auto* total_summon_cost = std::get_if<ResourceCost>(&total_summon_cost_result);
         banner_views.push_back(
             BannerView{
                 .m_id = banner_definition.m_id,
                 .m_cost_per_summon = banner_definition.m_cost_per_summon,
-                .m_affordable = valid_cost && m_context.m_game_state.m_wallet.can_afford(*valid_cost),
+                .m_affordable = total_summon_cost && m_context.m_game_state.m_wallet.can_afford(*total_summon_cost),
                 .m_unlocked = this->is_banner_unlocked(banner_definition, m_context.m_game_state)
             }
         );
@@ -23,6 +23,7 @@ std::vector<BannerView> SummoningService::get_banners() {
 }
 
 Result<SummonResult> SummoningService::summon(const SummonRequest& summon_request) {
+    constexpr auto maximum = std::numeric_limits<std::int64_t>::max();
     //check if executing via EventBus
     const auto result = check_service_mutation(m_context);
     if (const auto* error = std::get_if<Error>(&result); error) {
@@ -69,7 +70,22 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
             };
         }
     }
-
+    //grab total cost of the requested amount of summons to perform
+    const auto  total_summon_cost_result = this->calculate_total_banner_cost(*banner_definition, summon_request.m_count, content_catalog);
+    if (const auto* error = std::get_if<Error>(&total_summon_cost_result)) {
+        return *error;
+    }
+    const auto* total_summon_cost = std::get_if<ResourceCost>(&total_summon_cost_result);
+    //check if the player has enough to summon in their wallet
+    if (!game_state.m_wallet.can_afford(*total_summon_cost)) {
+        return Error{
+            .m_code = Error_code::insufficient_resources,
+            .m_message = "Not enough resources to summon."
+        };
+    }
+    //grab next id counter
+    const auto next_character_id = game_state.m_identities.m_next_character;
+    
 }
 
 Result<ResourceCost> SummoningService::calculate_total_banner_cost(const BannerDefinition& banner_definition, const std::int32_t count, const ContentCatalog& content_catalog) {

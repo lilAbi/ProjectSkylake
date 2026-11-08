@@ -20,12 +20,16 @@ struct ResourceDelta {
 // Signed changes.
 class ResourceWallet {
 public:
-    static Result<ResourceWallet> from_balances(const ResourceBundle&);
-    std::int64_t                  balance(const ResourceID&) const;
-    ResourceBundle                snapshot() const;
-    bool                          can_afford(const ResourceCost&) const;
-    Result<void>                  try_spend(const ResourceCost&);
-    Result<void>                  grant(const ResourceBundle&);
+    static Result<ResourceWallet> get_wallet(const ResourceBundle& balance);
+    std::int64_t                  get_balance_for_resource(const ResourceID& resource_id) const;
+    ResourceBundle                get_snapshot() const;
+    bool                          can_afford(const ResourceCost& cost) const;
+    Result<void>                  try_spend(const ResourceCost& cost);
+    Result<void>                  grant(const ResourceBundle& resources);
+
+private:
+    //ensures the wallet has valid resource ids and positive amounts
+    Result<void> validate_bundle(const ResourceBundle& resource_bundle);
 
 private:
     std::map<ResourceID, std::int64_t> m_balances;
