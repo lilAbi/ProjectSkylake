@@ -49,7 +49,7 @@ Result<void> ResourceWallet::try_spend(const ResourceCost& cost) {
 }
 
 Result<void> ResourceWallet::grant(const ResourceBundle& resources) {
-    const auto result = this->validate_bundle(cost);
+    const auto result = this->validate_bundle(resources);
     if (const auto* error = std::get_if<Error>(&result); error) {
         return *error;
     }

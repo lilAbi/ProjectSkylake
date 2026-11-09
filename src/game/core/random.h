@@ -25,7 +25,7 @@ public:
 
 class RandomStreamFactory {
 public:
-    Result<std::unique_ptr<IRandomStream>> make_stream(Seed master, const StreamKey&) const;
+    Result<std::unique_ptr<IRandomStream>> make_stream(Seed master, const StreamKey& key) const;
 };
 
 #endif //PROJECTSKYLAKE_RANDOM_H

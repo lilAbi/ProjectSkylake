@@ -1,6 +1,7 @@
 #include "summoning_service.h"
 
 #include "game/content/catalog.h"
+#include "game/generation/character_generation.h"
 
 std::vector<BannerView> SummoningService::get_banners() {
     std::vector<BannerView> banner_views;
@@ -84,16 +85,16 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
         };
     }
     //grab next id counter
-    const auto new_character_id = game_state.m_identities.m_next_character;
+    const auto next_character_id = game_state.m_identities.m_next_character;
     //check if new character id
-    if (new_character_id < 1 || m_context.m_revision.m_value < 0) {
+    if (next_character_id < 1 || m_context.m_revision.m_value < 0) {
         return Error{
             .m_code = Error_code::invalid_phase,
             .m_message = "Character identities or state revision is invalid."
         };
     }
     //make sure the next id is valid
-    if (new_character_id > maximum - summon_request.m_count || m_context.m_revision.m_value == maximum) {
+    if (next_character_id > maximum - summon_request.m_count || m_context.m_revision.m_value == maximum) {
         return Error{
             .m_code = Error_code::overflow,
             .m_message = "Character identities or state revision would overflow."
@@ -101,14 +102,38 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
     }
     //check if the next character ids are in use
     for (std::int32_t i = 0; i < summon_request.m_count; ++i) {
-        if (game_state.m_roster.m_characters.contains(CharacterID{new_character_id + i})) {
+        if (game_state.m_roster.m_characters.contains(CharacterID{next_character_id + i})) {
             return Error{
                 .m_code = Error_code::invalid_phase,
                 .m_message = "The next character identity is already in use."
             };
         }
     }
-    
+    //make a copy of the current state
+    auto wallet_state_copy = game_state.m_wallet;
+    //attempt to spend and check for errors
+    auto spend_result = wallet_state_copy.try_spend(*total_summon_cost);
+    if (const auto* error = std::get_if<Error>(&spend_result)) {
+        return *error;
+    }
+    //make a copy of the roster
+    auto roster_state_copy = game_state.m_roster;
+    std::vector<CharacterID> summoned_character_ids;
+    summoned_character_ids.reserve(static_cast<std::size_t>(summon_request.m_count));
+    //create a request to generate summonds
+    CharacterGenerationRequest{
+        .m_allowed_classes = banner_definition->m_allowed_classes,
+        .m_tier = 1,
+        .m_metadata = GenerationMetadata {
+            .m_seed = game_state.m_profile.m_master_seed,
+            .m_generator_version = generator_version,
+            .m_content_version = content_catalog.content_version()
+        }
+    };
+    //perform the summons
+    for (std::int32_t i = 0; i < summon_request.m_count; ++i) {
+        const CharacterID new_character_id{next_character_id + 1};
+    }
 }
 
 Result<ResourceCost> SummoningService::calculate_total_banner_cost(const BannerDefinition& banner_definition, const std::int32_t count, const ContentCatalog& content_catalog) {
