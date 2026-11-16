@@ -112,7 +112,7 @@ Result<void> RosterService::rename_team(const TeamID team_id, std::string name) 
 }
 
 Result<void> RosterService::set_team_member(TeamID team_id, const std::int32_t slot, std::optional<CharacterID> character_id) {
-    //check if executing via EventBus
+    //check if request is valid
     const auto result = check_service_mutation(m_context);
     if (const auto* error = std::get_if<Error>(&result); error) {
         return *error;

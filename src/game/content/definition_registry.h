@@ -5,6 +5,9 @@
 #include "game/core/results.h"
 
 #include <algorithm>
+#include <cstddef>
+#include <string>
+#include <utility>
 #include <span>
 #include <string_view>
 #include <unordered_map>

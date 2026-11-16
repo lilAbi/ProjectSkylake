@@ -1,93 +1,64 @@
 #include "json_content_source.h"
 
-#include "json_helper.h"
+#include "json_decoding.h"
 
-#include <godot_cpp/classes/file_access.hpp>
-
-Result<std::string> JSONContentSource::read_file(const std::string& path) {
-    //open file godot file access api
-    const auto file = godot::FileAccess::open(godot::String::utf8(path.c_str()), godot::FileAccess::READ);
-    //check if file was opened
-    if (file.is_null()) {
-        return Error{
-            .m_code = Error_code::io_failure,
-            .m_message = path + ": cannot open content file (Godot error " + std::to_string(godot::FileAccess::get_open_error()) + ")"
-        };
-    }
-    const auto bytes = file->get_buffer(static_cast<std::int64_t>(file->get_length()));
-    if (static_cast<std::uint64_t>(bytes.size()) != file->get_length()) {
-        return Error{
-            .m_code = Error_code::io_failure,
-            .m_message = path + ": short read while loading content"
-        };
-    }
-    return bytes.is_empty() ? std::string{} : std::string{reinterpret_cast<const char*>(bytes.ptr()), static_cast<std::size_t>(bytes.size())};
-}
+#include <algorithm>
+#include <variant>
 
 Result<CatalogData> JSONContentSource::load() {
-    if (m_manifest_path.empty()) {
+    using namespace content::json_detail;
+    //validate if manifest and reader obj exist
+    if (m_manifest_path.empty() || !m_file_reader) {
         return Error{
             .m_code = Error_code::not_configured,
             .m_message = "JSON content source requires a manifest path and file reader"
         };
     }
-    try {
-        //attempt to read the content manifest file into a string buffer
-        const auto manifest_read_result = JSONContentSource::read_file(m_manifest_path);
-        if (const auto* manifest_read_error = std::get_if<Error>(&manifest_read_result)) {
-            throw Error{*manifest_read_error};
-        }
-        //attempt to extract a string result from the buffer
-        const auto& manifest_string_buffer = std::get<std::string>(manifest_read_result);
-        //parse manifest into a json object
-        const auto manifest = parse_json(manifest_string_buffer);
-        //check if version is compatible
-        schema_version(manifest);
-        const Object             object{manifest, "#", {"schema_version", "content_version", "sources"}};
-        CatalogData              catalog_data;
-        std::vector<std::string> sources;
-        //attempt to extract a possible content_version value & check
-        object.field("content_version", catalog_data.m_content_version, true);
-        if (catalog_data.m_content_version.empty()) {
-            fail("#/content_version", "must not be empty");
-        }
-        //attempt to extract a possible sources value & check
-        object.field("sources", sources, true);
-        if (sources.size() > max_sources) {
-            fail("#/sources", "manifest exceeds source count limit");
-        }
-        // Resolve and check the complete manifest before opening source files.
-        std::vector<std::string> paths;
-        std::set<std::string>    seen;
-        for (std::size_t i = 0; i < sources.size(); ++i) {
-            const auto path = resolve_source(m_manifest_path, sources[i], "#/sources/" + std::to_string(i));
-            if (path == m_manifest_path || !seen.insert(path).second) {
-                fail("#/sources/" + std::to_string(i), "duplicate source or manifest self-reference '" + path + "'");
+    //the budget includes the manifest and is passed to the reader before every read.
+    std::size_t total_bytes = 0;
+    //local file-reading helper lamda to enforces size constraints and tracks how much data has been loaded
+    const auto read = [&](const std::string& path) -> Result<std::string> {
+        const auto limit = std::min(max_file_bytes, max_total_bytes - total_bytes);
+        auto       result = m_file_reader(path, limit);
+        if (const auto* bytes = std::get_if<std::string>(&result)) {
+            // Also enforce the contract when a custom reader returns too much data.
+            if (bytes->size() > limit) {
+                return Error{
+                    .m_code = Error_code::invalid_content,
+                    .m_message = path + ": content byte limit exceeded"
+                };
             }
-            paths.push_back(path);
+            total_bytes += bytes->size();
         }
-        std::size_t definition_count = 0;
-        for (const auto& path : paths) {
-            const auto definition_read_result = JSONContentSource::read_file(path);
-            if (const auto* definition_read_error = std::get_if<Error>(&definition_read_result)) {
-                throw Error{*definition_read_error};
-                continue;
-            }
-            const auto& definition_string_buffer = std::get<std::string>(definition_read_result);
-            const auto definition_json = parse_json(definition_string_buffer);
-            load_definitions(catalog_data, definition_json, definition_count);
+        return result;
+    };
+
+    CatalogData              data;
+    std::vector<std::string> paths;
+    {
+        auto bytes = read(m_manifest_path);
+        if (const auto* error = std::get_if<Error>(&bytes)) {
+            return *error;
         }
-        return catalog_data;
-    } catch (const Error& failure) {
-        auto error = failure;
-        if (error.m_message.starts_with('#')) {
-            error.m_message = m_manifest_path + error.m_message;
+        auto manifest = decode_manifest(std::get<std::string>(bytes), m_manifest_path);
+        if (const auto* error = std::get_if<Error>(&manifest)) {
+            return *error;
         }
-        return error;
-    } catch (const Json::exception& error) {
-        return Error{
-            .m_code = Error_code::invalid_content,
-            .m_message = m_manifest_path + ": " + error.what()
-        };
+        auto& decoded = std::get<Manifest>(manifest);
+        data.m_content_version = std::move(decoded.m_content_version);
+        paths = std::move(decoded.m_sources);
     }
+
+    std::size_t definition_count = 0;
+    for (const auto& path : paths) {
+        auto bytes = read(path);
+        if (const auto* error = std::get_if<Error>(&bytes)) {
+            return *error;
+        }
+        auto result = append_source(data, std::get<std::string>(bytes), path, definition_count);
+        if (const auto* error = std::get_if<Error>(&result)) {
+            return *error;
+        }
+    }
+    return data;
 }

@@ -1,6 +1,5 @@
 #include "game_application.h"
 
-#include "godot_cpp/classes/engine.hpp"
 #include "nodes/debug/content_catalog_scene_controller.h"
 #include "util/constants.hpp"
 #include "util/conversions.hpp"
@@ -19,7 +18,6 @@ void GameApplication::get_godot_objects() {
 }
 
 void GameApplication::bind_signals() {
-    
 }
 
 void GameApplication::_enter_tree() {
@@ -51,7 +49,6 @@ void GameApplication::_ready() {
     //pass the Runtime object to the scene coordinator
     m_scene_coordinator->configure(*m_runtime);
     m_logger->print("[GameApplication] Passed GameRuntime object to SceneCoordinator");
-
 }
 
 void GameApplication::start_game() {

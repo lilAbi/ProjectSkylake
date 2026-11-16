@@ -1,7 +1,7 @@
 #include "resources.h"
 
-Result<ResourceWallet> ResourceWallet::get_wallet(const ResourceBundle& balance) {
-    const auto result = this->validate_bundle(balance);
+Result<ResourceWallet> ResourceWallet::create_wallet(const ResourceBundle& balance) {
+    const auto result = ResourceWallet::validate_bundle(balance);
     if (const auto* error = std::get_if<Error>(&result); error) {
         return *error;
     }
@@ -29,7 +29,7 @@ bool ResourceWallet::can_afford(const ResourceCost& cost) const {
 }
 
 Result<void> ResourceWallet::try_spend(const ResourceCost& cost) {
-    const auto result = this->validate_bundle(cost);
+    const auto result = ResourceWallet::validate_bundle(cost);
     if (const auto* error = std::get_if<Error>(&result); error) {
         return *error;
     }
@@ -49,7 +49,7 @@ Result<void> ResourceWallet::try_spend(const ResourceCost& cost) {
 }
 
 Result<void> ResourceWallet::grant(const ResourceBundle& resources) {
-    const auto result = this->validate_bundle(resources);
+    const auto result = ResourceWallet::validate_bundle(resources);
     if (const auto* error = std::get_if<Error>(&result); error) {
         return *error;
     }
@@ -67,8 +67,8 @@ Result<void> ResourceWallet::grant(const ResourceBundle& resources) {
     return std::monostate{};
 }
 
-Result<void> ResourceWallet::validate_bundle(const ResourceBundle& resource_bundle) {
-    for (const auto& [resource_id, amount] : resource_bundle.m_amounts) {
+Result<void> ResourceWallet::validate_bundle(const ResourceBundle& resources) {
+    for (const auto& [resource_id, amount] : resources.m_amounts) {
         if (resource_id.m_value.empty() || amount < 0) {
             return Error{
                 .m_code = Error_code::invalid_argument,

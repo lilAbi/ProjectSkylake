@@ -18,14 +18,26 @@ class IRandomStream {
 public:
     virtual ~IRandomStream() = default;
     virtual std::uint64_t                  next_u64() = 0;
-    virtual std::unique_ptr<IRandomStream> clone() const = 0;
+    virtual std::unique_ptr<IRandomStream> clone() = 0;
     virtual Result<std::uint64_t>          uniform_u64(std::uint64_t exclusive_upper) = 0;
     virtual Result<bool>                   roll(BasisPoints chance) = 0;
 };
 
+class SplitMixStream final : public IRandomStream {
+public:
+    explicit SplitMixStream(const std::uint64_t state) : m_state(state) {}
+    std::uint64_t                  next_u64() override;
+    std::unique_ptr<IRandomStream> clone() override;
+    Result<std::uint64_t>          uniform_u64(std::uint64_t exclusive_upper) override;
+    Result<bool>                   roll(BasisPoints chance) override;
+
+private:
+    std::uint64_t m_state;
+};
+
 class RandomStreamFactory {
 public:
-    Result<std::unique_ptr<IRandomStream>> make_stream(Seed master, const StreamKey& key) const;
+    [[nodiscard]] Result<std::unique_ptr<IRandomStream>> make_stream(Seed master, const StreamKey& key) const;
 };
 
 #endif //PROJECTSKYLAKE_RANDOM_H

@@ -25,7 +25,7 @@ struct ServiceContext {
     EventBus&                  m_events;
     Revision&                  m_revision;
     const ActivityReservations m_reservations;
-    //const RandomStreamFactory& m_rng;
+    const RandomStreamFactory& m_rng;
     //const IClock&              m_clock;
 };
 

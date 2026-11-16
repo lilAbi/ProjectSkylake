@@ -28,14 +28,15 @@
 
 class GameRuntime {
     friend class SceneCoordinator;
-
 public:
     GameRuntime() = default;
     ~GameRuntime() = default;
 
+    //initialize the game runtime
     Result<void> initialize();
     Result<void> new_game(const NewGameRequest& new_game_request);
     Result<void> load_profile(SaveSlot);
+    Result<void> save_profile();
     Result<void> shutdown();
 
     const GameState&             get_state() const;
@@ -55,23 +56,26 @@ public:
 
 private:
     Logger*              m_logger = Logger::get();
-    GameState            m_state{};
+    GameState            m_game_state{};
     ContentCatalog       m_content_catalog{};
     EventBus             m_event_bus{};
     ActivityReservations m_reservations{};
     Revision             m_revision{};
+    RandomStreamFactory  m_rng{};
     ServiceContext       m_context{
-              .m_game_state = m_state,
-              .m_content_catalog = m_content_catalog,
-              .m_events = m_event_bus,
-              .m_revision = m_revision
+        .m_game_state = m_game_state,
+        .m_content_catalog = m_content_catalog,
+        .m_events = m_event_bus,
+        .m_revision = m_revision,
+        .m_reservations = m_reservations,
+        .m_rng = m_rng
     };
-    // Domain/application helpers.
+    //domain/application helpers
     CharacterGenerator m_character_generator{m_content_catalog};
     EncounterGenerator m_encounter_generator{m_content_catalog};
     ItemGenerator      m_item_generator;
     RewardGenerator    m_reward_generator;
-    // Application services.
+    //application services
     RosterService               m_roster_service{m_context};
     SummoningService            m_summoning_service{m_context, m_character_generator};
     EquipmentService            m_equipment_service{m_context};
@@ -84,7 +88,9 @@ private:
     SaveService                 m_saves_service;
     ActivityCoordinator         m_activities{m_progression_service, m_roster_service, m_battles_service};
     // metadata
-    bool m_profile_active = false;
+    bool     m_profile_active = false;
+    bool     m_initialized = false;
+    SaveSlot m_slot{0};
 };
 
 #endif //PROJECTSKYLAKE_GAME_RUNTIME_H

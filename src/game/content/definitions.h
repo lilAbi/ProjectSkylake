@@ -9,6 +9,9 @@
 #include "game/character/stats.h"
 
 #include <chrono>
+#include <cstdint>
+#include <string>
+#include <vector>
 #include <variant>
 
 struct CharacterClassDefinition {

@@ -7,7 +7,8 @@
 #include "game/core/ids.h"
 #include "game/core/results.h"
 
-#include <unordered_map>
+#include <span>
+#include <string>
 
 class ContentCatalog {
 public:

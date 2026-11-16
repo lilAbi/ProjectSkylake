@@ -49,9 +49,10 @@ struct BattleExecution {
 };
 
 struct NewGameRequest {
-    std::string m_profile_id;
-    std::string m_display_name;
-    Seed        m_master_seed;
+    std::string    m_profile_id;
+    std::string    m_display_name;
+    Seed           m_master_seed;
+    ResourceBundle m_starting_resources;
 };
 
 #endif //PROJECTSKYLAKE_REQUESTS_H

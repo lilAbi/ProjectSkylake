@@ -29,17 +29,18 @@ public:
     void display_title_scene();
 
 private:
+    void start_new_game();
     void display_camp_scene();
     void display_battle_scene();
     void display_shrine_scene();
     void display_new_game_scene();
     void display_load_game_scene();
-
+    //attach nodes related to debug tooling
     void attach_debug_tools();
-
+    //helper functions to mount child nodes to root
     void mount_scene(godot::Node* root);
     void mount_activity(godot::Node* root);
-
+    //helper functions to clear child nodes from root
     void clear_scene();
     void clear_activity();
 
