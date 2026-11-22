@@ -11,7 +11,7 @@ class IRandomStream;
 
 class SkillTreeGenerator {
 public:
-    Result<SkillTree> generate(ClassID, std::span<const TraitID>, const ContentCatalog&, IRandomStream&) const;
+    Result<SkillTree> generate(const ClassID& class_id, std::span<const TraitID> traits, const ContentCatalog& content_catalog, IRandomStream& skill_stream_rng) const;
 };
 
 #endif //PROJECTSKYLAKE_SKILL_TREE_GENERATOR_H

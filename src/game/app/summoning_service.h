@@ -19,13 +19,8 @@ public:
     Result<SummonResult>    summon(const SummonRequest& summon_request);
 
 private:
-    Result<ResourceCost> calculate_total_banner_cost(
-        const BannerDefinition& banner_definition,
-        std::int32_t            count,
-        const ContentCatalog&   content_catalog
-    );
-
-    bool is_banner_unlocked(const BannerDefinition& banner_definition, const GameState& game_state);
+    Result<ResourceCost> calculate_total_banner_cost(const BannerDefinition& banner_definition, std::int32_t count, const ContentCatalog& content_catalog);
+    bool                 is_banner_unlocked(const BannerDefinition& banner_definition, const GameState& game_state);
 
 private:
     ServiceContext&           m_context;

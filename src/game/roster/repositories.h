@@ -7,8 +7,8 @@
 
 class RosterRepository {
 public:
-    explicit RosterRepository(RosterState&);
-    const CharacterInstance* find(CharacterID) const;
+    explicit RosterRepository(RosterState& roster_state);
+    const CharacterInstance* find(CharacterID character_id) const;
     std::vector<CharacterID> ids() const;
     Result<void>             insert(CharacterInstance);
     Result<void>             erase(CharacterID);

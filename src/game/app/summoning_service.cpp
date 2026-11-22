@@ -1,7 +1,9 @@
 #include "summoning_service.h"
 
 #include "game/content/catalog.h"
+#include "game/core/random.h"
 #include "game/generation/character_generation.h"
+#include "game/roster/repositories.h"
 
 std::vector<BannerView> SummoningService::get_banners() {
     std::vector<BannerView> banner_views;
@@ -117,14 +119,14 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
         return *error;
     }
     //make a copy of the roster
-    auto roster_state_copy = game_state.m_roster;
+    auto                     roster_state_copy = game_state.m_roster;
     std::vector<CharacterID> summoned_character_ids;
     summoned_character_ids.reserve(static_cast<std::size_t>(summon_request.m_count));
     //create a request to generate summonds
-    CharacterGenerationRequest{
+    CharacterGenerationRequest request{
         .m_allowed_classes = banner_definition->m_allowed_classes,
         .m_tier = 1,
-        .m_metadata = GenerationMetadata {
+        .m_metadata = GenerationMetadata{
             .m_seed = game_state.m_profile.m_master_seed,
             .m_generator_version = generator_version,
             .m_content_version = content_catalog.content_version()
@@ -132,7 +134,69 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
     };
     //perform the summons
     for (std::int32_t i = 0; i < summon_request.m_count; ++i) {
+        //create character id
         const CharacterID new_character_id{next_character_id + 1};
+        //create a rng stream for this summon and checks for errors
+        auto character_rng_stream_result = m_context.m_rng.make_stream(
+            game_state.m_profile.m_master_seed,
+            StreamKey{
+                .m_domain = "summon.character",
+                .m_instance = static_cast<std::uint64_t>(new_character_id.m_value),
+                .m_algorithm_version = generator_version
+            }
+        );
+        if (const auto* error = std::get_if<Error>(&character_rng_stream_result)) {
+            return *error;
+        }
+        //create a rng stream for the summon's skills and checks for errors
+        auto skills_rng_stream_result = m_context.m_rng.make_stream(
+            game_state.m_profile.m_master_seed,
+            StreamKey{
+                .m_domain = "summon.skill_tree",
+                .m_instance = static_cast<std::uint64_t>(new_character_id.m_value),
+                .m_algorithm_version = generator_version
+            }
+        );
+        if (const auto* error = std::get_if<Error>(&skills_rng_stream_result)) {
+            return *error;
+        }
+        //grab the actual stream objs and check for errors
+        auto& character_rng_stream = std::get<std::unique_ptr<IRandomStream>>(character_rng_stream_result);
+        auto& skill_rng_stream = std::get<std::unique_ptr<IRandomStream>>(skills_rng_stream_result);
+        if (!character_rng_stream || !skill_rng_stream) {
+            return Error{
+                .m_code = Error_code::not_configured,
+                .m_message = "The random stream factory returned an empty stream."
+            };
+        }
+        // generate summon
+        auto summoned_resulted = m_character_generator.generate(request, *character_rng_stream, *skill_rng_stream);
+        if (const auto* error = std::get_if<Error>(&summoned_resulted)) {
+            return *error;
+        }
+        auto& summoned_character = std::get<GeneratedCharacter>(summoned_resulted);
+        // test if summoned character is allowed with respect to the current banner
+        if (std::ranges::find(banner_definition->m_allowed_classes, summoned_character.m_class_id) == banner_definition->m_allowed_classes.end()) {
+            return Error{
+                .m_code = Error_code::invalid_content,
+                .m_message = "The generator returned a class outside this banner."
+            };
+        }
+        //create character instance
+        CharacterInstance character_instance{
+            .m_id = new_character_id,
+            .m_generated = std::move(summoned_character),
+            .m_progression = {},
+            .m_equipment = {}
+        };
+        // unlock nodes
+        for (const auto& node : character_instance.m_generated.m_skill_tree.m_nodes) {
+            if (node.m_point_cost == 0 && node.m_prerequisites.empty()) {
+                character_instance.m_progression.m_skills.m_unlocked.insert(node.m_id);
+            }
+        }
+        //
+        auto inserted = RosterRepository{staged_roster}.insert(std::move(instance));
     }
 }
 

@@ -58,7 +58,7 @@ void SceneCoordinator::start_new_game() {
     std::random_device entropy;
     const auto         seed = (static_cast<std::uint64_t>(entropy()) << 32) ^ static_cast<std::uint64_t>(entropy());
     //create a new game & check for any errors
-    auto new_game_request_result = m_runtime->new_game(
+    const auto new_game_request_result = m_runtime->new_game(
         NewGameRequest{
             .m_profile_id = "profile-" + std::to_string(seed),
             .m_display_name = "Player",

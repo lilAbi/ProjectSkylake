@@ -33,7 +33,7 @@ Result<void> GameRuntime::initialize() {
 }
 
 Result<void> GameRuntime::new_game(const NewGameRequest& new_game_request) {
-    m_logger->print("[GameRuntime] {} called", __FUNCTION__);
+    m_logger->print("[GameRuntime] {}() called", __FUNCTION__);
     //check if an ongoing battle is happening
     if (!m_reservations.m_battle_characters.empty()) {
         return Error{
@@ -68,19 +68,31 @@ Result<void> GameRuntime::new_game(const NewGameRequest& new_game_request) {
 }
 
 Result<void> GameRuntime::load_profile(SaveSlot) {
-    m_logger->print("[GameRuntime] {} called", __FUNCTION__);
+    m_logger->print("[GameRuntime] {}() called", __FUNCTION__);
     //load previous saved game file
     return std::monostate{};
 }
 
 Result<void> GameRuntime::save_profile() {
+    //todo: implement save
     return std::monostate{};
 }
 
 Result<void> GameRuntime::shutdown() {
-    m_logger->print("[GameRuntime] {} called", __FUNCTION__);
-    //safely de-construct objects
-    return std::monostate{};
+    m_logger->print("[GameRuntime] {}() called", __FUNCTION__);
+    if (!m_event_bus.is_owner_thread()) {
+        return Error{
+            .m_code = Error_code::invalid_phase,
+            .m_message = "Shutdown must run on the runtime owner thread."
+        };
+    }
+    if (m_event_bus.is_shutting_down()) {
+        return std::monostate{};
+    }
+    Result<void> saved_result = m_profile_active ? this->save_profile() : std::monostate{};
+    m_event_bus.shutdown();
+    m_profile_active = false;
+    return saved_result;
 }
 
 const GameState& GameRuntime::get_state() const {
