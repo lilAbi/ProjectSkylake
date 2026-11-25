@@ -122,7 +122,7 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
     auto                     roster_state_copy = game_state.m_roster;
     std::vector<CharacterID> summoned_character_ids;
     summoned_character_ids.reserve(static_cast<std::size_t>(summon_request.m_count));
-    //create a request to generate summonds
+    //create a request to generate summons
     CharacterGenerationRequest request{
         .m_allowed_classes = banner_definition->m_allowed_classes,
         .m_tier = 1,
@@ -183,21 +183,42 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
             };
         }
         //create character instance
-        CharacterInstance character_instance{
+        CharacterInstance new_character_instance{
             .m_id = new_character_id,
             .m_generated = std::move(summoned_character),
             .m_progression = {},
             .m_equipment = {}
         };
         // unlock nodes
-        for (const auto& node : character_instance.m_generated.m_skill_tree.m_nodes) {
+        for (const auto& node : new_character_instance.m_generated.m_skill_tree.m_nodes) {
             if (node.m_point_cost == 0 && node.m_prerequisites.empty()) {
-                character_instance.m_progression.m_skills.m_unlocked.insert(node.m_id);
+                new_character_instance.m_progression.m_skills.m_unlocked.insert(node.m_id);
             }
         }
-        //
-        auto inserted = RosterRepository{staged_roster}.insert(std::move(instance));
+        //insert new character in players roster
+        auto insert_result = RosterRepository{roster_state_copy}.insert(std::move(new_character_instance));
+        if (const auto* error = std::get_if<Error>(&insert_result)) {
+            return *error;
+        }
+        summoned_character_ids.push_back(new_character_id);
     }
+    // mark next revision
+    const Revision next_revision{m_context.m_revision.m_value + 1};
+    // prepare payloads
+    CharactersSummoned notification{
+        .m_banner = banner_definition->m_id,
+        .m_characters = summoned_character_ids,
+        .m_spent = *total_summon_cost,
+        .m_revision = next_revision
+    };
+    SummonResult summon_result{
+        .m_characters = std::move(summoned_character_ids),
+        .m_spent = *total_summon_cost,
+        .m_revision = next_revision,
+        .m_notification_queued = false
+    };
+
+    //todo: pick up from here
 }
 
 Result<ResourceCost> SummoningService::calculate_total_banner_cost(const BannerDefinition& banner_definition, const std::int32_t count, const ContentCatalog& content_catalog) {

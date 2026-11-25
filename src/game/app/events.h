@@ -1,5 +1,5 @@
-#ifndef PROJECTSKYLAKE_EVENTS_H
-#define PROJECTSKYLAKE_EVENTS_H
+#ifndef PROJECTSKYLAKE_GAME_EVENTS_H
+#define PROJECTSKYLAKE_GAME_EVENTS_H
 
 #include "game/core/types.h"
 #include "game/economy/resources.h"

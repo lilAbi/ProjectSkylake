@@ -19,6 +19,7 @@ struct SummonResult {
     std::vector<CharacterID> m_characters;
     ResourceCost             m_spent;
     Revision                 m_revision;
+    bool                     m_notification_queued{};
 };
 
 struct CraftRequest {

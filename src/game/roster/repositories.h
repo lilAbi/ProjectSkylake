@@ -7,11 +7,11 @@
 
 class RosterRepository {
 public:
-    explicit RosterRepository(RosterState& roster_state);
+    explicit RosterRepository(RosterState& roster_state) : m_state(roster_state) {};
     const CharacterInstance* find(CharacterID character_id) const;
     std::vector<CharacterID> ids() const;
-    Result<void>             insert(CharacterInstance);
-    Result<void>             erase(CharacterID);
+    Result<void>             insert(CharacterInstance character_instance);
+    Result<void>             erase(CharacterID character_id);
 
 private:
     RosterState& m_state;
@@ -19,10 +19,10 @@ private:
 
 class InventoryRepository {
 public:
-    explicit InventoryRepository(InventoryState&);
-    const ItemInstance*  find(ItemID) const;
-    Result<void>         insert(ItemInstance);
-    Result<ItemInstance> extract(ItemID);
+    explicit InventoryRepository(InventoryState& inventory_state) : m_state(inventory_state) {};
+    const ItemInstance*  find(ItemID item_id) const;
+    Result<void>         insert(ItemInstance item_instance) const;
+    Result<ItemInstance> extract(ItemID item_id) const;
 
 private:
     InventoryState& m_state;
@@ -30,11 +30,11 @@ private:
 
 class TeamRepository {
 public:
-    explicit TeamRepository(TeamState&);
-    const Team*  find(TeamID) const;
-    Result<void> insert(Team);
-    Result<void> replace(Team);
-    Result<void> erase(TeamID);
+    explicit TeamRepository(TeamState& team_state) : m_state(team_state) {};
+    const Team*  find(TeamID team_id) const;
+    Result<void> insert(Team team);
+    Result<void> replace(Team team);
+    Result<void> erase(TeamID item_id);
 
 private:
     TeamState& m_state;
