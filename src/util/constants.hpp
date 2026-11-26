@@ -111,8 +111,6 @@ namespace core::inline labels {
             constexpr inline auto GameApplication{"%GameApplication"};
             constexpr inline auto DebugRoot{"%DebugRoot"};
             constexpr inline auto ContentCatalog{"ContentCatalog"};
-
-
         }
 
         namespace Title {
@@ -131,6 +129,9 @@ namespace core::inline labels {
 
         namespace Shrine {
             constexpr inline auto BackButton{"%BackButton"};
+            constexpr inline auto KeepButton{"%KeepButton"};
+            constexpr inline auto SummonButton{"%SummonButton"};
+            constexpr inline auto MultiSummonButton{"%SummonButton"};
         }
 
 

@@ -222,7 +222,7 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
     game_state.m_roster.m_characters.swap(roster_state_copy.m_characters);
     game_state.m_identities.m_next_character = next_character_id + summon_request.m_count;
     m_context.m_revision = next_revision;
-    // send 
+    // send event 
     try {
         summon_result.m_notification_queued = m_context.m_events.post(std::move(notification)) == Post_result::posted;
     } catch (...) {
