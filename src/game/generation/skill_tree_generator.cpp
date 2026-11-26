@@ -3,7 +3,7 @@
 #include "game/content/catalog.h"
 #include "game/core/random.h"
 
-Result<SkillTree> SkillTreeGenerator::generate(ClassID class_id, std::span<const TraitID> traits, const ContentCatalog& content_catalog, IRandomStream& skill_stream_rng) const {
+Result<SkillTree> SkillTreeGenerator::generate(const ClassID& class_id, std::span<const TraitID> traits, const ContentCatalog& content_catalog, IRandomStream& skill_stream_rng) const {
     // grab class definition
     const auto* class_definition = content_catalog.find(class_id);
     if (!class_definition) {

@@ -217,8 +217,19 @@ Result<SummonResult> SummoningService::summon(const SummonRequest& summon_reques
         .m_revision = next_revision,
         .m_notification_queued = false
     };
+    // commit changes
+    std::swap(game_state.m_wallet, wallet_state_copy);
+    game_state.m_roster.m_characters.swap(roster_state_copy.m_characters);
+    game_state.m_identities.m_next_character = next_character_id + summon_request.m_count;
+    m_context.m_revision = next_revision;
+    // send 
+    try {
+        summon_result.m_notification_queued = m_context.m_events.post(std::move(notification)) == Post_result::posted;
+    } catch (...) {
+        summon_result.m_notification_queued = false;
+    }
 
-    //todo: pick up from here
+    return summon_result;
 }
 
 Result<ResourceCost> SummoningService::calculate_total_banner_cost(const BannerDefinition& banner_definition, const std::int32_t count, const ContentCatalog& content_catalog) {
