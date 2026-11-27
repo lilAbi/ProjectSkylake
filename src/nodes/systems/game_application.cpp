@@ -5,6 +5,8 @@
 #include "util/conversions.hpp"
 #include "util/engine.hpp"
 
+#include "godot_cpp/classes/project_settings.hpp"
+
 void GameApplication::_bind_methods() {
     // Bind Godot-facing methods, properties, and signals here.
 }
@@ -24,6 +26,8 @@ void GameApplication::_enter_tree() {
     if (core::Engine::is_editor_active())
         return;
     m_logger->print("[GameApplication] {}() called", __FUNCTION__);
+    // grab path to local game directory
+    const auto directory = godot::ProjectSettings::get_singleton()->globalize_path("user://saves").utf8();
     //create GameRuntime
     m_runtime = std::make_unique<GameRuntime>();
     //initialize the runtime

@@ -28,6 +28,7 @@
 
 class GameRuntime {
     friend class SceneCoordinator;
+
 public:
     GameRuntime() = default;
     ~GameRuntime() = default;
@@ -35,8 +36,9 @@ public:
     //initialize the game runtime
     Result<void> initialize();
     Result<void> new_game(const NewGameRequest& new_game_request);
-    Result<void> load_profile(SaveSlot);
+    Result<void> load_profile(SaveSlot slot);
     Result<void> save_profile();
+    void         configure_save_store(ISaveStore& store);
     Result<void> shutdown();
 
     const GameState&             get_state() const;
@@ -53,6 +55,8 @@ public:
     IdleProgressionService&      get_idle_service();
     SaveService&                 get_save_service();
     ActivityCoordinator&         get_activities();
+    Revision                     get_revision() const noexcept;
+    bool                         has_profile() const noexcept;
 
 private:
     Logger*              m_logger = Logger::get();

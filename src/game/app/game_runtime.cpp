@@ -6,29 +6,20 @@
 
 Result<void> GameRuntime::initialize() {
     m_logger->print("[GameRuntime] {}() called", __FUNCTION__);
-
-    //load content_catalog from content_data
-    JSONContentSource catalog_data_content_source{"res://content/catalog.json"};
-    auto              catalog_data = catalog_data_content_source.load();
+    // load and extract pre-defined game content data from manifest file
+    auto catalog_data = JSONContentSource{"res://content/catalog.json"}.load();
     if (const auto* catalog_data_error = std::get_if<Error>(&catalog_data)) {
-        m_logger->critical("[GameRuntime] catalog_data_error: {}", catalog_data_error->m_message);
         return *catalog_data_error;
     }
     m_logger->print("[GameRuntime] Catalog data loaded.");
-
-    //initialize "ContentCatalog" with pre-defined definitions
+    // build "ContentCatalog" with loaded data
     auto catalog = ContentCatalog::build(std::get<CatalogData>(std::move(catalog_data)));
     if (const auto* catalog_error = std::get_if<Error>(&catalog)) {
-        m_logger->critical("[GameRuntime] catalog_error: {}", catalog_error->m_message);
         return *catalog_error;
     }
-
-    //update game's content catalog
     m_content_catalog = std::move(std::get<ContentCatalog>(std::move(catalog)));
     m_logger->print("[GameRuntime] Content Catalog created.");
-
-    //
-
+    m_initialized = true;
     return std::monostate{};
 }
 
@@ -42,8 +33,8 @@ Result<void> GameRuntime::new_game(const NewGameRequest& new_game_request) {
         };
     }
     //validate wallet has the correct resources
-    auto wallet = ResourceWallet::create_wallet(new_game_request.m_starting_resources);
-    if (const auto* error = std::get_if<Error>(&wallet)) {
+    auto new_wallet = ResourceWallet::create_wallet(new_game_request.m_starting_resources);
+    if (const auto* error = std::get_if<Error>(&new_wallet)) {
         return *error;
     }
     //create a new game state
@@ -53,7 +44,7 @@ Result<void> GameRuntime::new_game(const NewGameRequest& new_game_request) {
         .m_display_name = new_game_request.m_display_name,
         .m_master_seed = new_game_request.m_master_seed
     };
-    new_game_state.m_wallet = std::get<ResourceWallet>(std::move(wallet));
+    new_game_state.m_wallet = std::get<ResourceWallet>(std::move(new_wallet));
     if (!m_content_catalog.regions().empty()) {
         new_game_state.m_progression.m_region = m_content_catalog.regions().front().m_id;
     }
@@ -76,6 +67,10 @@ Result<void> GameRuntime::load_profile(SaveSlot) {
 Result<void> GameRuntime::save_profile() {
     //todo: implement save
     return std::monostate{};
+}
+
+void GameRuntime::configure_save_store(ISaveStore& store) {
+    //m_saves_service.configure(store, m_content_catalog);
 }
 
 Result<void> GameRuntime::shutdown() {
@@ -149,4 +144,12 @@ SaveService& GameRuntime::get_save_service() {
 
 ActivityCoordinator& GameRuntime::get_activities() {
     return m_activities;
+}
+
+Revision GameRuntime::get_revision() const noexcept {
+    return m_revision;
+}
+
+bool GameRuntime::has_profile() const noexcept {
+    return m_profile_active;
 }

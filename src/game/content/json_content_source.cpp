@@ -44,9 +44,9 @@ Result<CatalogData> JSONContentSource::load() {
         if (const auto* error = std::get_if<Error>(&manifest)) {
             return *error;
         }
-        auto& decoded = std::get<Manifest>(manifest);
-        data.m_content_version = std::move(decoded.m_content_version);
-        paths = std::move(decoded.m_sources);
+        auto& [content_version, sources] = std::get<Manifest>(manifest);
+        data.m_content_version = std::move(content_version);
+        paths = std::move(sources);
     }
 
     std::size_t definition_count = 0;
