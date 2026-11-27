@@ -1,5 +1,7 @@
 #include "save_scene_controller.h"
 
+#include "game/app/game_runtime.h"
+
 #include "util/constants.hpp"
 #include "util/conversions.hpp"
 #include "util/engine.hpp"
@@ -19,9 +21,9 @@ void SaveSceneController::get_godot_objects() {
 }
 
 void SaveSceneController::bind_signals() {
-    core::connect_signal(m_slot_1_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_button_pressed));
-    core::connect_signal(m_slot_2_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_button_pressed));
-    core::connect_signal(m_slot_3_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_button_pressed));
+    core::connect_signal(m_slot_1_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_1_pressed));
+    core::connect_signal(m_slot_2_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_2_pressed));
+    core::connect_signal(m_slot_3_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_slot_3_pressed));
     core::connect_signal(m_back_button, core::labels::signal::BaseButton::pressed, callable_mp(this, &SaveSceneController::on_back_button_pressed));
 }
 
@@ -33,12 +35,42 @@ void SaveSceneController::_ready() {
     //bind respective signals to callback functions
     this->bind_signals();
 }
-void SaveSceneController::on_slot_button_pressed() {
-    m_logger->print("[SaveSceneController] {} called", __FUNCTION__);
+
+void SaveSceneController::configure(GameRuntime& runtime) {
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
+    m_runtime = &runtime;
+}
+
+void SaveSceneController::load_slot(const std::int32_t slot) {
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
+    /*
+    const auto loaded = m_runtime->load_profile(SaveSlot{slot});
+    if (const auto* error = std::get_if<Error>(&loaded)) {
+        if (m_status) {
+            m_status->set_text(godot::String::utf8(error->m_message.c_str()));
+        }
+        return;
+    }
+    */
     this->emit_signal(core::labels::signal::SaveSceneController::start_game_requested);
 }
 
+void SaveSceneController::on_slot_1_pressed() {
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
+    this->load_slot(1);
+}
+
+void SaveSceneController::on_slot_2_pressed() {
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
+    this->load_slot(2);
+}
+
+void SaveSceneController::on_slot_3_pressed() {
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
+    this->load_slot(3);
+}
+
 void SaveSceneController::on_back_button_pressed() {
-    m_logger->print("[SaveSceneController] {} called", __FUNCTION__);
+    m_logger->print("[SaveSceneController] {}() called", __FUNCTION__);
     this->emit_signal(core::labels::signal::SaveSceneController::game_title_requested);
 }

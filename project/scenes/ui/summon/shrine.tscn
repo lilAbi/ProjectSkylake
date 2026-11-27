@@ -285,7 +285,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Summon: 100 sigils  |  Reroll: 100 sigils  |  Save: free"
+text = "Summon: 100 sigils | Save: free"
 
 [node name="SummonButton" type="Button" parent="Layout/ActionBar" unique_id=1151196083]
 unique_name_in_owner = true
@@ -293,17 +293,17 @@ custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "Summon"
 
+[node name="MultiSummonlButton" type="Button" parent="Layout/ActionBar" unique_id=887094512]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Summon x10"
+
 [node name="KeepButton" type="Button" parent="Layout/ActionBar" unique_id=1118582013]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "Save to Roster"
-
-[node name="RerollButton" type="Button" parent="Layout/ActionBar" unique_id=887094512]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "Reroll"
 
 [node name="BackButton" type="Button" parent="Layout/ActionBar" unique_id=188920148]
 unique_name_in_owner = true

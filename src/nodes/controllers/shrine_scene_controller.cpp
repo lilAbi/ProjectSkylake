@@ -43,3 +43,23 @@ void ShrineSceneController::on_back_button_pressed() {
 void ShrineSceneController::on_summon_button_pressed() {
 
 }
+
+void ShrineSceneController::on_multi_summon_button_pressed() {
+
+}
+
+void ShrineSceneController::on_save_game_button_pressed() {
+
+}
+
+void ShrineSceneController::pull(std::int32_t count) {
+
+}
+
+void ShrineSceneController::refresh() {
+
+}
+
+godot::Label* ShrineSceneController::label(const char* unique_name) const {
+
+}
